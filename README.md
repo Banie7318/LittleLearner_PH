@@ -1,30 +1,18 @@
-# Little Learner PH
+# Little Learner PH — Easy Edit Edition
 
-A simple iPad-friendly Progressive Web App for kindergarten learning.
+A single-project version of the iPad kindergarten learning PWA.
 
-## Included
-- English reading mini-games
-- Filipino reading / pantig activities
-- Basic Math
-- Reading comprehension stories
-- Thinking and pattern games
-- Text-to-speech instructions
-- Parent dashboard
-- Local progress saving
-- Offline-ready service worker
-- No paid backend required
+## Simplification
+Firebase configuration, Firebase sync, learner settings, and lesson logic are
+together in `public/app.js`.
 
-## Run locally
-For testing on a computer, use a simple local web server:
+## Data strategy
+- Local storage first
+- Firestore cloud backup second
+- Anonymous Firebase Authentication
+- Firestore persistent local cache
+- Service-worker app shell cache
 
-Python:
-    python -m http.server 8000
-
-Then open:
-    http://localhost:8000
-
-## iPad installation
-For the PWA install/offline feature, host the folder on an HTTPS website (GitHub Pages, Netlify, Cloudflare Pages, etc.).
-Open it in Safari on the iPad, tap Share, then "Add to Home Screen".
-
-Note: Opening index.html directly from Files may show the app, but service-worker/offline installation requires HTTPS (or localhost during development).
+## Privacy choice
+The Firebase `measurementId` is retained in the config, but Firebase Analytics
+is not initialized in this child-focused build.
