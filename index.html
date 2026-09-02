@@ -9,7 +9,9 @@ Everything is inside THIS index.html:
 - CSS styles
 - Firebase configuration
 - Firebase Authentication + Firestore cloud sync
-- Filipino / English voice switching
+- Enhanced Filipino / English voice switching
+- Parent voice preview and selection
+- Child-friendly slower speech
 - English lessons
 - Filipino Reading
 - Math Adventure
@@ -138,6 +140,33 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
   .cloud-box{align-items:flex-start;flex-direction:column}
 }
 
+
+.voice-settings-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px
+}
+.voice-setting{
+  background:#f8fbff;border:2px solid #edf1f7;border-radius:20px;padding:14px
+}
+.voice-setting label{margin:0 0 8px}
+.voice-setting select{
+  width:100%;padding:12px;border:2px solid #e4e8f1;border-radius:14px;background:#fff;color:var(--ink)
+}
+.voice-preview{width:100%;margin-top:10px}
+.voice-info{display:block;min-height:34px;margin-top:9px;color:#667085;line-height:1.35}
+.speech-speed-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px
+}
+.speech-speed-grid label{
+  background:#fff9e9;border-radius:18px;padding:13px;margin:0
+}
+.speech-speed-grid input[type="range"]{width:100%;margin:10px 0 2px}
+.voice-tip{
+  margin-top:14px;padding:12px 14px;border-radius:16px;background:#eef8ff;color:#41536c;line-height:1.45
+}
+@media(max-width:650px){
+  .voice-settings-grid,.speech-speed-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -247,8 +276,49 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
         </div>
 
         <div class="card parent-panel">
+          <h3>🔊 Voice & Audio</h3>
+          <label><input type="checkbox" id="voiceToggle" checked> Read lessons aloud</label>
+
+          <div class="voice-settings-grid">
+            <div class="voice-setting">
+              <label for="filipinoVoiceSelect">🇵🇭 Filipino / Tagalog Voice</label>
+              <select id="filipinoVoiceSelect">
+                <option value="">Auto — best Filipino voice</option>
+              </select>
+              <button id="previewFilipinoVoice" class="secondary voice-preview" type="button">▶ Preview Filipino</button>
+              <small id="filipinoVoiceInfo" class="voice-info">Looking for a Filipino voice on this device…</small>
+            </div>
+
+            <div class="voice-setting">
+              <label for="englishVoiceSelect">🇺🇸 Clear English Voice</label>
+              <select id="englishVoiceSelect">
+                <option value="">Auto — best clear English voice</option>
+              </select>
+              <button id="previewEnglishVoice" class="secondary voice-preview" type="button">▶ Preview English</button>
+              <small id="englishVoiceInfo" class="voice-info">Looking for a clear English voice on this device…</small>
+            </div>
+          </div>
+
+          <div class="speech-speed-grid">
+            <label>Filipino speaking speed
+              <input id="filipinoRate" type="range" min="0.55" max="0.95" step="0.01" value="0.70">
+              <span id="filipinoRateValue">70%</span>
+            </label>
+
+            <label>English speaking speed
+              <input id="englishRate" type="range" min="0.55" max="0.95" step="0.01" value="0.72">
+              <span id="englishRateValue">72%</span>
+            </label>
+          </div>
+
+          <div class="voice-tip">
+            <b>Tip:</b> Choose the voice that sounds clearest to the child, then use the Preview buttons.
+            The app remembers a different voice for Filipino and English.
+          </div>
+        </div>
+
+        <div class="card parent-panel">
           <h3>⚙️ Learning Settings</h3>
-          <label><input type="checkbox" id="voiceToggle" checked> Read instructions aloud using Filipino/English voice automatically</label>
           <label><input type="checkbox" id="celebrateToggle" checked> Celebration sounds & animation</label>
           <button id="resetProgress" class="danger">Reset Progress</button>
         </div>
@@ -301,6 +371,10 @@ const APP_CONFIG = {
     todayStars: 0,
     dailyGoal: 15,
     voice: true,
+    englishVoiceURI: "",
+    filipinoVoiceURI: "",
+    englishSpeechRate: 0.72,
+    filipinoSpeechRate: 0.70,
     celebrate: true,
     updatedAt: 0,
     skills: {
@@ -556,82 +630,82 @@ let questions = [];
 
 const lessonBanks = {
   english: [
-    {icon:"🍎", title:"Letter A", say:"A says ah, like apple.", prompt:"Which word starts with A?", choices:["Apple 🍎","Ball ⚽","Cat 🐱","Dog 🐶"], correct:0},
-    {icon:"🐱", title:"C-A-T", say:"C, A, T. Cat.", prompt:"What word is C - A - T?", choices:["Cat 🐱","Sun ☀️","Hat 🎩","Dog 🐶"], correct:0},
-    {icon:"☀️", title:"Sight Word", say:"The word is see.", prompt:"Choose the word SEE.", choices:["SEE","SIT","SUN","SAD"], correct:0},
-    {icon:"🐶", title:"Simple Sentence", say:"The dog can run.", prompt:"Who can run?", choices:["Dog 🐶","Fish 🐟","Tree 🌳","Book 📘"], correct:0}
+    {icon:"🍎", title:"Letter A", say:"This is the letter A. A makes the short a sound, as in apple.", prompt:"Which word starts with A?", choices:["Apple 🍎","Ball ⚽","Cat 🐱","Dog 🐶"], correct:0},
+    {icon:"🐱", title:"C-A-T", say:"Let us sound it out slowly. C. A. T. Cat.", prompt:"What word is C - A - T?", choices:["Cat 🐱","Sun ☀️","Hat 🎩","Dog 🐶"], correct:0},
+    {icon:"☀️", title:"Sight Word", say:"This word is SEE. Listen carefully. SEE.", prompt:"Choose the word SEE.", choices:["SEE","SIT","SUN","SAD"], correct:0},
+    {icon:"🐶", title:"Simple Sentence", say:"Listen to the sentence. The dog can run.", prompt:"Who can run?", choices:["Dog 🐶","Fish 🐟","Tree 🌳","Book 📘"], correct:0}
   ],
   filipino: [
     // =====================================================
     // ANTAS 1 — MGA PATINIG: A E I O U
     // =====================================================
-    {icon:"🅰️", title:"Patinig A", say:"A. A tulad ng Araw.", prompt:"Alin ang letrang A?", choices:["A","E","I","O"], correct:0},
-    {icon:"🥚", title:"Patinig E", say:"E. E tulad ng Egg o itlog. Sabihin natin: E.", prompt:"Alin ang letrang E?", choices:["E","A","I","U"], correct:0},
-    {icon:"🐟", title:"Patinig I", say:"I. I tulad ng Isda.", prompt:"Anong patinig ang simula ng ISDA?", choices:["I","A","O","U"], correct:0},
-    {icon:"⭕", title:"Patinig O", say:"O. Bilog ang hugis ng O.", prompt:"Alin ang letrang O?", choices:["O","A","E","U"], correct:0},
-    {icon:"🍇", title:"Patinig U", say:"U. Sabihin natin: U.", prompt:"Alin ang letrang U?", choices:["U","A","E","I"], correct:0},
+    {icon:"🅰️", title:"Patinig A", say:"Ito ang patinig A. A, gaya ng salitang araw.", prompt:"Alin ang letrang A?", choices:["A","E","I","O"], correct:0},
+    {icon:"🥚", title:"Patinig E", say:"Ito ang patinig E. Sabihin natin nang dahan-dahan: E.", prompt:"Alin ang letrang E?", choices:["E","A","I","U"], correct:0},
+    {icon:"🐟", title:"Patinig I", say:"Ito ang patinig I. I, gaya ng salitang isda.", prompt:"Anong patinig ang simula ng ISDA?", choices:["I","A","O","U"], correct:0},
+    {icon:"⭕", title:"Patinig O", say:"Ito ang patinig O. Bilog ang hugis ng O.", prompt:"Alin ang letrang O?", choices:["O","A","E","U"], correct:0},
+    {icon:"🍇", title:"Patinig U", say:"Ito ang patinig U. Sabihin natin nang dahan-dahan: U.", prompt:"Alin ang letrang U?", choices:["U","A","E","I"], correct:0},
 
     // =====================================================
     // ANTAS 2 — BA BE BI BO BU
     // =====================================================
-    {icon:"👄", title:"Pantig BA", say:"B plus A is BA. BA.", prompt:"B + A = ?", choices:["BA","BE","BI","BO"], correct:0},
-    {icon:"👄", title:"Pantig BE", say:"B plus E is BE. BE.", prompt:"B + E = ?", choices:["BE","BA","BI","BU"], correct:0},
-    {icon:"👄", title:"Pantig BI", say:"B plus I is BI. BI.", prompt:"B + I = ?", choices:["BI","BA","BO","BU"], correct:0},
-    {icon:"👄", title:"Pantig BO", say:"B plus O is BO. BO.", prompt:"B + O = ?", choices:["BO","BI","BA","BE"], correct:0},
-    {icon:"👄", title:"Pantig BU", say:"B plus U is BU. BU.", prompt:"B + U = ?", choices:["BU","BO","BE","BI"], correct:0},
+    {icon:"👄", title:"Pantig BA", say:"Pagsamahin ang B at A. Ang mababasa ay BA. BA.", prompt:"B + A = ?", choices:["BA","BE","BI","BO"], correct:0},
+    {icon:"👄", title:"Pantig BE", say:"Pagsamahin ang B at E. Ang mababasa ay BE. BE.", prompt:"B + E = ?", choices:["BE","BA","BI","BU"], correct:0},
+    {icon:"👄", title:"Pantig BI", say:"Pagsamahin ang B at I. Ang mababasa ay BI. BI.", prompt:"B + I = ?", choices:["BI","BA","BO","BU"], correct:0},
+    {icon:"👄", title:"Pantig BO", say:"Pagsamahin ang B at O. Ang mababasa ay BO. BO.", prompt:"B + O = ?", choices:["BO","BI","BA","BE"], correct:0},
+    {icon:"👄", title:"Pantig BU", say:"Pagsamahin ang B at U. Ang mababasa ay BU. BU.", prompt:"B + U = ?", choices:["BU","BO","BE","BI"], correct:0},
 
     // =====================================================
     // ANTAS 3 — IBA PANG PANTIG FAMILIES
     // =====================================================
-    {icon:"👩", title:"MA-ME-MI-MO-MU", say:"MA, ME, MI, MO, MU.", prompt:"M + A = ?", choices:["MA","ME","MI","MO"], correct:0},
-    {icon:"🐱", title:"PA-PE-PI-PO-PU", say:"PA, PE, PI, PO, PU.", prompt:"P + U = ?", choices:["PU","PA","PI","PO"], correct:0},
-    {icon:"☀️", title:"SA-SE-SI-SO-SU", say:"SA, SE, SI, SO, SU.", prompt:"S + A = ?", choices:["SA","SE","SI","SU"], correct:0},
-    {icon:"✋", title:"KA-KE-KI-KO-KU", say:"KA, KE, KI, KO, KU.", prompt:"K + O = ?", choices:["KO","KA","KI","KU"], correct:0},
-    {icon:"🍭", title:"LA-LE-LI-LO-LU", say:"LA, LE, LI, LO, LU.", prompt:"L + A = ?", choices:["LA","LE","LI","LO"], correct:0},
-    {icon:"👃", title:"NA-NE-NI-NO-NU", say:"NA, NE, NI, NO, NU.", prompt:"N + I = ?", choices:["NI","NA","NO","NU"], correct:0},
-    {icon:"👦", title:"TA-TE-TI-TO-TU", say:"TA, TE, TI, TO, TU.", prompt:"T + A = ?", choices:["TA","TE","TI","TO"], correct:0},
+    {icon:"👩", title:"MA-ME-MI-MO-MU", say:"Basahin natin nang dahan-dahan. MA. ME. MI. MO. MU.", prompt:"M + A = ?", choices:["MA","ME","MI","MO"], correct:0},
+    {icon:"🐱", title:"PA-PE-PI-PO-PU", say:"Basahin natin nang dahan-dahan. PA. PE. PI. PO. PU.", prompt:"P + U = ?", choices:["PU","PA","PI","PO"], correct:0},
+    {icon:"☀️", title:"SA-SE-SI-SO-SU", say:"Basahin natin nang dahan-dahan. SA. SE. SI. SO. SU.", prompt:"S + A = ?", choices:["SA","SE","SI","SU"], correct:0},
+    {icon:"✋", title:"KA-KE-KI-KO-KU", say:"Basahin natin nang dahan-dahan. KA. KE. KI. KO. KU.", prompt:"K + O = ?", choices:["KO","KA","KI","KU"], correct:0},
+    {icon:"🍭", title:"LA-LE-LI-LO-LU", say:"Basahin natin nang dahan-dahan. LA. LE. LI. LO. LU.", prompt:"L + A = ?", choices:["LA","LE","LI","LO"], correct:0},
+    {icon:"👃", title:"NA-NE-NI-NO-NU", say:"Basahin natin nang dahan-dahan. NA. NE. NI. NO. NU.", prompt:"N + I = ?", choices:["NI","NA","NO","NU"], correct:0},
+    {icon:"👦", title:"TA-TE-TI-TO-TU", say:"Basahin natin nang dahan-dahan. TA. TE. TI. TO. TU.", prompt:"T + A = ?", choices:["TA","TE","TI","TO"], correct:0},
 
     // =====================================================
     // ANTAS 4 — PAGBUO NG SALITA
     // =====================================================
-    {icon:"👧", title:"BA + TA = BATA", say:"BA. TA. Kapag pinagsama: BATA.", prompt:"Ano ang mabubuo sa BA + TA?", choices:["BATA 👧","BOLA ⚽","PUSA 🐱","ISDA 🐟"], correct:0},
-    {icon:"⚽", title:"BO + LA = BOLA", say:"BO. LA. Kapag pinagsama: BOLA.", prompt:"Ano ang mabubuo sa BO + LA?", choices:["BOLA ⚽","BATA 👧","MATA 👁️","PUSA 🐱"], correct:0},
-    {icon:"👁️", title:"MA + TA = MATA", say:"MA. TA. Kapag pinagsama: MATA.", prompt:"Ano ang mabubuo sa MA + TA?", choices:["MATA 👁️","BOLA ⚽","PUSA 🐱","ISDA 🐟"], correct:0},
-    {icon:"🐱", title:"PU + SA = PUSA", say:"PU. SA. Kapag pinagsama: PUSA.", prompt:"Ano ang mabubuo sa PU + SA?", choices:["PUSA 🐱","BATA 👧","BOLA ⚽","MATA 👁️"], correct:0},
-    {icon:"🐟", title:"IS + DA = ISDA", say:"IS. DA. Kapag pinagsama: ISDA.", prompt:"Ano ang mabubuo sa IS + DA?", choices:["ISDA 🐟","PUSA 🐱","BOLA ⚽","BATA 👧"], correct:0},
-    {icon:"👩", title:"NA + NAY = NANAY", say:"NA. NAY. Kapag pinagsama: NANAY.", prompt:"Ano ang mabubuo sa NA + NAY?", choices:["NANAY 👩","TATAY 👨","BATA 👧","BOLA ⚽"], correct:0},
-    {icon:"👨", title:"TA + TAY = TATAY", say:"TA. TAY. Kapag pinagsama: TATAY.", prompt:"Ano ang mabubuo sa TA + TAY?", choices:["TATAY 👨","NANAY 👩","MATA 👁️","PUSA 🐱"], correct:0},
+    {icon:"👧", title:"BA + TA = BATA", say:"Basahin natin. BA. TA. Kapag pinagsama, BATA.", prompt:"Ano ang mabubuo sa BA + TA?", choices:["BATA 👧","BOLA ⚽","PUSA 🐱","ISDA 🐟"], correct:0},
+    {icon:"⚽", title:"BO + LA = BOLA", say:"Basahin natin. BO. LA. Kapag pinagsama, BOLA.", prompt:"Ano ang mabubuo sa BO + LA?", choices:["BOLA ⚽","BATA 👧","MATA 👁️","PUSA 🐱"], correct:0},
+    {icon:"👁️", title:"MA + TA = MATA", say:"Basahin natin. MA. TA. Kapag pinagsama, MATA.", prompt:"Ano ang mabubuo sa MA + TA?", choices:["MATA 👁️","BOLA ⚽","PUSA 🐱","ISDA 🐟"], correct:0},
+    {icon:"🐱", title:"PU + SA = PUSA", say:"Basahin natin. PU. SA. Kapag pinagsama, PUSA.", prompt:"Ano ang mabubuo sa PU + SA?", choices:["PUSA 🐱","BATA 👧","BOLA ⚽","MATA 👁️"], correct:0},
+    {icon:"🐟", title:"IS + DA = ISDA", say:"Basahin natin. IS. DA. Kapag pinagsama, ISDA.", prompt:"Ano ang mabubuo sa IS + DA?", choices:["ISDA 🐟","PUSA 🐱","BOLA ⚽","BATA 👧"], correct:0},
+    {icon:"👩", title:"NA + NAY = NANAY", say:"Basahin natin. NA. NAY. Kapag pinagsama, NANAY.", prompt:"Ano ang mabubuo sa NA + NAY?", choices:["NANAY 👩","TATAY 👨","BATA 👧","BOLA ⚽"], correct:0},
+    {icon:"👨", title:"TA + TAY = TATAY", say:"Basahin natin. TA. TAY. Kapag pinagsama, TATAY.", prompt:"Ano ang mabubuo sa TA + TAY?", choices:["TATAY 👨","NANAY 👩","MATA 👁️","PUSA 🐱"], correct:0},
 
     // =====================================================
     // ANTAS 5 — MAIKLING PAGBASA
     // =====================================================
-    {icon:"🏠", title:"Salitang BAHAY", say:"BA-HAY. BAHAY.", prompt:"Alin ang BAHAY?", choices:["🏠 Bahay","🐶 Aso","🥭 Mangga","🚗 Kotse"], correct:0},
-    {icon:"⚽", title:"Maikling Pangungusap", say:"May bola si Ana.", prompt:"Ano ang mayroon si Ana?", choices:["Bola ⚽","Aklat 📘","Isda 🐟","Payong ☂️"], correct:0}
+    {icon:"🏠", title:"Salitang BAHAY", say:"Basahin natin nang dahan-dahan. BA. HAY. BAHAY.", prompt:"Alin ang BAHAY?", choices:["🏠 Bahay","🐶 Aso","🥭 Mangga","🚗 Kotse"], correct:0},
+    {icon:"⚽", title:"Maikling Pangungusap", say:"Pakinggan at basahin natin. May bola si Ana.", prompt:"Ano ang mayroon si Ana?", choices:["Bola ⚽","Aklat 📘","Isda 🐟","Payong ☂️"], correct:0}
   ],
   math: [
     // COUNTING
-    {icon:"🍎 🍎 🍎", title:"Let’s Count!", say:"One, two, three apples.", prompt:"How many apples?", choices:["3","2","4","1"], correct:0},
+    {icon:"🍎 🍎 🍎", title:"Let’s Count!", say:"Let us count slowly. One. Two. Three. There are three apples.", prompt:"How many apples?", choices:["3","2","4","1"], correct:0},
 
     // ADDITION
-    {icon:"⭐ ⭐ + ⭐", title:"Addition", say:"Two stars plus one star equals three stars.", prompt:"2 + 1 = ?", choices:["3","4","2","1"], correct:0},
-    {icon:"🍓 🍓 + 🍓 🍓", title:"Add Them Together", say:"Two strawberries plus two strawberries equals four.", prompt:"2 + 2 = ?", choices:["4","3","5","2"], correct:0},
+    {icon:"⭐ ⭐ + ⭐", title:"Addition", say:"Two stars plus one star equals three stars. Two plus one equals three.", prompt:"2 + 1 = ?", choices:["3","4","2","1"], correct:0},
+    {icon:"🍓 🍓 + 🍓 🍓", title:"Add Them Together", say:"Two strawberries plus two strawberries equals four. Two plus two equals four.", prompt:"2 + 2 = ?", choices:["4","3","5","2"], correct:0},
 
     // SUBTRACTION
-    {icon:"🐤 🐤 🐤", title:"Take One Away", say:"Three birds. One flies away. Two are left.", prompt:"3 - 1 = ?", choices:["2","3","1","4"], correct:0},
-    {icon:"🍪 🍪 🍪 🍪 🍪", title:"Subtraction", say:"There are five cookies. We take away two. Three cookies are left.", prompt:"5 - 2 = ?", choices:["3","2","4","1"], correct:0},
+    {icon:"🐤 🐤 🐤", title:"Take One Away", say:"There are three birds. One bird flies away. Two birds are left.", prompt:"3 - 1 = ?", choices:["2","3","1","4"], correct:0},
+    {icon:"🍪 🍪 🍪 🍪 🍪", title:"Subtraction", say:"There are five cookies. Take away two cookies. Three cookies are left.", prompt:"5 - 2 = ?", choices:["3","2","4","1"], correct:0},
 
     // SIMPLE DIVISION / EQUAL SHARING
-    {icon:"🍪🍪🍪🍪  →  👧 👦", title:"Share Equally", say:"Four cookies are shared equally by two children. Each child gets two cookies.", prompt:"4 cookies ÷ 2 children = how many for each child?", choices:["2","4","1","3"], correct:0},
-    {icon:"🍎🍎🍎🍎🍎🍎  →  👧 👦", title:"Equal Sharing", say:"Six apples are shared equally by two children. Each child gets three apples.", prompt:"6 ÷ 2 = ?", choices:["3","2","4","6"], correct:0},
+    {icon:"🍪🍪🍪🍪  →  👧 👦", title:"Share Equally", say:"Four cookies are shared equally between two children. Each child gets two cookies.", prompt:"4 cookies ÷ 2 children = how many for each child?", choices:["2","4","1","3"], correct:0},
+    {icon:"🍎🍎🍎🍎🍎🍎  →  👧 👦", title:"Equal Sharing", say:"Six apples are shared equally between two children. Each child gets three apples.", prompt:"6 ÷ 2 = ?", choices:["3","2","4","6"], correct:0},
 
     // GREATER THAN / LESS THAN / EQUAL TO
-    {icon:"🍎 🍎     vs     🍎 🍎 🍎 🍎", title:"Which Has More?", say:"Two apples are less than four apples.", prompt:"Which number is greater?", choices:["4","2","They are equal","0"], correct:0},
-    {icon:"⭐⭐⭐⭐⭐     vs     ⭐⭐⭐", title:"Greater Than", say:"Five is greater than three.", prompt:"Choose the correct sign: 5 __ 3", choices:[">","<","=","+"], correct:0},
-    {icon:"🐟🐟     vs     🐟🐟🐟", title:"Less Than", say:"Two is less than three.", prompt:"Choose the correct sign: 2 __ 3", choices:["<",">","=","−"], correct:0},
-    {icon:"🍊🍊🍊     vs     🍊🍊🍊", title:"Equal To", say:"Three oranges are equal to three oranges.", prompt:"Choose the correct sign: 3 __ 3", choices:["=",">","<","+"], correct:0},
+    {icon:"🍎 🍎     vs     🍎 🍎 🍎 🍎", title:"Which Has More?", say:"Two is less than four. Four is the greater number.", prompt:"Which number is greater?", choices:["4","2","They are equal","0"], correct:0},
+    {icon:"⭐⭐⭐⭐⭐     vs     ⭐⭐⭐", title:"Greater Than", say:"Five is greater than three. The greater-than sign opens toward five.", prompt:"Choose the correct sign: 5 __ 3", choices:[">","<","=","+"], correct:0},
+    {icon:"🐟🐟     vs     🐟🐟🐟", title:"Less Than", say:"Two is less than three. The less-than sign points toward two.", prompt:"Choose the correct sign: 2 __ 3", choices:["<",">","=","−"], correct:0},
+    {icon:"🍊🍊🍊     vs     🍊🍊🍊", title:"Equal To", say:"Three is equal to three. Both sides have the same number.", prompt:"Choose the correct sign: 3 __ 3", choices:["=",">","<","+"], correct:0},
 
     // SHAPES
-    {icon:"🔺", title:"Shapes", say:"This is a triangle.", prompt:"What shape is this?", choices:["Triangle","Circle","Square","Heart"], correct:0}
+    {icon:"🔺", title:"Shapes", say:"This shape is a triangle. A triangle has three sides.", prompt:"What shape is this?", choices:["Triangle","Circle","Square","Heart"], correct:0}
   ],
   story: [
     {icon:"🐰🍎", title:"Bunny’s Apple", say:"Bunny has one apple. Mama gives Bunny one more apple. Bunny is happy.", prompt:"How many apples does Bunny have now?", choices:["2","1","3","0"], correct:0},
@@ -645,8 +719,8 @@ const lessonBanks = {
   ],
   review: [
     {icon:"🔤", title:"Quick Mix", say:"Let us review.", prompt:"Which one starts with M?", choices:["Moon 🌙","Cat 🐱","Dog 🐶","Sun ☀️"], correct:0},
-    {icon:"🇵🇭", title:"Patinig Review", say:"A, E, I, O, U are patinig.", prompt:"Alin ang patinig?", choices:["A","B","K","M"], correct:0},
-    {icon:"🇵🇭", title:"Pantig Review", say:"BA plus TA is BATA.", prompt:"BA + TA = ?", choices:["BATA","BOLA","PUSA","MATA"], correct:0},
+    {icon:"🇵🇭", title:"Patinig Review", say:"Ang A, E, I, O, at U ay mga patinig.", prompt:"Alin ang patinig?", choices:["A","B","K","M"], correct:0},
+    {icon:"🇵🇭", title:"Pantig Review", say:"Pagsamahin ang BA at TA. Ang mabubuo ay BATA.", prompt:"BA + TA = ?", choices:["BATA","BOLA","PUSA","MATA"], correct:0},
     {icon:"🔢", title:"Math Review", say:"Four minus one is three.", prompt:"4 - 1 = ?", choices:["3","2","4","5"], correct:0},
     {icon:"⭐⭐⭐⭐  vs  ⭐⭐", title:"Compare Numbers", say:"Four is greater than two.", prompt:"Choose the correct sign: 4 __ 2", choices:[">","<","=","+"], correct:0}
   ]
@@ -689,6 +763,17 @@ function updateHome(){
   $("#dailyGoal").value = String(state.dailyGoal || 15);
   $("#voiceToggle").checked = state.voice !== false;
   $("#celebrateToggle").checked = state.celebrate !== false;
+
+  const filRate = Number(state.filipinoSpeechRate || 0.70);
+  const engRate = Number(state.englishSpeechRate || 0.72);
+  if($("#filipinoRate")){
+    $("#filipinoRate").value = String(filRate);
+    $("#filipinoRateValue").textContent = `${Math.round(filRate * 100)}%`;
+  }
+  if($("#englishRate")){
+    $("#englishRate").value = String(engRate);
+    $("#englishRateValue").textContent = `${Math.round(engRate * 100)}%`;
+  }
   $("#skillProgress").innerHTML = Object.entries(state.skills).map(([k,v]) => `
     <div class="skill-row">
       <div style="display:flex;justify-content:space-between"><b>${labelSkill(k)}</b><span>${Math.min(v,100)}%</span></div>
@@ -698,82 +783,257 @@ function updateHome(){
 function labelSkill(k){ return ({english:"English Reading",filipino:"Filipino Reading",math:"Math",story:"Comprehension",thinking:"Thinking Skills",review:"Review"})[k]||k; }
 
 /* =========================================================
-   LANGUAGE-AWARE VOICE SYSTEM
-   Filipino Reading → Filipino/Tagalog voice when available
-   English/Math/Story/Thinking → English voice when available
+   ENHANCED BILINGUAL VOICE SYSTEM
+   ---------------------------------------------------------
+   Goals:
+   • Filipino lessons use a Filipino/Tagalog voice when available.
+   • English lessons use clear, neutral English.
+   • Novelty / character voices are avoided automatically.
+   • Parent can manually select and preview each voice.
+   • Speech is slower and easier for a kindergarten learner.
    ========================================================= */
 
 let availableVoices = [];
+let voiceRefreshTimer = null;
 
-function refreshVoices(){
-  if(!("speechSynthesis" in window)) return;
-  availableVoices = speechSynthesis.getVoices() || [];
-}
-
-refreshVoices();
-
-if("speechSynthesis" in window){
-  speechSynthesis.addEventListener?.("voiceschanged", refreshVoices);
-  // Safari/iPad sometimes loads the voice list shortly after page load.
-  setTimeout(refreshVoices, 300);
-  setTimeout(refreshVoices, 1200);
-}
+const NOVELTY_VOICE_WORDS = [
+  "albert","bad news","bahh","bells","boing","bubbles","cellos",
+  "deranged","fred","good news","hysterical","junior","organ",
+  "princess","ralph","superstar","trinoids","whisper","wobble","zarvox"
+];
 
 function normalizeLang(lang = ""){
-  return lang.toLowerCase().replace("_","-");
+  return String(lang).toLowerCase().replaceAll("_","-");
+}
+
+function isNoveltyVoice(voice){
+  const name = String(voice?.name || "").toLowerCase();
+  return NOVELTY_VOICE_WORDS.some(word => name.includes(word));
+}
+
+function voiceQualityScore(voice, language){
+  if(!voice || isNoveltyVoice(voice)) return -9999;
+
+  const lang = normalizeLang(voice.lang);
+  const name = String(voice.name || "").toLowerCase();
+  let score = 0;
+
+  if(language === "filipino"){
+    if(lang === "fil-ph") score += 120;
+    else if(lang === "tl-ph") score += 115;
+    else if(lang.startsWith("fil")) score += 90;
+    else if(lang.startsWith("tl")) score += 85;
+    else return -500;
+  }else{
+    if(lang === "en-us") score += 120;
+    else if(lang === "en-ph") score += 112;
+    else if(lang === "en-gb") score += 105;
+    else if(lang === "en-au") score += 95;
+    else if(lang.startsWith("en")) score += 80;
+    else return -500;
+  }
+
+  if(voice.localService) score += 12;
+
+  // Voice names sometimes reveal enhanced/premium system voices.
+  if(name.includes("premium")) score += 20;
+  if(name.includes("enhanced")) score += 18;
+  if(name.includes("natural")) score += 16;
+  if(name.includes("neural")) score += 16;
+
+  // Common neutral English voices receive a small preference, when exposed.
+  if(language === "english"){
+    const clearNames = ["samantha","ava","allison","susan","serena","daniel","alex"];
+    if(clearNames.some(n => name.includes(n))) score += 8;
+  }
+
+  return score;
+}
+
+function getSavedVoice(language){
+  const wantedURI = language === "filipino"
+    ? state.filipinoVoiceURI
+    : state.englishVoiceURI;
+
+  if(!wantedURI) return null;
+  return availableVoices.find(v => v.voiceURI === wantedURI) || null;
 }
 
 function chooseVoice(language){
+  refreshVoices(false);
+
+  const saved = getSavedVoice(language);
+  if(saved && !isNoveltyVoice(saved)) return saved;
+
+  const candidates = availableVoices
+    .map(v => ({ voice:v, score:voiceQualityScore(v, language) }))
+    .filter(x => x.score > -400)
+    .sort((a,b) => b.score - a.score);
+
+  return candidates[0]?.voice || null;
+}
+
+function optionLabel(voice){
+  const quality =
+    /premium/i.test(voice.name) ? " • Premium" :
+    /enhanced/i.test(voice.name) ? " • Enhanced" :
+    /natural|neural/i.test(voice.name) ? " • Natural" : "";
+
+  return `${voice.name} — ${voice.lang}${quality}`;
+}
+
+function fillVoiceSelect(select, language){
+  if(!select) return;
+
+  const previous = language === "filipino"
+    ? (state.filipinoVoiceURI || "")
+    : (state.englishVoiceURI || "");
+
+  const label = language === "filipino"
+    ? "Auto — best Filipino voice"
+    : "Auto — best clear English voice";
+
+  select.innerHTML = `<option value="">${label}</option>`;
+
+  const voices = availableVoices
+    .filter(v => voiceQualityScore(v, language) > -400)
+    .sort((a,b) => voiceQualityScore(b,language) - voiceQualityScore(a,language));
+
+  voices.forEach(v => {
+    const option = document.createElement("option");
+    option.value = v.voiceURI;
+    option.textContent = optionLabel(v);
+    select.appendChild(option);
+  });
+
+  if([...select.options].some(o => o.value === previous)){
+    select.value = previous;
+  }else{
+    select.value = "";
+  }
+}
+
+function updateVoiceInfo(){
+  const fil = chooseVoice("filipino");
+  const eng = chooseVoice("english");
+
+  const filInfo = $("#filipinoVoiceInfo");
+  const engInfo = $("#englishVoiceInfo");
+
+  if(filInfo){
+    if(fil){
+      filInfo.textContent = `Using: ${fil.name} (${fil.lang})`;
+    }else{
+      filInfo.textContent = "No Filipino/Tagalog system voice was detected. The device may fall back to another voice.";
+    }
+  }
+
+  if(engInfo){
+    if(eng){
+      engInfo.textContent = `Using: ${eng.name} (${eng.lang})`;
+    }else{
+      engInfo.textContent = "No English system voice was detected.";
+    }
+  }
+}
+
+function populateVoiceControls(){
+  fillVoiceSelect($("#filipinoVoiceSelect"), "filipino");
+  fillVoiceSelect($("#englishVoiceSelect"), "english");
+  updateVoiceInfo();
+}
+
+function refreshVoices(updateUI = true){
+  if(!("speechSynthesis" in window)) return;
+  const voices = speechSynthesis.getVoices() || [];
+
+  if(voices.length){
+    availableVoices = voices;
+    if(updateUI) populateVoiceControls();
+  }
+}
+
+if("speechSynthesis" in window){
   refreshVoices();
-  if(!availableVoices.length) return null;
 
-  const wanted = language === "filipino"
-    ? ["fil-ph","tl-ph","fil","tl"]
-    : ["en-us","en-gb","en-au","en"];
+  // Voice lists often arrive asynchronously in Safari/iPadOS.
+  speechSynthesis.addEventListener?.("voiceschanged", () => refreshVoices());
 
-  // 1. Prefer an exact locale match.
-  for(const code of wanted){
-    const exact = availableVoices.find(v => normalizeLang(v.lang) === code);
-    if(exact) return exact;
-  }
-
-  // 2. Then prefer any voice in the requested language family.
-  for(const code of wanted){
-    const family = code.split("-")[0];
-    const match = availableVoices.find(v => normalizeLang(v.lang).startsWith(family));
-    if(match) return match;
-  }
-
-  return null;
+  [250,700,1500,3000].forEach(ms => {
+    setTimeout(() => refreshVoices(), ms);
+  });
 }
 
 function activeSpeechLanguage(){
-  // Filipino Reading should sound Filipino/Tagalog.
-  if(currentMode === "filipino") return "filipino";
-
-  // Other current learning areas are primarily English.
-  return "english";
+  return currentMode === "filipino" ? "filipino" : "english";
 }
 
-function speak(text, languageOverride = null){
-  if(!state.voice || !("speechSynthesis" in window)) return;
+function removeEmojiForSpeech(value){
+  try{
+    return value.replace(/\p{Extended_Pictographic}/gu, " ");
+  }catch{
+    return value;
+  }
+}
+
+function prepareSpeechText(text, language){
+  let value = removeEmojiForSpeech(String(text || ""));
+
+  // Remove visual separators that speech engines often pronounce awkwardly.
+  value = value
+    .replaceAll("→", " ")
+    .replaceAll("__", " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if(language === "filipino"){
+    return value
+      .replaceAll("÷", " hinati sa ")
+      .replaceAll("+", " at ")
+      .replaceAll("=", " ay ")
+      .replaceAll(">", " mas malaki kaysa ")
+      .replaceAll("<", " mas maliit kaysa ")
+      .replace(/\bvs\.?\b/gi, " kumpara sa ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  return value
+    .replaceAll("÷", " divided by ")
+    .replaceAll("+", " plus ")
+    .replaceAll("=", " equals ")
+    .replaceAll(">", " is greater than ")
+    .replaceAll("<", " is less than ")
+    .replace(/\bvs\.?\b/gi, " compared with ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function speak(text, languageOverride = null, options = {}){
+  const force = Boolean(options.force);
+  if((!state.voice && !force) || !("speechSynthesis" in window)) return;
 
   const language = languageOverride || activeSpeechLanguage();
-  const utterance = new SpeechSynthesisUtterance(text);
   const selectedVoice = chooseVoice(language);
+  const cleanText = prepareSpeechText(text, language);
+
+  if(!cleanText) return;
 
   speechSynthesis.cancel();
 
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+
   if(language === "filipino"){
-    // "fil-PH" is the modern Filipino locale. Some systems expose "tl-PH".
     utterance.lang = selectedVoice?.lang || "fil-PH";
-    utterance.rate = 0.74;
-    utterance.pitch = 1.04;
+    utterance.rate = Math.min(0.95, Math.max(0.55, Number(state.filipinoSpeechRate || 0.70)));
+    utterance.pitch = 1.0;
   }else{
     utterance.lang = selectedVoice?.lang || "en-US";
-    utterance.rate = 0.78;
-    utterance.pitch = 1.06;
+    utterance.rate = Math.min(0.95, Math.max(0.55, Number(state.englishSpeechRate || 0.72)));
+    utterance.pitch = 1.0;
   }
+
+  utterance.volume = 1.0;
 
   if(selectedVoice){
     utterance.voice = selectedVoice;
@@ -781,6 +1041,23 @@ function speak(text, languageOverride = null){
 
   speechSynthesis.speak(utterance);
 }
+
+function previewFilipinoVoice(){
+  speak(
+    "Magandang araw! Magbasa tayo nang dahan-dahan. A, E, I, O, U. BA. BE. BI. BO. BU. BA. TA. BATA.",
+    "filipino",
+    { force:true }
+  );
+}
+
+function previewEnglishVoice(){
+  speak(
+    "Hello! Let us learn slowly and clearly. This is the letter A. A makes the short a sound, as in apple. Well done.",
+    "english",
+    { force:true }
+  );
+}
+
 function celebrate(){
   if(!state.celebrate) return;
   const el = $("#celebration"); el.classList.add("show");
@@ -837,8 +1114,8 @@ function checkAnswer(i){
       $("#feedback").innerHTML="🎉 Magaling! Tama ang sagot mo!";
       speak("Magaling! Tama ang sagot mo!", "filipino");
     }else{
-      $("#feedback").innerHTML="🎉 Great job! You got it!";
-      speak("Great job! You got it!", "english");
+      $("#feedback").innerHTML="🎉 Well done! That is correct!";
+      speak("Well done. That is correct.", "english");
     }
     celebrate();
   } else {
@@ -847,7 +1124,7 @@ function checkAnswer(i){
       speak("Magandang subok! Subukan nating tandaan ang tamang sagot.", "filipino");
     }else{
       $("#feedback").innerHTML=`🌟 Good try! The answer is <b>${q.choices[q.correct]}</b>.`;
-      speak("Good try! Let us remember the correct answer.", "english");
+      speak("Good try. Let us look carefully at the correct answer.", "english");
     }
   }
   save();
@@ -874,7 +1151,7 @@ function finishLesson(){
   if(currentMode === "filipino"){
     speak(`Tapos na ang ating gawain. Nakakuha ka ng ${lessonScore} na bituin. Magaling!`, "filipino");
   }else{
-    speak(`Adventure complete. You earned ${lessonScore} stars. Great job!`, "english");
+    speak(`The lesson is complete. You earned ${lessonScore} stars. Well done.`, "english");
   }
   $("#againBtn").onclick=()=>startLesson(currentMode);
   $("#homeAfterBtn").onclick=()=>showView("#homeView");
@@ -889,7 +1166,7 @@ function startDaily(){
 $("#startDailyBtn").onclick=startDaily;
 $$(".lesson-card").forEach(b=>b.onclick=()=>startLesson(b.dataset.mode));
 $("#backBtn").onclick=()=>showView("#homeView");
-$("#parentBtn").onclick=()=>{updateHome();showView("#parentView")};
+$("#parentBtn").onclick=()=>{updateHome();populateVoiceControls();showView("#parentView")};
 $("#parentBackBtn").onclick=()=>showView("#homeView");
 $("#saveProfile").onclick=()=>{
   state.name=$("#learnerName").value.trim()||"Super Learner";
@@ -897,6 +1174,42 @@ $("#saveProfile").onclick=()=>{
   save(); alert("Profile saved! ⭐");
 };
 $("#voiceToggle").onchange=e=>{state.voice=e.target.checked;save()};
+
+$("#filipinoVoiceSelect").onchange=e=>{
+  state.filipinoVoiceURI = e.target.value;
+  save();
+  updateVoiceInfo();
+  previewFilipinoVoice();
+};
+
+$("#englishVoiceSelect").onchange=e=>{
+  state.englishVoiceURI = e.target.value;
+  save();
+  updateVoiceInfo();
+  previewEnglishVoice();
+};
+
+$("#previewFilipinoVoice").onclick=previewFilipinoVoice;
+$("#previewEnglishVoice").onclick=previewEnglishVoice;
+
+$("#filipinoRate").oninput=e=>{
+  state.filipinoSpeechRate = Number(e.target.value);
+  $("#filipinoRateValue").textContent = `${Math.round(state.filipinoSpeechRate * 100)}%`;
+};
+$("#filipinoRate").onchange=()=>{
+  save();
+  previewFilipinoVoice();
+};
+
+$("#englishRate").oninput=e=>{
+  state.englishSpeechRate = Number(e.target.value);
+  $("#englishRateValue").textContent = `${Math.round(state.englishSpeechRate * 100)}%`;
+};
+$("#englishRate").onchange=()=>{
+  save();
+  previewEnglishVoice();
+};
+
 $("#celebrateToggle").onchange=e=>{state.celebrate=e.target.checked;save()};
 $("#resetProgress").onclick=()=>{
   if(confirm("Reset all learning progress on this iPad and the connected cloud profile?")){
