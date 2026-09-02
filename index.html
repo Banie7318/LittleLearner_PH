@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 =========================================================
-LITTLE LEARNER PH — ONE FILE EDITION
+LITTLE LEARNER PH — ENHANCED MATATAG PWA EDITION
 =========================================================
 
 Everything is inside THIS index.html:
@@ -22,10 +22,10 @@ SEARCH FOR:
 
 to locate the Firebase project settings and learner defaults.
 
-IMPORTANT:
-This easy-edit build intentionally does not depend on sw.js.
-A service worker normally has to be hosted as its own same-origin file,
-so full offline PWA caching requires the multi-file edition.
+ENHANCED PACKAGE:
+index.html contains the full learning app. manifest.webmanifest and sw.js
+add installable PWA behavior when deployed to Firebase Hosting/GitHub Pages.
+Local progress remains available even when Firebase is temporarily unavailable.
 =========================================================
 -->
 
@@ -38,7 +38,10 @@ so full offline PWA caching requires the multi-file edition.
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Little Learner PH" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <title>Little Learner PH</title>
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <title>Little Learner PH — MATATAG Learning Companion</title>
 <style>
 
 :root{
@@ -236,6 +239,39 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
   50%{transform:scale(1.13)}
 }
 
+
+/* =========================================================
+   V2 — ADAPTIVE MATATAG LEARNING EXPERIENCE
+   ========================================================= */
+:root{
+  --navy:#23324e;
+  --soft:#f6f8fc;
+  --focus:#5b7cfa;
+  --success:#44b678;
+  --gentle-warn:#fff2c7;
+}
+button{min-height:48px;touch-action:manipulation}
+.lesson-card{position:relative;overflow:hidden}
+.lesson-card::after{content:"";position:absolute;width:84px;height:84px;border-radius:50%;right:-30px;bottom:-38px;background:rgba(255,255,255,.32)}
+.explore{background:#ddf7ee}.values{background:#ffe8d5}.makabansa{background:#e7edff}
+.focus-card{margin-top:16px;padding:18px 22px;display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:center;background:linear-gradient(145deg,#ffffff,#f7fbff)}
+.focus-kicker{font-size:.76rem;font-weight:950;letter-spacing:.08em;color:#64748b;text-transform:uppercase}
+.focus-card h3{margin:6px 0 5px;font-size:1.18rem}.focus-card p{margin:0;color:#64748b;line-height:1.45}
+.daily-meter{height:13px;border-radius:999px;background:#e9eef8;overflow:hidden;margin-top:10px}.daily-meter-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#77c8ff,#8fe0b0);transition:width .35s ease}
+.theme-badge{justify-self:end;min-width:145px;text-align:center;padding:16px;border-radius:22px;background:#fff7ce;font-weight:950;line-height:1.4;box-shadow:0 10px 24px rgba(44,55,84,.08)}
+.lesson-meta-line{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:4px}.mini-pill{font-size:.72rem;font-weight:900;background:#f2f5fb;color:#516079;padding:7px 10px;border-radius:999px}.mini-pill.theme{background:#fff4c9;color:#695500}.mini-pill.domain{background:#eaf6ff;color:#285c7b}
+.question-progress{width:min(650px,100%);height:10px;border-radius:999px;background:#edf1f7;overflow:hidden;margin:8px 0 10px}.question-progress>div{height:100%;background:linear-gradient(90deg,#ffd85a,#77c8ff);border-radius:999px;transition:width .25s ease}
+.teacher-btn{border:0;background:#f0edff;color:#514394;border-radius:18px;padding:12px 16px;font-weight:950;margin-top:8px}.teacher-btn:active{transform:scale(.98)}
+.answer{transition:.15s transform,.15s border-color,.15s background,.15s opacity}.answer:disabled{cursor:default}.answer.wrong-answer{border-color:#f2c45d!important;background:var(--gentle-warn)!important;animation:wrongWiggle .32s ease!important;opacity:.72}.answer.correct-answer,.answer.reveal-answer{border-color:#75d39a!important;background:#e9faef!important}
+.feedback[aria-live]{line-height:1.5}
+.daily-banner{width:min(650px,100%);background:#fff7da;padding:10px 14px;border-radius:16px;margin-bottom:8px;font-weight:850;color:#735c00;font-size:.88rem}
+.parent-subtitle{color:#64748b;font-size:.9rem;line-height:1.45;margin-top:-5px}.curriculum-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.domain-card{background:#f7f9ff;border-radius:18px;padding:14px}.domain-card b{display:block;font-size:.92rem;margin-bottom:8px}.domain-card .bar{height:10px;background:#e7ebf4;border-radius:999px;overflow:hidden}.domain-card .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#b8a2ff,#77c8ff)}.domain-card small{display:block;margin-top:6px;color:#667085}
+.recommendation-list{display:grid;gap:9px;margin-top:12px}.recommendation{padding:12px 14px;background:#fff9df;border-radius:16px;line-height:1.4}.recommendation b{display:block;margin-bottom:2px}.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.earned-badge{padding:8px 11px;background:#edf9f1;border-radius:999px;font-size:.82rem;font-weight:900}
+.parent-pin-note{font-size:.78rem;color:#7a8498;margin-top:6px}.install-box{background:linear-gradient(145deg,#eef8ff,#f6f3ff);border-radius:18px;padding:15px;line-height:1.45}
+.mastery-chip{font-weight:900;color:#58667c;font-size:.82rem;margin-top:3px}
+@media (max-width:650px){.focus-card{grid-template-columns:1fr}.theme-badge{justify-self:stretch}.curriculum-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (display-mode:standalone){.standalone-hide{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -271,6 +307,19 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
           <div class="stars" id="starDisplay">☆ ☆ ☆ ☆ ☆</div>
         </div>
 
+
+
+        <div class="focus-card card">
+          <div>
+            <div class="focus-kicker">Smart Daily Focus</div>
+            <h3 id="todayFocusTitle">Building today’s learning path…</h3>
+            <p id="todayFocusText">Little Learner PH will prioritize skills that need more practice.</p>
+            <div class="daily-meter" aria-label="Daily learning goal progress"><div id="dailyMeterFill" class="daily-meter-fill" style="width:0%"></div></div>
+            <p id="dailyMeterText" style="font-size:.82rem;margin-top:7px">0 of 15 minutes</p>
+          </div>
+          <div id="themeBadge" class="theme-badge">🏠 Quarter 1<br>Knowing Who We Are</div>
+        </div>
+
         <h3 class="section-title">Pick a Learning Game</h3>
         <div class="lesson-grid">
           <button class="lesson-card english" data-mode="english">
@@ -287,6 +336,16 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
           </button>
           <button class="lesson-card thinking" data-mode="thinking">
             <span class="emoji">🧩</span><strong>Thinking Game</strong><small>Patterns & logic</small>
+          </button>
+
+          <button class="lesson-card explore" data-mode="explore">
+            <span class="emoji">🔬</span><strong>Little Explorer</strong><small>Body, animals, plants & our world</small>
+          </button>
+          <button class="lesson-card values" data-mode="values">
+            <span class="emoji">❤️</span><strong>Good Manners</strong><small>Kindness, respect & responsibility</small>
+          </button>
+          <button class="lesson-card makabansa" data-mode="makabansa">
+            <span class="emoji">🇵🇭</span><strong>My Philippines</strong><small>Family, community & Filipino identity</small>
           </button>
           <button class="lesson-card review" data-mode="review">
             <span class="emoji">🏆</span><strong>Quick Review</strong><small>Practice what we learned</small>
@@ -318,6 +377,17 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
               <option value="30">30 minutes</option>
             </select>
           </label>
+
+          <label>Curriculum Quarter
+            <select id="curriculumQuarter">
+              <option value="1">Quarter 1 — Knowing Who We Are and Our Families</option>
+              <option value="2">Quarter 2 — Exploring Our Community</option>
+              <option value="3">Quarter 3 — Appreciating Our Country</option>
+              <option value="4">Quarter 4 — Caring for Our World</option>
+            </select>
+          </label>
+          <label>Parent PIN <input id="parentPin" inputmode="numeric" maxlength="4" placeholder="Optional 4-digit PIN"></label>
+          <div class="parent-pin-note">Optional child gate only. Leave blank if you do not want a PIN.</div>
           <button id="saveProfile" class="primary">Save Profile</button>
         </div>
 
@@ -327,8 +397,18 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
             <div><b id="totalStars">0</b><span>Total Stars</span></div>
             <div><b id="sessionsDone">0</b><span>Activities Done</span></div>
             <div><b id="streak">0</b><span>Day Streak</span></div>
+            <div><b id="todayMinutes">0</b><span>Minutes Today</span></div>
+            <div><b id="accuracy">0%</b><span>Answer Accuracy</span></div>
+            <div><b id="masteredSkills">0</b><span>Skills Mastered</span></div>
           </div>
           <div id="skillProgress" class="skill-progress"></div>
+          <h3 style="margin-top:24px">🎓 MATATAG-Aligned Learning Areas</h3>
+          <p class="parent-subtitle">This shows mastery of skills currently available inside the app; it is not a claim that all official Kindergarten competencies are already digitized.</p>
+          <div id="curriculumProgress" class="curriculum-grid"></div>
+          <h3 style="margin-top:24px">🎯 Suggested Practice</h3>
+          <div id="recommendations" class="recommendation-list"></div>
+          <h3 style="margin-top:24px">🏅 Earned Badges</h3>
+          <div id="badgeRow" class="badge-row"></div>
         </div>
 
 
@@ -347,8 +427,20 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
         <div class="card parent-panel">
           <h3>⚙️ Learning Settings</h3>
           <label><input type="checkbox" id="soundEffectsToggle" checked> Play animal & object sounds</label>
+          <label><input type="checkbox" id="backgroundMusicToggle" checked> Fun background music during lessons</label>
+          <label><input type="checkbox" id="voiceGuidanceToggle" checked> Teacher voice guidance</label>
+          <label><input type="checkbox" id="autoNarrateToggle" checked> Read each lesson instruction automatically</label>
           <label><input type="checkbox" id="celebrateToggle" checked> Celebration animation</label>
           <button id="resetProgress" class="danger">Reset Progress</button>
+        </div>
+
+
+        <div class="card parent-panel">
+          <h3>📱 iPad App Setup</h3>
+          <div class="install-box">
+            Deploy this folder with Firebase Hosting or GitHub Pages, open it in Safari on the iPad, then use <b>Share → Add to Home Screen</b>. The enhanced package includes a manifest and service worker for app-like launching and offline caching of the learning shell.
+          </div>
+          <button id="installHelpBtn" class="secondary standalone-hide" style="margin-top:12px">Show iPad Steps</button>
         </div>
       </section>
     </main>
@@ -391,22 +483,38 @@ const APP_CONFIG = {
   },
 
   learnerDefaults: {
+    schemaVersion: 2,
     name: "Super Learner",
     totalStars: 0,
     sessions: 0,
     streak: 0,
     lastDay: "",
     todayStars: 0,
+    todayMinutes: 0,
+    minutesDay: "",
     dailyGoal: 15,
+    quarter: 1,
+    parentPin: "",
     soundEffects: true,
+    backgroundMusic: true,
+    voiceGuidance: true,
+    autoNarrate: true,
     celebrate: true,
+    totalAttempts: 0,
+    correctAnswers: 0,
     updatedAt: 0,
+    mastery: {},
+    badges: [],
+    activityHistory: [],
     skills: {
       english: 0,
       filipino: 0,
       math: 0,
       story: 0,
       thinking: 0,
+      explore: 0,
+      values: 0,
+      makabansa: 0,
       review: 0
     }
   }
@@ -415,14 +523,28 @@ const APP_CONFIG = {
 const STORAGE_KEY = "littleLearnerPH";
 const defaults = JSON.parse(JSON.stringify(APP_CONFIG.learnerDefaults));
 
-let state = {
-  ...defaults,
-  ...(JSON.parse(localStorage.getItem(STORAGE_KEY)) || {})
-};
-state.skills = {
-  ...defaults.skills,
-  ...(state.skills || {})
-};
+function readLocalState(){
+  try{
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {};
+  }catch(error){
+    console.warn("Stored progress could not be read; using safe defaults.", error);
+    return {};
+  }
+}
+
+function normalizeState(raw = {}){
+  const next = { ...defaults, ...raw };
+  next.skills = { ...defaults.skills, ...(raw.skills || {}) };
+  next.mastery = { ...(raw.mastery || {}) };
+  next.badges = Array.isArray(raw.badges) ? raw.badges : [];
+  next.activityHistory = Array.isArray(raw.activityHistory) ? raw.activityHistory.slice(-30) : [];
+  next.quarter = Math.min(4, Math.max(1, Number(raw.quarter || 1)));
+  next.parentPin = /^\d{4}$/.test(String(raw.parentPin || "")) ? String(raw.parentPin) : "";
+  next.schemaVersion = 2;
+  return next;
+}
+
+let state = normalizeState(readLocalState());
 
 /* =========================================================
    2) FIREBASE CLOUD SYNC
@@ -539,14 +661,7 @@ async function mergeCloudAndLocal(){
   const cloudUpdated = Number(remote.updatedAt || 0);
 
   if (cloudUpdated > localUpdated){
-    state = {
-      ...defaults,
-      ...remote,
-      skills: {
-        ...defaults.skills,
-        ...(remote.skills || {})
-      }
-    };
+    state = normalizeState(remote);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     updateHome();
     setCloudUI("online", "Newer progress was restored from Firebase.");
@@ -651,11 +766,43 @@ let currentMode = "english";
 let lessonScore = 0;
 let qIndex = 0;
 let questions = [];
+let questionTryCount = 0;
+let lessonStartedAt = 0;
+let dailyJourney = null;
+
+const CURRICULUM = {
+  themes: {
+    1:{icon:"🏠", short:"Knowing Who We Are", name:"Knowing Who We Are and Our Families"},
+    2:{icon:"🏫", short:"Exploring Our Community", name:"Exploring Our Community"},
+    3:{icon:"🇵🇭", short:"Appreciating Our Country", name:"Appreciating Our Country"},
+    4:{icon:"🌎", short:"Caring for Our World", name:"Caring for Our World"}
+  },
+  domains: {
+    languages:{label:"Languages", icon:"📚"},
+    mathematics:{label:"Mathematics", icon:"🔢"},
+    pne:{label:"Physical & Natural Environment", icon:"🔬"},
+    gmrc:{label:"Good Manners & Right Conduct", icon:"❤️"},
+    makabansa:{label:"Makabansa", icon:"🇵🇭"}
+  }
+};
+
+const MODE_META = {
+  english:{label:"English Reading", domain:"languages"},
+  filipino:{label:"Filipino Reading", domain:"languages"},
+  math:{label:"Math", domain:"mathematics"},
+  story:{label:"Comprehension", domain:"languages"},
+  thinking:{label:"Thinking Skills", domain:"pne"},
+  explore:{label:"Little Explorer", domain:"pne"},
+  values:{label:"Good Manners", domain:"gmrc"},
+  makabansa:{label:"My Philippines", domain:"makabansa"},
+  review:{label:"Review", domain:"languages"}
+};
 
 const lessonBanks = {
   english: [
     {icon:"🍎", title:"Letter A", say:"This is the letter A. A makes the short a sound, as in apple.", prompt:"Which word starts with A?", choices:["Apple 🍎","Ball ⚽","Cat 🐱","Dog 🐶"], correct:0},
-    {icon:"🐱", title:"C-A-T", say:"Let us sound it out slowly. C. A. T. Cat.", prompt:"What word is C - A - T?", choices:["Cat 🐱","Sun ☀️","Hat 🎩","Dog 🐶"], correct:0},
+    {icon:"🐱", title:"C-A-T", say:"How do you read this? C. A. T.", prompt:"How do you read this: C-A-T?", choices:["Cat 🐱","Sun ☀️","Hat 🎩","Dog 🐶"], correct:0, hint:"Listen to the animal sound. What animal makes that sound?", sound:"cat", autoSoundCue:true, skill:"english.animal_decoding"},
+    {icon:"🐶", title:"D-O-G", say:"How do you read this? D. O. G.", prompt:"How do you read this: D-O-G?", choices:["Dog 🐶","Cat 🐱","Sun ☀️","Hat 🎩"], correct:0, hint:"Listen to the animal sound. What animal makes that sound?", sound:"dog", autoSoundCue:true, skill:"english.animal_decoding"},
     {icon:"☀️", title:"Sight Word", say:"This word is SEE. Listen carefully. SEE.", prompt:"Choose the word SEE.", choices:["SEE","SIT","SUN","SAD"], correct:0},
     {icon:"🐶", title:"Simple Sentence", say:"Listen to the sentence. The dog can run.", prompt:"Who can run?", choices:["Dog 🐶","Fish 🐟","Tree 🌳","Book 📘"], correct:0}
   ],
@@ -741,6 +888,24 @@ const lessonBanks = {
     {icon:"🐱 🐶 🐟 🚗", title:"Odd One Out", say:"Cat, dog and fish are animals. A car is not an animal.", prompt:"Which one is NOT an animal?", choices:["🚗 Car","🐱 Cat","🐶 Dog","🐟 Fish"], correct:0},
     {icon:"🌧️", title:"Everyday Thinking", say:"When it rains, we use an umbrella.", prompt:"What should we use when it rains?", choices:["☂️ Umbrella","🧸 Teddy","⚽ Ball","🧢 Cap"], correct:0}
   ],
+  explore: [
+    {icon:"👀 👂 👃 ✋ 👅", title:"Our Five Senses", say:"We use our eyes to see, ears to hear, nose to smell, skin to feel, and tongue to taste.", prompt:"Which body part helps us see?", choices:["Eyes 👀","Ears 👂","Nose 👃","Hands ✋"], correct:0, hint:"We use this body part when we look at a picture.", skill:"pne.senses", domain:"pne", theme:1},
+    {icon:"🌱 ☀️ 💧", title:"What Plants Need", say:"Plants need sunlight and water to grow.", prompt:"What helps a plant grow?", choices:["Sunlight and water ☀️💧","Candy 🍬","Toy blocks 🧱","Shoes 👟"], correct:0, hint:"Think about what we give a plant in a garden.", skill:"pne.plants", domain:"pne", theme:4},
+    {icon:"🐟 🌊", title:"Animal Homes", say:"A fish lives in water.", prompt:"Where does a fish live?", choices:["Water 🌊","Tree 🌳","Road 🛣️","Desk 🪑"], correct:0, hint:"Fish swim here.", skill:"pne.animals", domain:"pne", theme:4},
+    {icon:"🗑️ ♻️ 🌎", title:"Care for Our World", say:"We care for our world by putting trash in the proper bin and keeping places clean.", prompt:"What should we do with trash?", choices:["Put it in the proper bin 🗑️","Throw it on the road","Leave it on the floor","Hide it under a chair"], correct:0, hint:"Choose the action that keeps our surroundings clean.", skill:"pne.environment", domain:"pne", theme:4}
+  ],
+  values: [
+    {icon:"😊 🙏", title:"Polite Words", say:"We say please when asking and thank you when someone helps us.", prompt:"What can you say when someone helps you?", choices:["Thank you! 🙏","Go away!","Give me that!","Nothing"], correct:0, hint:"It is a polite way to show gratitude.", skill:"gmrc.politeness", domain:"gmrc", theme:1},
+    {icon:"🧸 👧 👦", title:"Sharing", say:"Sharing and taking turns help us play kindly with others.", prompt:"Two children want one toy. What is a kind choice?", choices:["Take turns 🧸","Grab it","Hide it","Shout"], correct:0, hint:"Both children should get a chance.", skill:"gmrc.sharing", domain:"gmrc", theme:2},
+    {icon:"💥 😟 ❤️", title:"When We Make a Mistake", say:"When we accidentally hurt or upset someone, we can say sorry and try to make things right.", prompt:"You bump a classmate by accident. What should you say?", choices:["I'm sorry ❤️","Move!","It's funny!","Be quiet!"], correct:0, hint:"Choose the words that show care and respect.", skill:"gmrc.respect", domain:"gmrc", theme:2},
+    {icon:"🧹 🧸 📚", title:"Responsibility", say:"We take care of our things and put them back after using them.", prompt:"What should you do after playing?", choices:["Put toys away 🧸","Leave everything on the floor","Kick the toys","Hide the books"], correct:0, hint:"Choose the action that keeps our space safe and neat.", skill:"gmrc.responsibility", domain:"gmrc", theme:1}
+  ],
+  makabansa: [
+    {icon:"👨‍👩‍👧‍👦 🏠", title:"My Family", say:"Families care for and help one another.", prompt:"Which picture shows a family?", choices:["Family 👨‍👩‍👧‍👦","Traffic light 🚦","Bus 🚌","Mountain ⛰️"], correct:0, hint:"Think of people who care for one another at home.", skill:"makabansa.family", domain:"makabansa", theme:1},
+    {icon:"👩‍🏫 👮 👨‍⚕️", title:"Community Helpers", say:"Teachers, police officers, health workers and many others help our community.", prompt:"Who helps children learn at school?", choices:["Teacher 👩‍🏫","Pilot ✈️","Chef 👨‍🍳","Farmer 👨‍🌾"], correct:0, hint:"You meet this helper in the classroom.", skill:"makabansa.community", domain:"makabansa", theme:2},
+    {icon:"🇵🇭", title:"Our Country", say:"Our country is the Philippines.", prompt:"What is the name of our country?", choices:["Philippines 🇵🇭","Japan 🇯🇵","Canada 🇨🇦","Brazil 🇧🇷"], correct:0, hint:"Look for our Philippine flag.", skill:"makabansa.country", domain:"makabansa", theme:3},
+    {icon:"🇵🇭 🤝", title:"Caring for Our Country", say:"We show love for our country by caring for people, places, and our environment.", prompt:"Which action helps our community?", choices:["Keep shared places clean 🧹","Throw trash anywhere","Damage plants","Write on walls"], correct:0, hint:"Choose the action that takes care of a place everyone uses.", skill:"makabansa.citizenship", domain:"makabansa", theme:3}
+  ],
   review: [
     {icon:"🔤", title:"Quick Mix", say:"Let us review.", prompt:"Which one starts with M?", choices:["Moon 🌙","Cat 🐱","Dog 🐶","Sun ☀️"], correct:0},
     {icon:"🇵🇭", title:"Patinig Review", say:"Ang A, E, I, O, at U ay mga patinig.", prompt:"Alin ang patinig?", choices:["A","B","K","M"], correct:0},
@@ -750,8 +915,229 @@ const lessonBanks = {
   ]
 };
 
+
+/* =========================================================
+   4) ADAPTIVE LEARNING + CURRICULUM MASTERY
+   ========================================================= */
+const SESSION_LIMITS = {english:4,filipino:6,math:5,story:3,thinking:3,explore:4,values:4,makabansa:4,review:5};
+
+function clamp(n,min=0,max=100){ return Math.min(max,Math.max(min,n)); }
+function shuffle(array){
+  const a=[...array];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function inferSkillKey(mode,q){
+  if(q?.skill) return q.skill;
+  const title=String(q?.title||"").toLowerCase();
+  const prompt=String(q?.prompt||"").toLowerCase();
+  if(mode==="english"){
+    if(title.includes("letter")) return "english.letters";
+    if(title.includes("c-a-t")) return "english.blending";
+    if(title.includes("sight")) return "english.sight_words";
+    return "english.sentences";
+  }
+  if(mode==="filipino"){
+    if(title.startsWith("patinig")) return "filipino.patinig";
+    if(title.startsWith("pantig") || /^[a-zñ]+(?:-[a-zñ]+){2,}$/i.test(String(q?.title||""))) return "filipino.pantig";
+    if(title.includes(" + ")) return "filipino.word_building";
+    if(title.includes("pangungusap")) return "filipino.sentences";
+    return "filipino.words";
+  }
+  if(mode==="math"){
+    if(title.includes("count")) return "math.counting";
+    if(title.includes("add") || prompt.includes(" + ")) return "math.addition";
+    if(title.includes("subtract") || title.includes("take one") || prompt.includes(" - ")) return "math.subtraction";
+    if(title.includes("share") || prompt.includes("÷")) return "math.equal_sharing";
+    if(title.includes("greater") || title.includes("less") || title.includes("equal") || title.includes("more") || prompt.includes(" __ ")) return "math.comparison";
+    if(title.includes("shape")) return "math.shapes";
+    return "math.number_sense";
+  }
+  if(mode==="story") return "languages.listening_comprehension";
+  if(mode==="thinking"){
+    if(title.includes("next")) return "math.patterns";
+    if(title.includes("odd")) return "pne.classification";
+    return "pne.everyday_reasoning";
+  }
+  if(mode==="review"){
+    if(title.includes("patinig")) return "filipino.patinig";
+    if(title.includes("pantig")) return "filipino.word_building";
+    if(title.includes("math") || title.includes("compare")) return "math.number_sense";
+    return "english.letters";
+  }
+  return `${mode}.general`;
+}
+
+function inferDomain(mode,q){
+  if(q?.domain) return q.domain;
+  if(mode==="math") return "mathematics";
+  if(mode==="explore" || mode==="thinking") return "pne";
+  if(mode==="values") return "gmrc";
+  if(mode==="makabansa") return "makabansa";
+  if(mode==="review"){
+    const skill=inferSkillKey(mode,q);
+    if(skill.startsWith("math.")) return "mathematics";
+    if(skill.startsWith("pne.")) return "pne";
+    if(skill.startsWith("gmrc.")) return "gmrc";
+    if(skill.startsWith("makabansa.")) return "makabansa";
+  }
+  return "languages";
+}
+
+function questionTheme(q){ return Number(q?.theme || state.quarter || 1); }
+
+function masteryForSkill(skill){ return clamp(Number(state.mastery?.[skill]?.mastery || 0)); }
+function masteryForQuestion(mode,q){
+  const specific=state.mastery?.[inferSkillKey(mode,q)];
+  if(specific) return clamp(Number(specific.mastery||0));
+  return clamp(Math.round(Number(state.skills?.[mode]||0)*.55));
+}
+
+function filipinoTier(q){
+  const title=String(q?.title||"");
+  if(/^Patinig/i.test(title)) return 1;
+  if(/^Pantig/i.test(title)) return 2;
+  if(/^[A-ZÑ]+(?:-[A-ZÑ]+){2,}$/i.test(title)) return 3;
+  if(title.includes(" + ")) return 4;
+  return 5;
+}
+
+function prepareQuestion(q,mode){
+  const options=q.choices.map((text,index)=>({text,correct:index===q.correct}));
+  const mixed=shuffle(options);
+  return {
+    ...q,
+    mode,
+    skill:inferSkillKey(mode,q),
+    domain:inferDomain(mode,q),
+    theme:questionTheme(q),
+    choices:mixed.map(x=>x.text),
+    correct:mixed.findIndex(x=>x.correct)
+  };
+}
+
+function adaptiveQuestionSet(mode,limit=SESSION_LIMITS[mode]||4){
+  let pool=[...(lessonBanks[mode]||[])];
+  if(mode==="filipino"){
+    const broad=Number(state.skills.filipino||0);
+    const maxTier=broad<20?2:broad<45?3:broad<70?4:5;
+    const gated=pool.filter(q=>filipinoTier(q)<=maxTier);
+    if(gated.length>=Math.min(limit,3)) pool=gated;
+  }
+  pool=pool
+    .map(q=>({q,priority:masteryForQuestion(mode,q)+Math.random()*28+(questionTheme(q)===state.quarter?-6:4)}))
+    .sort((a,b)=>a.priority-b.priority)
+    .map(x=>x.q);
+  return pool.slice(0,Math.min(limit,pool.length)).map(q=>prepareQuestion(q,mode));
+}
+
+function updateMastery(q,wasCorrect,firstTry){
+  const skill=q.skill || inferSkillKey(currentMode,q);
+  const item=state.mastery[skill] || {attempts:0,correct:0,mastery:0,lastSeen:"",lastWrong:""};
+  item.attempts++;
+  if(wasCorrect) item.correct++;
+  const delta=wasCorrect ? (firstTry?12:7) : -4;
+  item.mastery=clamp(Math.round(Number(item.mastery||0)+delta));
+  item.lastSeen=new Date().toISOString();
+  if(!wasCorrect) item.lastWrong=item.lastSeen;
+  state.mastery[skill]=item;
+  state.totalAttempts=Number(state.totalAttempts||0)+1;
+  if(wasCorrect) state.correctAnswers=Number(state.correctAnswers||0)+1;
+  recomputeModeSkill(currentMode);
+}
+
+function recomputeModeSkill(mode){
+  if(!lessonBanks[mode]) return;
+  const keys=[...new Set(lessonBanks[mode].map(q=>inferSkillKey(mode,q)))];
+  if(!keys.length) return;
+  const vals=keys.map(k=>masteryForSkill(k));
+  state.skills[mode]=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+}
+
+function skillFriendlyName(skill){
+  const map={
+    "english.letters":"English letter sounds","english.blending":"English sound blending","english.sight_words":"English sight words","english.sentences":"English simple sentences",
+    "filipino.patinig":"Mga patinig","filipino.pantig":"Pagbasa ng pantig","filipino.word_building":"Pagbuo ng salitang Filipino","filipino.words":"Pagbasa ng salitang Filipino","filipino.sentences":"Maikling pangungusap",
+    "math.counting":"Counting","math.addition":"Simple addition","math.subtraction":"Simple subtraction","math.equal_sharing":"Equal sharing","math.comparison":"Comparing numbers","math.shapes":"Shapes","math.number_sense":"Number sense","math.patterns":"Patterns",
+    "languages.listening_comprehension":"Listening comprehension","pne.senses":"Five senses","pne.plants":"Plants","pne.animals":"Animal habitats","pne.environment":"Caring for the environment","pne.classification":"Classifying objects","pne.everyday_reasoning":"Everyday reasoning",
+    "gmrc.politeness":"Polite words","gmrc.sharing":"Sharing and taking turns","gmrc.respect":"Respect and saying sorry","gmrc.responsibility":"Responsibility",
+    "makabansa.family":"Family","makabansa.community":"Community helpers","makabansa.country":"The Philippines","makabansa.citizenship":"Caring for our community"
+  };
+  return map[skill] || skill.replaceAll("."," · ");
+}
+
+function domainProgress(){
+  const buckets={languages:[],mathematics:[],pne:[],gmrc:[],makabansa:[]};
+  Object.entries(lessonBanks).forEach(([mode,bank])=>{
+    if(mode==="review") return;
+    bank.forEach(q=>{
+      const domain=inferDomain(mode,q); const skill=inferSkillKey(mode,q);
+      if(buckets[domain] && !buckets[domain].some(x=>x.skill===skill)) buckets[domain].push({skill,value:masteryForSkill(skill)});
+    });
+  });
+  return Object.fromEntries(Object.entries(buckets).map(([domain,items])=>[domain,items.length?Math.round(items.reduce((s,x)=>s+x.value,0)/items.length):0]));
+}
+
+function weakSkillRecommendations(){
+  const attempted=Object.entries(state.mastery||{})
+    .filter(([,v])=>Number(v.attempts||0)>0)
+    .sort((a,b)=>Number(a[1].mastery||0)-Number(b[1].mastery||0));
+  if(!attempted.length){
+    return [
+      {title:"Start with Today’s Adventure",text:"The app will sample English, Filipino, Math and an integrated learning area, then begin adapting."},
+      {title:"Use Teacher Voice",text:"Let the learner listen first, then answer. This supports beginning readers who cannot yet read the interface independently."}
+    ];
+  }
+  return attempted.slice(0,3).map(([skill,data])=>({
+    title:skillFriendlyName(skill),
+    text:`Current mastery: ${clamp(Number(data.mastery||0))}%. The smart lesson picker will bring this skill back more often.`
+  }));
+}
+
+function awardBadges(){
+  const earned=new Set(state.badges||[]);
+  if(state.totalStars>=10) earned.add("⭐ Star Starter");
+  if(state.totalStars>=50) earned.add("🌟 Super Learner");
+  if(state.streak>=3) earned.add("🔥 3-Day Explorer");
+  if(Object.values(state.mastery||{}).some(x=>Number(x.mastery||0)>=80)) earned.add("🏆 Skill Master");
+  if(Number(state.skills.filipino||0)>=60) earned.add("🇵🇭 Batang Mambabasa");
+  if(Number(state.skills.math||0)>=60) earned.add("🔢 Number Navigator");
+  state.badges=[...earned].slice(-12);
+}
+
+function buildDailyPlan(){
+  const missionCount=state.dailyGoal<=10?3:state.dailyGoal<=15?4:5;
+  const quarterEnrichment={1:["values","explore","story"],2:["makabansa","values","thinking"],3:["makabansa","story","values"],4:["explore","values","thinking"]}[state.quarter] || ["explore","values","story"];
+  const core=["english","filipino","math"];
+  const candidates=[...new Set([...core,...quarterEnrichment,"story","thinking","explore","values","makabansa"])];
+  candidates.sort((a,b)=>(Number(state.skills[a]||0)+Math.random()*18)-(Number(state.skills[b]||0)+Math.random()*18));
+  const selected=[];
+  const weakestReading=["english","filipino"].sort((a,b)=>Number(state.skills[a]||0)-Number(state.skills[b]||0))[0];
+  selected.push(weakestReading,"math");
+  quarterEnrichment.forEach(m=>{if(selected.length<missionCount&&!selected.includes(m))selected.push(m)});
+  candidates.forEach(m=>{if(selected.length<missionCount&&!selected.includes(m))selected.push(m)});
+  return selected.slice(0,missionCount);
+}
+
+function recordLessonTime(){
+  if(!lessonStartedAt) return 0;
+  const seconds=Math.max(20,Math.min(900,Math.round((Date.now()-lessonStartedAt)/1000)));
+  const minutes=Math.max(1,Math.round(seconds/60));
+  state.todayMinutes=Number(state.todayMinutes||0)+minutes;
+  state.activityHistory.push({mode:currentMode,score:lessonScore,total:questions.length,minutes,at:new Date().toISOString()});
+  state.activityHistory=state.activityHistory.slice(-30);
+  lessonStartedAt=0;
+  return minutes;
+}
+
+function accuracyPercent(){
+  return state.totalAttempts?Math.round((Number(state.correctAnswers||0)/Number(state.totalAttempts))*100):0;
+}
+
 function save({ cloud = true } = {}){
   state.updatedAt = Date.now();
+  awardBadges();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   updateHome();
   if (cloud) scheduleCloudSave();
@@ -766,34 +1152,71 @@ function dayKey(date = new Date()){
 function todayKey(){ return dayKey(new Date()); }
 
 function updateStreak(){
+  // Reset daily counters when the calendar day changes.
+  // The actual learning streak is updated only after a completed activity.
   const t = todayKey();
-  if(state.lastDay === t) return;
-  const yesterday = dayKey(new Date(Date.now()-86400000));
-  state.streak = state.lastDay === yesterday ? state.streak + 1 : 1;
-  state.lastDay = t;
-  state.todayStars = 0;
+  if(state.minutesDay !== t){
+    state.todayMinutes=0;
+    state.todayStars=0;
+    state.minutesDay=t;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+}
+
+function markLearningDay(){
+  const t=todayKey();
+  if(state.lastDay===t) return;
+  const yesterday=dayKey(new Date(Date.now()-86400000));
+  state.streak=state.lastDay===yesterday ? Number(state.streak||0)+1 : 1;
+  state.lastDay=t;
 }
 
 function updateHome(){
   updateStreak();
+  const theme=CURRICULUM.themes[state.quarter] || CURRICULUM.themes[1];
   $("#heroGreeting").textContent = `Hello, ${state.name || "Super Learner"}! 👋`;
   $("#starText").textContent = `${state.todayStars} stars earned`;
-  const filled = Math.min(5, state.todayStars);
+  const filled = Math.min(5, Number(state.todayStars||0));
   $("#starDisplay").textContent = "★ ".repeat(filled) + "☆ ".repeat(5-filled);
   $("#totalStars").textContent = state.totalStars;
   $("#sessionsDone").textContent = state.sessions;
   $("#streak").textContent = state.streak;
+  $("#todayMinutes").textContent = Number(state.todayMinutes||0);
+  $("#accuracy").textContent = `${accuracyPercent()}%`;
+  $("#masteredSkills").textContent = Object.values(state.mastery||{}).filter(x=>Number(x.mastery||0)>=80).length;
   $("#learnerName").value = state.name || "";
   $("#dailyGoal").value = String(state.dailyGoal || 15);
+  $("#curriculumQuarter").value = String(state.quarter || 1);
+  $("#parentPin").value = state.parentPin || "";
   $("#soundEffectsToggle").checked = state.soundEffects !== false;
+  $("#backgroundMusicToggle").checked = state.backgroundMusic !== false;
+  $("#voiceGuidanceToggle").checked = state.voiceGuidance !== false;
+  $("#autoNarrateToggle").checked = state.autoNarrate !== false;
   $("#celebrateToggle").checked = state.celebrate !== false;
-  $("#skillProgress").innerHTML = Object.entries(state.skills).map(([k,v]) => `
+
+  const pct=clamp(Math.round((Number(state.todayMinutes||0)/Math.max(1,Number(state.dailyGoal||15)))*100));
+  $("#dailyMeterFill").style.width=`${pct}%`;
+  $("#dailyMeterText").textContent=`${state.todayMinutes || 0} of ${state.dailyGoal || 15} minutes`;
+  $("#themeBadge").innerHTML=`${theme.icon} Quarter ${state.quarter}<br>${theme.short}`;
+
+  const recs=weakSkillRecommendations();
+  $("#todayFocusTitle").textContent = recs[0]?.title || "Today’s Learning Adventure";
+  $("#todayFocusText").textContent = recs[0]?.text || "Practice a balanced mix of early learning skills.";
+
+  $("#skillProgress").innerHTML = Object.entries(state.skills).filter(([k])=>k!=="review").map(([k,v]) => `
     <div class="skill-row">
       <div style="display:flex;justify-content:space-between"><b>${labelSkill(k)}</b><span>${Math.min(v,100)}%</span></div>
       <div class="bar"><div class="fill" style="width:${Math.min(v,100)}%"></div></div>
     </div>`).join("");
+
+  const domains=domainProgress();
+  $("#curriculumProgress").innerHTML=Object.entries(CURRICULUM.domains).map(([key,meta])=>`
+    <div class="domain-card"><b>${meta.icon} ${meta.label}</b><div class="bar"><div class="fill" style="width:${domains[key]||0}%"></div></div><small>${domains[key]||0}% app-skill mastery</small></div>`).join("");
+
+  $("#recommendations").innerHTML=recs.map(r=>`<div class="recommendation"><b>${r.title}</b>${r.text}</div>`).join("");
+  $("#badgeRow").innerHTML=(state.badges||[]).length ? state.badges.map(b=>`<span class="earned-badge">${b}</span>`).join("") : '<span class="muted">Badges will appear as the learner practices.</span>';
 }
-function labelSkill(k){ return ({english:"English Reading",filipino:"Filipino Reading",math:"Math",story:"Comprehension",thinking:"Thinking Skills",review:"Review"})[k]||k; }
+function labelSkill(k){ return MODE_META[k]?.label || k; }
 
 /* =========================================================
    CHILD-FRIENDLY SOUND EFFECT ENGINE
@@ -822,7 +1245,7 @@ function labelSkill(k){ return ({english:"English Reading",filipino:"Filipino Re
 let audioContext = null;
 
 function getAudioContext(){
-  if(!state.soundEffects) return null;
+  if(state.soundEffects===false && state.backgroundMusic===false) return null;
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   if(!AudioCtx) return null;
 
@@ -1062,7 +1485,158 @@ function soundComplete(){
   Some decorative icons are intentionally ignored so audio does not
   accidentally reveal an answer or distract from a letter/pantig lesson.
 */
+
+/* =========================================================
+   FUN BACKGROUND MUSIC ENGINE
+   ---------------------------------------------------------
+   A soft, looping pentatonic tune generated with Web Audio.
+   No external music file is downloaded, and it starts only
+   after a learner taps a lesson (important for iPad Safari).
+   Teacher narration automatically lowers the music volume.
+   ========================================================= */
+let backgroundMusic = {
+  playing:false,
+  master:null,
+  timer:null,
+  step:0,
+  nextTime:0,
+  ctx:null,
+  ducked:false
+};
+
+const MUSIC_MELODY = [0,2,4,7,4,2,0,2, 4,7,9,7,4,2,0,2];
+const MUSIC_BASS = [0,0,5,5,4,4,5,5, 0,0,5,5,4,4,7,7];
+const MUSIC_ROOT_MIDI = 60; // C4
+const MUSIC_STEP_SECONDS = .36;
+const MUSIC_NORMAL_GAIN = .052;
+const MUSIC_DUCK_GAIN = .016;
+
+function midiHz(midi){ return 440 * Math.pow(2,(midi-69)/12); }
+
+function musicVoice(ctx,freq,start,duration,gain=.05,type="triangle"){
+  if(!backgroundMusic.master) return;
+  const osc1=ctx.createOscillator();
+  const osc2=ctx.createOscillator();
+  const amp=ctx.createGain();
+  const filter=ctx.createBiquadFilter();
+  filter.type="lowpass";
+  filter.frequency.value=1800;
+  osc1.type=type;
+  osc2.type="sine";
+  osc1.frequency.setValueAtTime(freq,start);
+  osc2.frequency.setValueAtTime(freq*2,start);
+  amp.gain.setValueAtTime(.0001,start);
+  amp.gain.exponentialRampToValueAtTime(Math.max(.001,gain),start+.025);
+  amp.gain.exponentialRampToValueAtTime(.0001,start+duration);
+  osc1.connect(amp); osc2.connect(amp); amp.connect(filter); filter.connect(backgroundMusic.master);
+  osc1.start(start); osc2.start(start);
+  osc1.stop(start+duration+.04); osc2.stop(start+duration+.04);
+}
+
+function musicSparkle(ctx,start){
+  if(!backgroundMusic.master) return;
+  const osc=ctx.createOscillator();
+  const amp=ctx.createGain();
+  osc.type="sine";
+  osc.frequency.setValueAtTime(1046.5,start);
+  osc.frequency.exponentialRampToValueAtTime(1568,start+.16);
+  amp.gain.setValueAtTime(.0001,start);
+  amp.gain.exponentialRampToValueAtTime(.018,start+.015);
+  amp.gain.exponentialRampToValueAtTime(.0001,start+.2);
+  osc.connect(amp); amp.connect(backgroundMusic.master);
+  osc.start(start); osc.stop(start+.23);
+}
+
+function scheduleBackgroundMusic(){
+  const ctx=backgroundMusic.ctx;
+  if(!backgroundMusic.playing || !ctx || !backgroundMusic.master) return;
+  const horizon=ctx.currentTime+1.1;
+  while(backgroundMusic.nextTime < horizon){
+    const s=backgroundMusic.step % MUSIC_MELODY.length;
+    const t=backgroundMusic.nextTime;
+    const melodyMidi=MUSIC_ROOT_MIDI+12+MUSIC_MELODY[s];
+    musicVoice(ctx,midiHz(melodyMidi),t,.28,.026,s%4===0?"triangle":"sine");
+    if(s%2===0){
+      const bassMidi=MUSIC_ROOT_MIDI-12+MUSIC_BASS[s];
+      musicVoice(ctx,midiHz(bassMidi),t,.58,.018,"triangle");
+    }
+    if(s===3 || s===7 || s===11 || s===15) musicSparkle(ctx,t+.08);
+    backgroundMusic.step++;
+    backgroundMusic.nextTime += MUSIC_STEP_SECONDS;
+  }
+}
+
+function startBackgroundMusic(){
+  if(state.backgroundMusic===false || backgroundMusic.playing) return;
+  const ctx=getAudioContext();
+  if(!ctx) return;
+  backgroundMusic.ctx=ctx;
+  backgroundMusic.master=ctx.createGain();
+  backgroundMusic.master.gain.setValueAtTime(.0001,ctx.currentTime);
+  backgroundMusic.master.gain.exponentialRampToValueAtTime(MUSIC_NORMAL_GAIN,ctx.currentTime+.35);
+  backgroundMusic.master.connect(ctx.destination);
+  backgroundMusic.playing=true;
+  backgroundMusic.ducked=false;
+  backgroundMusic.step=0;
+  backgroundMusic.nextTime=ctx.currentTime+.06;
+  scheduleBackgroundMusic();
+  backgroundMusic.timer=setInterval(scheduleBackgroundMusic,300);
+}
+
+function stopBackgroundMusic(){
+  if(!backgroundMusic.playing) return;
+  clearInterval(backgroundMusic.timer);
+  backgroundMusic.timer=null;
+  const ctx=backgroundMusic.ctx;
+  const master=backgroundMusic.master;
+  backgroundMusic.playing=false;
+  backgroundMusic.master=null;
+  backgroundMusic.ctx=null;
+  if(ctx && master){
+    const now=ctx.currentTime;
+    master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(Math.max(.0001,master.gain.value),now);
+    master.gain.exponentialRampToValueAtTime(.0001,now+.28);
+    setTimeout(()=>{try{master.disconnect()}catch{}},360);
+  }
+}
+
+function duckBackgroundMusic(duck=true){
+  if(!backgroundMusic.playing || !backgroundMusic.master || !backgroundMusic.ctx) return;
+  backgroundMusic.ducked=duck;
+  const ctx=backgroundMusic.ctx;
+  const gain=backgroundMusic.master.gain;
+  const target=duck ? MUSIC_DUCK_GAIN : MUSIC_NORMAL_GAIN;
+  gain.cancelScheduledValues(ctx.currentTime);
+  gain.setTargetAtTime(target,ctx.currentTime,.08);
+}
+
+/* Built-in device narration. No AI service or child audio upload is used. */
+function stopTeacherVoice(){
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  duckBackgroundMusic(false);
+}
+function speakTeacher(q){
+  if(state.voiceGuidance===false || !("speechSynthesis" in window) || !q) return;
+  stopTeacherVoice();
+  const utterance=new SpeechSynthesisUtterance(String(q.say || q.prompt || ""));
+  utterance.rate=.88;
+  utterance.pitch=1.04;
+  utterance.lang=currentMode==="filipino" ? "fil-PH" : "en-PH";
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=voices.find(v=>v.lang?.toLowerCase()===utterance.lang.toLowerCase()) || voices.find(v=>v.lang?.toLowerCase().startsWith(currentMode==="filipino"?"fil":"en"));
+  if(preferred) utterance.voice=preferred;
+  utterance.onstart=()=>duckBackgroundMusic(true);
+  utterance.onend=()=>{
+    duckBackgroundMusic(false);
+    if(q.autoSoundCue) setTimeout(()=>playQuestionSound(q),180);
+  };
+  utterance.onerror=()=>duckBackgroundMusic(false);
+  window.speechSynthesis.speak(utterance);
+}
+
 function inferQuestionSound(q){
+  if(q?.sound) return q.sound;
   const title = String(q?.title || "").toLowerCase();
   const prompt = String(q?.prompt || "").toLowerCase();
   const icon = String(q?.icon || "");
@@ -1154,23 +1728,18 @@ function celebrate(){
   setTimeout(()=>el.classList.remove("show"),800);
 }
 
-function startLesson(mode){
-  // Lesson selection is a user gesture, so it can safely unlock Web Audio on iPad.
+function startLesson(mode,{limit=null,fromDaily=false}={}){
   getAudioContext();
-  currentMode = mode; lessonScore=0; qIndex=0;
-  questions = [...lessonBanks[mode]].sort(()=>Math.random()-.5);
-
-  // Keep kindergarten math sessions short while varying the skills practiced.
-  if(mode === "math"){
-    questions = questions.slice(0, 6);
-  }
-
-  // Filipino has a larger progressive bank: patinig → pantig → salita.
-  // Keep each session short and child-friendly.
-  if(mode === "filipino"){
-    questions = questions.slice(0, 7);
-  }
-
+  startBackgroundMusic();
+  stopTeacherVoice();
+  currentMode = mode;
+  lessonScore=0;
+  qIndex=0;
+  questionTryCount=0;
+  lessonStartedAt=Date.now();
+  const chosenLimit=limit || SESSION_LIMITS[mode] || 4;
+  questions=adaptiveQuestionSet(mode,chosenLimit);
+  if(!fromDaily && dailyJourney) dailyJourney=null;
   showView("#lessonView");
   renderQuestion();
 }
@@ -1251,136 +1820,217 @@ function renderQuestion(){
   $("#lessonStars").textContent = `⭐ ${lessonScore}`;
   if(qIndex >= questions.length){ finishLesson(); return; }
 
+  questionTryCount=0;
   const q = questions[qIndex];
   const stage = $("#lessonStage");
   const soundKind = inferQuestionSound(q);
+  const theme=CURRICULUM.themes[q.theme] || CURRICULUM.themes[state.quarter];
+  const domain=CURRICULUM.domains[q.domain] || {label:"Integrated Learning",icon:"🌈"};
+  const progress=Math.round(((qIndex)/Math.max(1,questions.length))*100);
+  const currentMastery=masteryForSkill(q.skill);
 
   stage.classList.remove("question-enter");
   void stage.offsetWidth;
   stage.classList.add("question-enter");
 
   stage.innerHTML = `
+    ${dailyJourney ? `<div class="daily-banner">🚀 Daily Adventure · Mission ${dailyJourney.index+1} of ${dailyJourney.modes.length}</div>` : ""}
+    <div class="lesson-meta-line">
+      <span class="mini-pill theme">${theme.icon} ${theme.short}</span>
+      <span class="mini-pill domain">${domain.icon} ${domain.label}</span>
+    </div>
+    <div class="question-progress"><div style="width:${progress}%"></div></div>
     <div class="pill">${labelSkill(currentMode)}</div>
     ${getQuestionVisual(q)}
     <h2>${q.title}</h2>
     <p class="prompt">${q.prompt}</p>
+    <div class="mastery-chip">Practice level: ${currentMastery<35?"Getting started 🌱":currentMastery<70?"Growing 🌿":"Strong ⭐"}</div>
+    ${state.voiceGuidance!==false && "speechSynthesis" in window ? `<button class="teacher-btn" id="teacherVoice">👩‍🏫 Hear Teacher</button>` : ""}
     ${soundKind ? `
       <button class="sound-effect-btn" id="soundNow">
-        <span class="sound-icon">🔊</span>${soundLabel(soundKind)}
+        <span class="sound-icon">🔊</span>${q.autoSoundCue ? "Hear the animal clue" : soundLabel(soundKind)}
       </button>
-      <div class="sound-note">Tap to hear it again</div>
+      <div class="sound-note">${q.autoSoundCue ? "Listen, then try to read the word yourself" : "Tap to hear the object or environment sound"}</div>
     ` : ""}
     <div class="answer-grid">
       ${q.choices.map((c,i)=>`<button class="answer" data-i="${i}">${c}</button>`).join("")}
     </div>
-    <div class="feedback" id="feedback"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
   `;
+
+  if($("#teacherVoice")) $("#teacherVoice").onclick=()=>speakTeacher(q);
+  if(state.autoNarrate!==false && state.voiceGuidance!==false){
+    setTimeout(()=>speakTeacher(q),280);
+  }else if(q.autoSoundCue){
+    setTimeout(()=>playQuestionSound(q),520);
+  }
 
   if(soundKind){
     $("#soundNow").onclick=()=>playSoundKind(soundKind);
-
-    // Web Audio is unlocked by the user's lesson/Next tap.
-    // A short delay lets the visual appear first.
-    setTimeout(()=>playSoundKind(soundKind),420);
   }
 
   $$(".answer").forEach(b=>b.onclick=()=>checkAnswer(Number(b.dataset.i)));
 }
 
+function appendNextButton(){
+  const btn=document.createElement("button");
+  btn.className="primary next-btn";
+  btn.textContent=qIndex===questions.length-1?"Finish ➜":"Next ➜";
+  btn.onclick=()=>{getAudioContext();stopTeacherVoice();qIndex++;renderQuestion()};
+  $("#feedback").appendChild(document.createElement("br"));
+  $("#feedback").appendChild(btn);
+}
+
 function checkAnswer(i){
   const q=questions[qIndex];
   const answerButtons = $$(".answer");
-  answerButtons.forEach(b=>b.disabled=true);
   const selected = answerButtons.find(b=>Number(b.dataset.i)===i);
-  const correct = answerButtons.find(b=>Number(b.dataset.i)===q.correct);
-  if(i===q.correct){
-    selected?.classList.add("correct-answer");
-    lessonScore++; state.totalStars++; state.todayStars++;
-    state.skills[currentMode] = Math.min(100,(state.skills[currentMode]||0)+4);
-    if(currentMode === "filipino"){
-      $("#feedback").innerHTML="🎉 Magaling! Tama ang sagot mo!";
-    }else{
-      $("#feedback").innerHTML="🎉 Well done! That is correct!";
-    }
+  const correctBtn = answerButtons.find(b=>Number(b.dataset.i)===q.correct);
+  if(!selected || selected.disabled) return;
+
+  questionTryCount++;
+  const isCorrect=i===q.correct;
+  updateMastery(q,isCorrect,questionTryCount===1);
+
+  if(isCorrect){
+    answerButtons.forEach(b=>b.disabled=true);
+    selected.classList.add("correct-answer");
+    lessonScore++;
+    state.totalStars++;
+    state.todayStars++;
+    $("#feedback").innerHTML=currentMode === "filipino"
+      ? (questionTryCount===1?"🎉 Magaling! Tama ang sagot mo!":"🌟 Tama! Natutuhan mo ito sa pangalawang subok!")
+      : (questionTryCount===1?"🎉 Well done! You got it!":"🌟 Yes! You figured it out on your second try!");
     soundSuccess();
     celebrate();
-  } else {
-    selected?.classList.add("wrong-answer");
-    correct?.classList.add("reveal-answer");
-    if(currentMode === "filipino"){
-      $("#feedback").innerHTML=`🌟 Magandang subok! Ang tamang sagot ay <b>${q.choices[q.correct]}</b>.`;
-    }else{
-      $("#feedback").innerHTML=`🌟 Good try! The correct answer is <b>${q.choices[q.correct]}</b>.`;
-    }
-    soundTryAgain();
+    save();
+    appendNextButton();
+    return;
   }
+
+  selected.classList.add("wrong-answer");
+  selected.disabled=true;
+  soundTryAgain();
+
+  if(questionTryCount===1){
+    const hint=q.hint || (currentMode==="filipino" ? "Pakinggan at tingnan muli ang mga pagpipilian." : "Look closely and try one more time.");
+    $("#feedback").innerHTML=currentMode === "filipino"
+      ? `🌱 Magandang subok! Subukan ulit. <b>Pahiwatig:</b> ${hint}`
+      : `🌱 Good try! Try one more time. <b>Hint:</b> ${hint}`;
+    save();
+    return;
+  }
+
+  answerButtons.forEach(b=>b.disabled=true);
+  correctBtn?.classList.add("reveal-answer");
+  $("#feedback").innerHTML=currentMode === "filipino"
+    ? `💛 Ayos lang! Ang tamang sagot ay <b>${q.choices[q.correct]}</b>. Pag-aaralan natin ulit ito mamaya.`
+    : `💛 Nice effort! The answer is <b>${q.choices[q.correct]}</b>. I’ll bring this skill back for more practice.`;
   save();
-  const btn=document.createElement("button");
-  btn.className="primary next-btn"; btn.textContent="Next ➜";
-  btn.onclick=()=>{getAudioContext();qIndex++;renderQuestion()};
-  $("#feedback").appendChild(document.createElement("br")); $("#feedback").appendChild(btn);
+  appendNextButton();
 }
 
 function finishLesson(){
+  stopTeacherVoice();
+  markLearningDay();
   state.sessions++;
-  state.skills[currentMode]=Math.min(100,(state.skills[currentMode]||0)+3);
-  save();
+  const minutes=recordLessonTime();
+  recomputeModeSkill(currentMode);
+  awardBadges();
   const max=questions.length;
+  const hasNextDaily=dailyJourney && dailyJourney.index < dailyJourney.modes.length-1;
+  const isDailyDone=dailyJourney && !hasNextDaily;
+  save();
+
   $("#lessonStage").innerHTML=`
-    <div class="finish-trophy">🏆</div>
-    <h2>Adventure Complete!</h2>
+    <div class="finish-trophy">${isDailyDone?"🌈":"🏆"}</div>
+    <h2>${isDailyDone?"Today’s Adventure Complete!":"Mission Complete!"}</h2>
     <p class="prompt">You earned <b>${lessonScore} out of ${max} stars</b>! ⭐</p>
-    <p>${lessonScore===max ? "Amazing work! 🌈" : "Wonderful effort! Practice makes us stronger. 💪"}</p>
-    <button id="againBtn" class="primary big">Play Again 🎮</button>
+    <p>${minutes} learning minute${minutes===1?"":"s"} recorded. ${lessonScore===max ? "Amazing work! 🌈" : "Every try helps your brain grow. 🌱"}</p>
+    ${hasNextDaily ? `<button id="continueDailyBtn" class="primary big">Next Mission 🚀</button>` : `<button id="againBtn" class="primary big">Play Again 🎮</button>`}
     <button id="homeAfterBtn" class="secondary" style="margin-top:10px">Go Home</button>
   `;
   celebrate();
   soundComplete();
-  $("#againBtn").onclick=()=>startLesson(currentMode);
-  $("#homeAfterBtn").onclick=()=>showView("#homeView");
+
+  if(hasNextDaily){
+    $("#continueDailyBtn").onclick=()=>{
+      dailyJourney.index++;
+      startLesson(dailyJourney.modes[dailyJourney.index],{limit:3,fromDaily:true});
+    };
+  }else{
+    if($("#againBtn")) $("#againBtn").onclick=()=>{dailyJourney=null;startLesson(currentMode)};
+    if(isDailyDone) dailyJourney=null;
+  }
+  $("#homeAfterBtn").onclick=()=>{stopTeacherVoice();stopBackgroundMusic();dailyJourney=null;showView("#homeView")};
 }
 
 function startDaily(){
-  const sequence=["english","filipino","math","story","thinking"];
-  const pick=sequence[Math.floor(Math.random()*sequence.length)];
-  startLesson(pick);
+  const modes=buildDailyPlan();
+  dailyJourney={modes,index:0,startedAt:Date.now()};
+  startLesson(modes[0],{limit:3,fromDaily:true});
 }
 
 $("#startDailyBtn").onclick=startDaily;
 $$(".lesson-card").forEach(b=>b.onclick=()=>startLesson(b.dataset.mode));
-$("#backBtn").onclick=()=>showView("#homeView");
-$("#parentBtn").onclick=()=>{updateHome();showView("#parentView")};
+$("#backBtn").onclick=()=>{stopTeacherVoice();stopBackgroundMusic();dailyJourney=null;showView("#homeView")};
+
+function openParentDashboard(){
+  stopTeacherVoice();
+  stopBackgroundMusic();
+  if(state.parentPin){
+    const entered=prompt("Parent PIN");
+    if(entered===null) return;
+    if(entered!==state.parentPin){ alert("That PIN did not match."); return; }
+  }
+  updateHome();
+  showView("#parentView");
+}
+
+$("#parentBtn").onclick=openParentDashboard;
 $("#parentBackBtn").onclick=()=>showView("#homeView");
 $("#saveProfile").onclick=()=>{
+  const pin=$("#parentPin").value.trim();
+  if(pin && !/^\d{4}$/.test(pin)){ alert("Parent PIN must be exactly 4 digits, or leave it blank."); return; }
   state.name=$("#learnerName").value.trim()||"Super Learner";
   state.dailyGoal=Number($("#dailyGoal").value);
-  save(); alert("Profile saved! ⭐");
+  state.quarter=Number($("#curriculumQuarter").value);
+  state.parentPin=pin;
+  save();
+  alert("Learner settings saved! ⭐");
 };
 $("#soundEffectsToggle").onchange=e=>{
   state.soundEffects=e.target.checked;
   save();
-  if(state.soundEffects){
-    getAudioContext();
-    soundSuccess();
-  }
+  if(state.soundEffects){getAudioContext();soundSuccess();}
 };
+$("#backgroundMusicToggle").onchange=e=>{
+  state.backgroundMusic=e.target.checked;
+  save();
+  if(!state.backgroundMusic) stopBackgroundMusic();
+};
+$("#voiceGuidanceToggle").onchange=e=>{state.voiceGuidance=e.target.checked;if(!state.voiceGuidance)stopTeacherVoice();save()};
+$("#autoNarrateToggle").onchange=e=>{state.autoNarrate=e.target.checked;save()};
 $("#celebrateToggle").onchange=e=>{state.celebrate=e.target.checked;save()};
 $("#resetProgress").onclick=()=>{
-  if(confirm("Reset all learning progress on this iPad and the connected cloud profile?")){
-    state={...defaults,skills:{...defaults.skills},updatedAt:Date.now()};
+  if(confirm("Reset all learning progress on this iPad and the connected cloud profile? Learner settings will be kept.")){
+    const keep={name:state.name,dailyGoal:state.dailyGoal,quarter:state.quarter,parentPin:state.parentPin,soundEffects:state.soundEffects,backgroundMusic:state.backgroundMusic,voiceGuidance:state.voiceGuidance,autoNarrate:state.autoNarrate,celebrate:state.celebrate};
+    state=normalizeState({...defaults,...keep,updatedAt:Date.now()});
     save();
     updateHome();
   }
 };
 
-$("#syncNowBtn").onclick = async () => {
-  await syncNow();
-};
+$("#syncNowBtn").onclick = async () => { await syncNow(); };
+$("#installHelpBtn").onclick=()=>alert("On iPad: 1) Open your deployed Little Learner PH site in Safari. 2) Tap the Share button. 3) Tap Add to Home Screen. 4) Tap Add. Open Little Learner PH from the new Home Screen icon.");
 
 updateHome();
 setCloudUI("connecting","Checking Firebase connection…");
 initFirebaseCloud();
 
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(err=>console.warn("Service worker registration skipped:",err)));
+}
 
 </script>
 </body>
