@@ -9,9 +9,7 @@ Everything is inside THIS index.html:
 - CSS styles
 - Firebase configuration
 - Firebase Authentication + Firestore cloud sync
-- Enhanced Filipino / English voice switching
-- Parent voice preview and selection
-- Child-friendly slower speech
+- Animal & object sound effects
 - English lessons
 - Filipino Reading
 - Math Adventure
@@ -141,30 +139,101 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
 }
 
 
-.voice-settings-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px
+/* =========================================================
+   ANIMATED LEARNING SCENES
+   Child-friendly motion: calm, playful, and not too fast.
+   ========================================================= */
+
+.lesson-stage{position:relative;overflow:hidden;isolation:isolate}
+.lesson-stage.question-enter{animation:lessonSceneIn .45s cubic-bezier(.2,.75,.25,1)}
+.learning-visual{position:relative;width:min(680px,100%);min-height:190px;display:flex;align-items:center;justify-content:center;margin:8px auto 14px}
+.visual-card{position:relative;z-index:2;width:min(520px,94%);min-height:168px;display:flex;align-items:center;justify-content:center;padding:22px;border-radius:32px;background:radial-gradient(circle at 18% 18%,rgba(255,255,255,.98),rgba(255,255,255,.55) 28%,transparent 29%),linear-gradient(145deg,#fffdf7,#f3f9ff);border:2px solid rgba(255,255,255,.95);box-shadow:0 18px 42px rgba(44,55,84,.12),inset 0 0 0 1px rgba(119,200,255,.09);animation:visualCardIn .52s cubic-bezier(.2,.8,.2,1)}
+.visual-card::after{content:"";position:absolute;inset:auto 13% -13px;height:22px;background:rgba(35,48,71,.08);filter:blur(11px);border-radius:50%;z-index:-1;animation:shadowBreathe 2.4s ease-in-out infinite}
+.scene-sparkle{position:absolute;z-index:1;font-size:clamp(.9rem,2.2vw,1.35rem);opacity:.72;pointer-events:none;animation:sparkleDrift 2.4s ease-in-out infinite}
+.scene-sparkle.s1{top:12%;left:12%}.scene-sparkle.s2{top:17%;right:11%;animation-delay:.35s}.scene-sparkle.s3{bottom:18%;left:16%;animation-delay:.7s}.scene-sparkle.s4{bottom:14%;right:15%;animation-delay:1.05s}
+.animated-icon{font-size:clamp(5.4rem,17vw,9.4rem);line-height:1;transform-origin:center bottom;animation:gentleFloat 2.4s ease-in-out infinite;filter:drop-shadow(0 12px 10px rgba(44,55,84,.10))}
+.shape-stage{width:180px;height:140px;display:grid;place-items:center}
+.demo-shape{position:relative;filter:drop-shadow(0 14px 12px rgba(208,44,112,.18))}
+.demo-shape.triangle{width:0;height:0;border-left:66px solid transparent;border-right:66px solid transparent;border-bottom:116px solid #e63f79;animation:shapeDance 2.6s ease-in-out infinite}
+.demo-shape.triangle::after{content:"";position:absolute;left:-41px;top:69px;width:82px;height:12px;border-radius:50%;background:rgba(255,255,255,.22);filter:blur(3px)}
+.demo-shape.circle{width:118px;height:118px;border-radius:50%;background:linear-gradient(145deg,#62ccff,#4b8dff);box-shadow:inset 12px 12px 24px rgba(255,255,255,.28);animation:shapeDance 2.6s ease-in-out infinite}
+.demo-shape.square{width:112px;height:112px;border-radius:22px;background:linear-gradient(145deg,#ffd85a,#ffad66);box-shadow:inset 12px 12px 24px rgba(255,255,255,.28);animation:shapeDance 2.6s ease-in-out infinite}
+.demo-shape.heart{font-size:7.5rem;line-height:1;animation:heartBeat 1.9s ease-in-out infinite}
+.letter-scene,.pantig-scene{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.learning-letter,.syllable-chip,.word-result{min-width:76px;min-height:76px;display:grid;place-items:center;padding:10px 16px;border-radius:22px;font-weight:1000;font-size:clamp(2rem,7vw,3.4rem);color:#243047;background:linear-gradient(145deg,#fff4b5,#ffe36d);border:3px solid rgba(255,255,255,.9);box-shadow:0 12px 22px rgba(255,190,45,.18);animation:syllableBob 2.2s ease-in-out infinite}
+.learning-letter:nth-child(2),.syllable-chip:nth-child(2){animation-delay:.18s}.learning-letter:nth-child(3),.syllable-chip:nth-child(3){animation-delay:.36s}.learning-letter:nth-child(4),.syllable-chip:nth-child(4){animation-delay:.54s}.learning-letter:nth-child(5),.syllable-chip:nth-child(5){animation-delay:.72s}
+.word-build-scene{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;width:100%}
+.word-part{min-width:90px;padding:14px 20px;border-radius:22px;background:linear-gradient(145deg,#e4f4ff,#bfe4ff);border:3px solid #fff;font-size:clamp(1.8rem,6vw,3rem);font-weight:1000;box-shadow:0 10px 22px rgba(69,157,229,.14);animation:wordPartIn .55s both cubic-bezier(.2,.8,.2,1)}
+.word-part.part2{animation-delay:.18s}.word-operator{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:1000;color:#7d6acb;animation:operatorPulse 1.5s ease-in-out infinite}
+.word-result{min-width:130px;background:linear-gradient(145deg,#dff8df,#aeeab8);box-shadow:0 12px 26px rgba(68,181,96,.16);animation:resultPop 1.8s ease-in-out infinite}
+.math-scene{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px;width:100%;font-size:clamp(2rem,6vw,3rem)}
+.math-token{display:inline-grid;place-items:center;min-width:50px;min-height:50px;padding:5px;border-radius:16px;animation:mathTokenIn .48s both cubic-bezier(.2,.8,.2,1),gentleFloat 2.5s ease-in-out infinite}
+.math-token:nth-child(2){animation-delay:.08s}.math-token:nth-child(3){animation-delay:.16s}.math-token:nth-child(4){animation-delay:.24s}.math-token:nth-child(5){animation-delay:.32s}.math-token:nth-child(6){animation-delay:.40s}.math-token:nth-child(7){animation-delay:.48s}.math-token:nth-child(8){animation-delay:.56s}
+.math-symbol-token{min-width:46px;padding:5px 9px;font-size:clamp(1.7rem,5vw,2.5rem);font-weight:1000;color:#7d6acb;animation:operatorPulse 1.5s ease-in-out infinite}
+.share-scene{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;width:100%;max-width:440px}
+.share-items,.share-kids{padding:14px;border-radius:22px;font-size:clamp(2rem,6vw,3.1rem);background:#fff;box-shadow:0 10px 22px rgba(44,55,84,.08);animation:gentleFloat 2.4s ease-in-out infinite}.share-kids{animation-delay:.35s}.share-arrow{font-size:2.3rem;font-weight:1000;color:#66b989;animation:arrowMove 1.35s ease-in-out infinite}
+.story-scene{font-size:clamp(4rem,14vw,8rem);animation:storySway 2.7s ease-in-out infinite;filter:drop-shadow(0 12px 11px rgba(44,55,84,.11))}
+.thinking-scene{font-size:clamp(2.5rem,8vw,4.8rem);letter-spacing:8px;animation:thinkingPulse 2.2s ease-in-out infinite}
+.lesson-stage h2{animation:titleIn .42s .08s both ease-out}.lesson-stage .prompt{animation:titleIn .42s .15s both ease-out}.listen-btn{animation:titleIn .42s .21s both ease-out}
+.answer-grid .answer{opacity:0;transform:translateY(14px) scale(.97);animation:answerEnter .42s forwards cubic-bezier(.2,.8,.2,1)}.answer-grid .answer:nth-child(1){animation-delay:.24s}.answer-grid .answer:nth-child(2){animation-delay:.31s}.answer-grid .answer:nth-child(3){animation-delay:.38s}.answer-grid .answer:nth-child(4){animation-delay:.45s}
+.answer.correct-answer{border-color:#77d699!important;background:#e8faee!important;animation:correctPop .62s cubic-bezier(.2,.9,.25,1)!important}.answer.wrong-answer{border-color:#ff9b9b!important;background:#fff0f0!important;animation:wrongWiggle .42s ease!important}.answer.reveal-answer{border-color:#77d699!important;background:#e8faee!important;animation:correctGlow .85s ease!important}
+.feedback{animation:titleIn .38s ease-out}.next-btn{animation:nextPulse 1.7s ease-in-out infinite}
+.lesson-stage::before,.lesson-stage::after{content:"";position:absolute;border-radius:50%;z-index:-1;pointer-events:none}.lesson-stage::before{width:180px;height:180px;left:-70px;top:16%;background:rgba(119,200,255,.10);animation:bubbleDrift 6s ease-in-out infinite}.lesson-stage::after{width:150px;height:150px;right:-55px;bottom:8%;background:rgba(255,143,179,.10);animation:bubbleDrift 7s .8s ease-in-out infinite reverse}
+.finish-trophy{font-size:clamp(5rem,16vw,9rem);animation:trophyWin 1.2s cubic-bezier(.2,.9,.2,1) both,gentleFloat 2.4s 1.2s ease-in-out infinite}
+@keyframes lessonSceneIn{from{opacity:.15;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes visualCardIn{0%{opacity:0;transform:scale(.86) translateY(12px)}75%{transform:scale(1.025) translateY(0)}100%{opacity:1;transform:scale(1)}}
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shadowBreathe{0%,100%{transform:scale(.9);opacity:.45}50%{transform:scale(1.04);opacity:.7}}
+@keyframes sparkleDrift{0%,100%{transform:translateY(0) rotate(0deg) scale(.9);opacity:.55}50%{transform:translateY(-8px) rotate(12deg) scale(1.15);opacity:1}}
+@keyframes shapeDance{0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-10px) rotate(2deg) scale(1.035)}}
+@keyframes heartBeat{0%,100%{transform:scale(1)}45%{transform:scale(1.09)}60%{transform:scale(1.02)}}
+@keyframes syllableBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
+@keyframes wordPartIn{from{opacity:0;transform:translateX(-20px) scale(.92)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes operatorPulse{0%,100%{transform:scale(1);opacity:.76}50%{transform:scale(1.14);opacity:1}}
+@keyframes resultPop{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+@keyframes mathTokenIn{from{opacity:0;transform:translateY(18px) scale(.75)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes arrowMove{0%,100%{transform:translateX(-4px)}50%{transform:translateX(5px)}}
+@keyframes storySway{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+@keyframes thinkingPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes titleIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes answerEnter{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes correctPop{0%{transform:scale(1)}38%{transform:scale(1.075)}66%{transform:scale(.985)}100%{transform:scale(1)}}
+@keyframes correctGlow{0%,100%{box-shadow:0 0 0 rgba(100,210,135,0)}50%{box-shadow:0 0 0 8px rgba(100,210,135,.16)}}
+@keyframes wrongWiggle{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@keyframes nextPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes bubbleDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-12px)}}
+@keyframes trophyWin{0%{opacity:0;transform:scale(.35) rotate(-12deg)}62%{opacity:1;transform:scale(1.16) rotate(5deg)}82%{transform:scale(.96) rotate(-2deg)}100%{transform:scale(1) rotate(0)}}
+@media(prefers-reduced-motion:reduce){.visual-card,.animated-icon,.demo-shape,.learning-letter,.syllable-chip,.word-part,.word-result,.math-token,.share-items,.share-kids,.share-arrow,.story-scene,.thinking-scene,.answer-grid .answer,.scene-sparkle,.finish-trophy{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+@media(max-width:600px){.learning-visual{min-height:155px}.visual-card{min-height:145px;padding:16px;border-radius:25px}.shape-stage{height:120px}.demo-shape.triangle{border-left-width:54px;border-right-width:54px;border-bottom-width:94px}.share-scene{gap:8px}}
+
+
+/* Sound-effect-only lesson audio */
+.sound-effect-btn{
+  border:0;
+  background:linear-gradient(145deg,#e7f7ff,#d7eeff);
+  color:#213b5c;
+  border-radius:20px;
+  padding:13px 18px;
+  font-weight:950;
+  margin-top:9px;
+  box-shadow:0 8px 18px rgba(78,159,218,.13);
+  animation:titleIn .42s .21s both ease-out;
 }
-.voice-setting{
-  background:#f8fbff;border:2px solid #edf1f7;border-radius:20px;padding:14px
+.sound-effect-btn:active{transform:scale(.97)}
+.sound-effect-btn .sound-icon{
+  display:inline-block;
+  margin-right:6px;
+  animation:soundPulse 1.4s ease-in-out infinite;
 }
-.voice-setting label{margin:0 0 8px}
-.voice-setting select{
-  width:100%;padding:12px;border:2px solid #e4e8f1;border-radius:14px;background:#fff;color:var(--ink)
+.sound-note{
+  font-size:.85rem;
+  color:#718096;
+  margin-top:7px;
+  min-height:1.1em;
 }
-.voice-preview{width:100%;margin-top:10px}
-.voice-info{display:block;min-height:34px;margin-top:9px;color:#667085;line-height:1.35}
-.speech-speed-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px
-}
-.speech-speed-grid label{
-  background:#fff9e9;border-radius:18px;padding:13px;margin:0
-}
-.speech-speed-grid input[type="range"]{width:100%;margin:10px 0 2px}
-.voice-tip{
-  margin-top:14px;padding:12px 14px;border-radius:16px;background:#eef8ff;color:#41536c;line-height:1.45
-}
-@media(max-width:650px){
-  .voice-settings-grid,.speech-speed-grid{grid-template-columns:1fr}
+@keyframes soundPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.13)}
 }
 
 </style>
@@ -276,50 +345,9 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
         </div>
 
         <div class="card parent-panel">
-          <h3>🔊 Voice & Audio</h3>
-          <label><input type="checkbox" id="voiceToggle" checked> Read lessons aloud</label>
-
-          <div class="voice-settings-grid">
-            <div class="voice-setting">
-              <label for="filipinoVoiceSelect">🇵🇭 Filipino / Tagalog Voice</label>
-              <select id="filipinoVoiceSelect">
-                <option value="">Auto — best Filipino voice</option>
-              </select>
-              <button id="previewFilipinoVoice" class="secondary voice-preview" type="button">▶ Preview Filipino</button>
-              <small id="filipinoVoiceInfo" class="voice-info">Looking for a Filipino voice on this device…</small>
-            </div>
-
-            <div class="voice-setting">
-              <label for="englishVoiceSelect">🇺🇸 Clear English Voice</label>
-              <select id="englishVoiceSelect">
-                <option value="">Auto — best clear English voice</option>
-              </select>
-              <button id="previewEnglishVoice" class="secondary voice-preview" type="button">▶ Preview English</button>
-              <small id="englishVoiceInfo" class="voice-info">Looking for a clear English voice on this device…</small>
-            </div>
-          </div>
-
-          <div class="speech-speed-grid">
-            <label>Filipino speaking speed
-              <input id="filipinoRate" type="range" min="0.55" max="0.95" step="0.01" value="0.70">
-              <span id="filipinoRateValue">70%</span>
-            </label>
-
-            <label>English speaking speed
-              <input id="englishRate" type="range" min="0.55" max="0.95" step="0.01" value="0.72">
-              <span id="englishRateValue">72%</span>
-            </label>
-          </div>
-
-          <div class="voice-tip">
-            <b>Tip:</b> Choose the voice that sounds clearest to the child, then use the Preview buttons.
-            The app remembers a different voice for Filipino and English.
-          </div>
-        </div>
-
-        <div class="card parent-panel">
           <h3>⚙️ Learning Settings</h3>
-          <label><input type="checkbox" id="celebrateToggle" checked> Celebration sounds & animation</label>
+          <label><input type="checkbox" id="soundEffectsToggle" checked> Play animal & object sounds</label>
+          <label><input type="checkbox" id="celebrateToggle" checked> Celebration animation</label>
           <button id="resetProgress" class="danger">Reset Progress</button>
         </div>
       </section>
@@ -370,11 +398,7 @@ const APP_CONFIG = {
     lastDay: "",
     todayStars: 0,
     dailyGoal: 15,
-    voice: true,
-    englishVoiceURI: "",
-    filipinoVoiceURI: "",
-    englishSpeechRate: 0.72,
-    filipinoSpeechRate: 0.70,
+    soundEffects: true,
     celebrate: true,
     updatedAt: 0,
     skills: {
@@ -761,19 +785,8 @@ function updateHome(){
   $("#streak").textContent = state.streak;
   $("#learnerName").value = state.name || "";
   $("#dailyGoal").value = String(state.dailyGoal || 15);
-  $("#voiceToggle").checked = state.voice !== false;
+  $("#soundEffectsToggle").checked = state.soundEffects !== false;
   $("#celebrateToggle").checked = state.celebrate !== false;
-
-  const filRate = Number(state.filipinoSpeechRate || 0.70);
-  const engRate = Number(state.englishSpeechRate || 0.72);
-  if($("#filipinoRate")){
-    $("#filipinoRate").value = String(filRate);
-    $("#filipinoRateValue").textContent = `${Math.round(filRate * 100)}%`;
-  }
-  if($("#englishRate")){
-    $("#englishRate").value = String(engRate);
-    $("#englishRateValue").textContent = `${Math.round(engRate * 100)}%`;
-  }
   $("#skillProgress").innerHTML = Object.entries(state.skills).map(([k,v]) => `
     <div class="skill-row">
       <div style="display:flex;justify-content:space-between"><b>${labelSkill(k)}</b><span>${Math.min(v,100)}%</span></div>
@@ -783,279 +796,356 @@ function updateHome(){
 function labelSkill(k){ return ({english:"English Reading",filipino:"Filipino Reading",math:"Math",story:"Comprehension",thinking:"Thinking Skills",review:"Review"})[k]||k; }
 
 /* =========================================================
-   ENHANCED BILINGUAL VOICE SYSTEM
+   CHILD-FRIENDLY SOUND EFFECT ENGINE
    ---------------------------------------------------------
-   Goals:
-   • Filipino lessons use a Filipino/Tagalog voice when available.
-   • English lessons use clear, neutral English.
-   • Novelty / character voices are avoided automatically.
-   • Parent can manually select and preview each voice.
-   • Speech is slower and easier for a kindergarten learner.
+   No text-to-speech / AI narration.
+
+   Lessons can play recognizable animal/object/environment
+   sounds instead:
+   cat → meow
+   dog → bark
+   bird → chirp
+   rain → rain
+   ball → bounce
+   car → engine/horn
+   fish/water → bubbles
+   apple/cookie → crunch
+   house → knock
+   book → page turn
+   spoon → clink
+   stars → twinkle
+
+   The sounds are generated directly in the browser with
+   Web Audio, so there are no external audio files to host.
    ========================================================= */
 
-let availableVoices = [];
-let voiceRefreshTimer = null;
+let audioContext = null;
 
-const NOVELTY_VOICE_WORDS = [
-  "albert","bad news","bahh","bells","boing","bubbles","cellos",
-  "deranged","fred","good news","hysterical","junior","organ",
-  "princess","ralph","superstar","trinoids","whisper","wobble","zarvox"
-];
+function getAudioContext(){
+  if(!state.soundEffects) return null;
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if(!AudioCtx) return null;
 
-function normalizeLang(lang = ""){
-  return String(lang).toLowerCase().replaceAll("_","-");
-}
-
-function isNoveltyVoice(voice){
-  const name = String(voice?.name || "").toLowerCase();
-  return NOVELTY_VOICE_WORDS.some(word => name.includes(word));
-}
-
-function voiceQualityScore(voice, language){
-  if(!voice || isNoveltyVoice(voice)) return -9999;
-
-  const lang = normalizeLang(voice.lang);
-  const name = String(voice.name || "").toLowerCase();
-  let score = 0;
-
-  if(language === "filipino"){
-    if(lang === "fil-ph") score += 120;
-    else if(lang === "tl-ph") score += 115;
-    else if(lang.startsWith("fil")) score += 90;
-    else if(lang.startsWith("tl")) score += 85;
-    else return -500;
-  }else{
-    if(lang === "en-us") score += 120;
-    else if(lang === "en-ph") score += 112;
-    else if(lang === "en-gb") score += 105;
-    else if(lang === "en-au") score += 95;
-    else if(lang.startsWith("en")) score += 80;
-    else return -500;
+  if(!audioContext){
+    audioContext = new AudioCtx();
   }
 
-  if(voice.localService) score += 12;
-
-  // Voice names sometimes reveal enhanced/premium system voices.
-  if(name.includes("premium")) score += 20;
-  if(name.includes("enhanced")) score += 18;
-  if(name.includes("natural")) score += 16;
-  if(name.includes("neural")) score += 16;
-
-  // Common neutral English voices receive a small preference, when exposed.
-  if(language === "english"){
-    const clearNames = ["samantha","ava","allison","susan","serena","daniel","alex"];
-    if(clearNames.some(n => name.includes(n))) score += 8;
+  if(audioContext.state === "suspended"){
+    audioContext.resume().catch(()=>{});
   }
 
-  return score;
+  return audioContext;
 }
 
-function getSavedVoice(language){
-  const wantedURI = language === "filipino"
-    ? state.filipinoVoiceURI
-    : state.englishVoiceURI;
-
-  if(!wantedURI) return null;
-  return availableVoices.find(v => v.voiceURI === wantedURI) || null;
+function audioNow(ctx){
+  return ctx.currentTime + 0.015;
 }
 
-function chooseVoice(language){
-  refreshVoices(false);
+function tone(ctx, {
+  start=0,
+  duration=.2,
+  from=440,
+  to=null,
+  type="sine",
+  gain=.16
+} = {}){
+  const t = audioNow(ctx) + start;
+  const osc = ctx.createOscillator();
+  const amp = ctx.createGain();
 
-  const saved = getSavedVoice(language);
-  if(saved && !isNoveltyVoice(saved)) return saved;
-
-  const candidates = availableVoices
-    .map(v => ({ voice:v, score:voiceQualityScore(v, language) }))
-    .filter(x => x.score > -400)
-    .sort((a,b) => b.score - a.score);
-
-  return candidates[0]?.voice || null;
-}
-
-function optionLabel(voice){
-  const quality =
-    /premium/i.test(voice.name) ? " • Premium" :
-    /enhanced/i.test(voice.name) ? " • Enhanced" :
-    /natural|neural/i.test(voice.name) ? " • Natural" : "";
-
-  return `${voice.name} — ${voice.lang}${quality}`;
-}
-
-function fillVoiceSelect(select, language){
-  if(!select) return;
-
-  const previous = language === "filipino"
-    ? (state.filipinoVoiceURI || "")
-    : (state.englishVoiceURI || "");
-
-  const label = language === "filipino"
-    ? "Auto — best Filipino voice"
-    : "Auto — best clear English voice";
-
-  select.innerHTML = `<option value="">${label}</option>`;
-
-  const voices = availableVoices
-    .filter(v => voiceQualityScore(v, language) > -400)
-    .sort((a,b) => voiceQualityScore(b,language) - voiceQualityScore(a,language));
-
-  voices.forEach(v => {
-    const option = document.createElement("option");
-    option.value = v.voiceURI;
-    option.textContent = optionLabel(v);
-    select.appendChild(option);
-  });
-
-  if([...select.options].some(o => o.value === previous)){
-    select.value = previous;
-  }else{
-    select.value = "";
-  }
-}
-
-function updateVoiceInfo(){
-  const fil = chooseVoice("filipino");
-  const eng = chooseVoice("english");
-
-  const filInfo = $("#filipinoVoiceInfo");
-  const engInfo = $("#englishVoiceInfo");
-
-  if(filInfo){
-    if(fil){
-      filInfo.textContent = `Using: ${fil.name} (${fil.lang})`;
-    }else{
-      filInfo.textContent = "No Filipino/Tagalog system voice was detected. The device may fall back to another voice.";
-    }
+  osc.type = type;
+  osc.frequency.setValueAtTime(Math.max(20,from), t);
+  if(to != null){
+    osc.frequency.exponentialRampToValueAtTime(Math.max(20,to), t + duration);
   }
 
-  if(engInfo){
-    if(eng){
-      engInfo.textContent = `Using: ${eng.name} (${eng.lang})`;
-    }else{
-      engInfo.textContent = "No English system voice was detected.";
-    }
+  amp.gain.setValueAtTime(.0001, t);
+  amp.gain.exponentialRampToValueAtTime(Math.max(.001,gain), t + Math.min(.025,duration/4));
+  amp.gain.exponentialRampToValueAtTime(.0001, t + duration);
+
+  osc.connect(amp);
+  amp.connect(ctx.destination);
+  osc.start(t);
+  osc.stop(t + duration + .03);
+}
+
+function noiseBurst(ctx, {
+  start=0,
+  duration=.18,
+  gain=.12,
+  lowpass=4000,
+  highpass=0
+} = {}){
+  const sampleRate = ctx.sampleRate;
+  const frameCount = Math.max(1, Math.floor(sampleRate * duration));
+  const buffer = ctx.createBuffer(1, frameCount, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for(let i=0;i<frameCount;i++){
+    data[i] = (Math.random()*2-1) * (1 - i/frameCount);
   }
-}
 
-function populateVoiceControls(){
-  fillVoiceSelect($("#filipinoVoiceSelect"), "filipino");
-  fillVoiceSelect($("#englishVoiceSelect"), "english");
-  updateVoiceInfo();
-}
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
 
-function refreshVoices(updateUI = true){
-  if(!("speechSynthesis" in window)) return;
-  const voices = speechSynthesis.getVoices() || [];
+  let node = source;
 
-  if(voices.length){
-    availableVoices = voices;
-    if(updateUI) populateVoiceControls();
+  if(highpass > 0){
+    const hp = ctx.createBiquadFilter();
+    hp.type = "highpass";
+    hp.frequency.value = highpass;
+    node.connect(hp);
+    node = hp;
   }
+
+  if(lowpass > 0){
+    const lp = ctx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.value = lowpass;
+    node.connect(lp);
+    node = lp;
+  }
+
+  const amp = ctx.createGain();
+  const t = audioNow(ctx) + start;
+  amp.gain.setValueAtTime(.0001,t);
+  amp.gain.exponentialRampToValueAtTime(Math.max(.001,gain),t+.01);
+  amp.gain.exponentialRampToValueAtTime(.0001,t+duration);
+
+  node.connect(amp);
+  amp.connect(ctx.destination);
+
+  source.start(t);
+  source.stop(t+duration+.03);
 }
 
-if("speechSynthesis" in window){
-  refreshVoices();
+function soundCat(ctx){
+  // Two rising/falling formants create a soft "meow".
+  tone(ctx,{start:0,duration:.46,from:430,to:680,type:"sine",gain:.18});
+  tone(ctx,{start:.22,duration:.44,from:680,to:360,type:"sine",gain:.17});
+  tone(ctx,{start:.03,duration:.53,from:860,to:520,type:"triangle",gain:.055});
+}
 
-  // Voice lists often arrive asynchronously in Safari/iPadOS.
-  speechSynthesis.addEventListener?.("voiceschanged", () => refreshVoices());
-
-  [250,700,1500,3000].forEach(ms => {
-    setTimeout(() => refreshVoices(), ms);
+function soundDog(ctx){
+  // Two short low barks.
+  [0,.32].forEach((s,i)=>{
+    noiseBurst(ctx,{start:s,duration:.12,gain:.13,lowpass:900});
+    tone(ctx,{start:s,duration:.14,from:185-i*15,to:95,type:"sawtooth",gain:.13});
   });
 }
 
-function activeSpeechLanguage(){
-  return currentMode === "filipino" ? "filipino" : "english";
+function soundBird(ctx){
+  [0,.13,.29].forEach((s,i)=>{
+    tone(ctx,{start:s,duration:.10,from:1650+i*180,to:2850+i*220,type:"sine",gain:.12});
+    tone(ctx,{start:s+.045,duration:.08,from:2700+i*150,to:1950+i*100,type:"sine",gain:.075});
+  });
 }
 
-function removeEmojiForSpeech(value){
-  try{
-    return value.replace(/\p{Extended_Pictographic}/gu, " ");
-  }catch{
-    return value;
+function soundRain(ctx){
+  // Several overlapping filtered noise bursts approximate rainfall.
+  for(let i=0;i<5;i++){
+    noiseBurst(ctx,{
+      start:i*.13,
+      duration:.42,
+      gain:.045,
+      lowpass:5200,
+      highpass:1000
+    });
   }
+  // A few droplets.
+  [0.08,.31,.55].forEach((s,i)=>{
+    tone(ctx,{start:s,duration:.09,from:950+i*170,to:520+i*90,type:"sine",gain:.045});
+  });
 }
 
-function prepareSpeechText(text, language){
-  let value = removeEmojiForSpeech(String(text || ""));
+function soundBall(ctx){
+  // Decreasing bounce impacts.
+  const hits = [
+    [0,.11,180,.15],
+    [.24,.09,160,.12],
+    [.43,.075,140,.09],
+    [.58,.06,125,.065]
+  ];
+  hits.forEach(([start,duration,freq,gain])=>{
+    tone(ctx,{start,duration,from:freq,to:70,type:"sine",gain});
+    noiseBurst(ctx,{start,duration:.035,gain:gain*.55,lowpass:800});
+  });
+}
 
-  // Remove visual separators that speech engines often pronounce awkwardly.
-  value = value
-    .replaceAll("→", " ")
-    .replaceAll("__", " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function soundCar(ctx){
+  tone(ctx,{start:0,duration:.72,from:82,to:145,type:"sawtooth",gain:.07});
+  tone(ctx,{start:.13,duration:.16,from:390,to:390,type:"square",gain:.05});
+  tone(ctx,{start:.34,duration:.16,from:390,to:390,type:"square",gain:.05});
+}
 
-  if(language === "filipino"){
-    return value
-      .replaceAll("÷", " hinati sa ")
-      .replaceAll("+", " at ")
-      .replaceAll("=", " ay ")
-      .replaceAll(">", " mas malaki kaysa ")
-      .replaceAll("<", " mas maliit kaysa ")
-      .replace(/\bvs\.?\b/gi, " kumpara sa ")
-      .replace(/\s+/g, " ")
-      .trim();
+function soundWater(ctx){
+  [0,.12,.27,.46,.62].forEach((s,i)=>{
+    tone(ctx,{
+      start:s,
+      duration:.12,
+      from:420+i*70,
+      to:760+i*85,
+      type:"sine",
+      gain:.065
+    });
+  });
+}
+
+function soundCrunch(ctx){
+  [0,.075,.15].forEach((s,i)=>{
+    noiseBurst(ctx,{
+      start:s,
+      duration:.09,
+      gain:.10-i*.018,
+      lowpass:3000,
+      highpass:450
+    });
+  });
+}
+
+function soundKnock(ctx){
+  [0,.22].forEach(s=>{
+    tone(ctx,{start:s,duration:.065,from:155,to:90,type:"sine",gain:.16});
+    noiseBurst(ctx,{start:s,duration:.055,gain:.07,lowpass:600});
+  });
+}
+
+function soundPage(ctx){
+  noiseBurst(ctx,{start:0,duration:.34,gain:.075,lowpass:5000,highpass:900});
+  noiseBurst(ctx,{start:.18,duration:.24,gain:.045,lowpass:3500,highpass:800});
+}
+
+function soundClink(ctx){
+  tone(ctx,{start:0,duration:.42,from:1500,to:1150,type:"sine",gain:.09});
+  tone(ctx,{start:.025,duration:.30,from:2380,to:1850,type:"sine",gain:.045});
+}
+
+function soundTwinkle(ctx){
+  [659,784,988,1319].forEach((freq,i)=>{
+    tone(ctx,{start:i*.10,duration:.22,from:freq,to:freq,type:"sine",gain:.07});
+  });
+}
+
+function soundHop(ctx){
+  [0,.22].forEach((s,i)=>{
+    tone(ctx,{start:s,duration:.08,from:120-i*10,to:70,type:"sine",gain:.09});
+  });
+}
+
+function soundSuccess(){
+  if(!state.soundEffects) return;
+  const ctx=getAudioContext();
+  if(!ctx) return;
+  [523,659,784].forEach((freq,i)=>{
+    tone(ctx,{start:i*.09,duration:.19,from:freq,to:freq,type:"sine",gain:.07});
+  });
+}
+
+function soundTryAgain(){
+  if(!state.soundEffects) return;
+  const ctx=getAudioContext();
+  if(!ctx) return;
+  tone(ctx,{start:0,duration:.16,from:300,to:230,type:"sine",gain:.06});
+}
+
+function soundComplete(){
+  if(!state.soundEffects) return;
+  const ctx=getAudioContext();
+  if(!ctx) return;
+  [523,659,784,1047].forEach((freq,i)=>{
+    tone(ctx,{start:i*.11,duration:.26,from:freq,to:freq,type:"sine",gain:.07});
+  });
+}
+
+/*
+  Choose a sound only when it is educationally relevant.
+  Some decorative icons are intentionally ignored so audio does not
+  accidentally reveal an answer or distract from a letter/pantig lesson.
+*/
+function inferQuestionSound(q){
+  const title = String(q?.title || "").toLowerCase();
+  const prompt = String(q?.prompt || "").toLowerCase();
+  const icon = String(q?.icon || "");
+
+  // Silent lessons: letters, patinig, pantig, shapes and pattern questions.
+  if(
+    title.startsWith("patinig") ||
+    title.startsWith("pantig") ||
+    /^[a-zñ]+(?:-[a-zñ]+){2,}$/i.test(String(q?.title || "")) ||
+    title.includes("shape") ||
+    title.includes("quick mix") ||
+    title.includes("patinig review") ||
+    title.includes("pantig review") ||
+    title.includes("odd one out") ||
+    title.includes("what comes next")
+  ){
+    return null;
   }
 
-  return value
-    .replaceAll("÷", " divided by ")
-    .replaceAll("+", " plus ")
-    .replaceAll("=", " equals ")
-    .replaceAll(">", " is greater than ")
-    .replaceAll("<", " is less than ")
-    .replace(/\bvs\.?\b/gi, " compared with ")
-    .replace(/\s+/g, " ")
-    .trim();
+  // Specific educational concepts first.
+  if(title.includes("c-a-t") || title.includes("pusa") || title.includes("pu + sa")) return "cat";
+  if(title.includes("dog") || title.includes("bantay") || prompt.includes("dog")) return "dog";
+  if(title.includes("bird") || icon.includes("🐤") || icon.includes("🐦")) return "bird";
+  if(title.includes("rain") || icon.includes("🌧")) return "rain";
+  if(title.includes("bola") || icon.includes("⚽")) return "ball";
+  if(title.includes("bahay") || icon.includes("🏠")) return "knock";
+  if(title.includes("isda") || icon.includes("🐟")) return "water";
+  if(icon.includes("🚗") || icon.includes("🚙")) return "car";
+  if(icon.includes("📘") || icon.includes("📖")) return "page";
+  if(icon.includes("🥄")) return "clink";
+  if(icon.includes("🐰")) return "hop";
+
+  // Food/object cues.
+  if(icon.includes("🍎") || icon.includes("🍪") || icon.includes("🍊")) return "crunch";
+  if(icon.includes("⭐")) return "twinkle";
+
+  return null;
 }
 
-function speak(text, languageOverride = null, options = {}){
-  const force = Boolean(options.force);
-  if((!state.voice && !force) || !("speechSynthesis" in window)) return;
-
-  const language = languageOverride || activeSpeechLanguage();
-  const selectedVoice = chooseVoice(language);
-  const cleanText = prepareSpeechText(text, language);
-
-  if(!cleanText) return;
-
-  speechSynthesis.cancel();
-
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-
-  if(language === "filipino"){
-    utterance.lang = selectedVoice?.lang || "fil-PH";
-    utterance.rate = Math.min(0.95, Math.max(0.55, Number(state.filipinoSpeechRate || 0.70)));
-    utterance.pitch = 1.0;
-  }else{
-    utterance.lang = selectedVoice?.lang || "en-US";
-    utterance.rate = Math.min(0.95, Math.max(0.55, Number(state.englishSpeechRate || 0.72)));
-    utterance.pitch = 1.0;
-  }
-
-  utterance.volume = 1.0;
-
-  if(selectedVoice){
-    utterance.voice = selectedVoice;
-  }
-
-  speechSynthesis.speak(utterance);
+function soundLabel(kind){
+  return {
+    cat:"Hear the cat",
+    dog:"Hear the dog",
+    bird:"Hear the bird",
+    rain:"Hear the rain",
+    ball:"Hear the ball bounce",
+    car:"Hear the car",
+    water:"Hear the water",
+    crunch:"Hear the crunch",
+    knock:"Hear the knock",
+    page:"Hear the page",
+    clink:"Hear the object",
+    twinkle:"Hear the stars",
+    hop:"Hear the hop"
+  }[kind] || "Hear the sound";
 }
 
-function previewFilipinoVoice(){
-  speak(
-    "Magandang araw! Magbasa tayo nang dahan-dahan. A, E, I, O, U. BA. BE. BI. BO. BU. BA. TA. BATA.",
-    "filipino",
-    { force:true }
-  );
+function playSoundKind(kind){
+  if(!kind || !state.soundEffects) return;
+  const ctx = getAudioContext();
+  if(!ctx) return;
+
+  const sounds = {
+    cat:soundCat,
+    dog:soundDog,
+    bird:soundBird,
+    rain:soundRain,
+    ball:soundBall,
+    car:soundCar,
+    water:soundWater,
+    crunch:soundCrunch,
+    knock:soundKnock,
+    page:soundPage,
+    clink:soundClink,
+    twinkle:soundTwinkle,
+    hop:soundHop
+  };
+
+  sounds[kind]?.(ctx);
 }
 
-function previewEnglishVoice(){
-  speak(
-    "Hello! Let us learn slowly and clearly. This is the letter A. A makes the short a sound, as in apple. Well done.",
-    "english",
-    { force:true }
-  );
+function playQuestionSound(q){
+  playSoundKind(inferQuestionSound(q));
 }
 
 function celebrate(){
@@ -1065,6 +1155,8 @@ function celebrate(){
 }
 
 function startLesson(mode){
+  // Lesson selection is a user gesture, so it can safely unlock Web Audio on iPad.
+  getAudioContext();
   currentMode = mode; lessonScore=0; qIndex=0;
   questions = [...lessonBanks[mode]].sort(()=>Math.random()-.5);
 
@@ -1083,54 +1175,149 @@ function startLesson(mode){
   renderQuestion();
 }
 
+
+function escapeSceneText(value=""){
+  return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+}
+
+function splitEmojiScene(icon=""){
+  const normalized = String(icon).replaceAll("→"," → ").replaceAll("+"," + ").replaceAll("="," = ").replaceAll("vs"," vs ").replace(/\s+/g," ").trim();
+  if(!normalized) return [];
+  const chunks = normalized.split(" ").filter(Boolean);
+  const expanded = [];
+  for(const chunk of chunks){
+    if(["→","+","=","vs","VS"].includes(chunk)){expanded.push({value:chunk,symbol:true});continue;}
+    try{
+      const glyphs=[...chunk.matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*/gu)].map(m=>m[0]);
+      if(glyphs.length>1){glyphs.forEach(g=>expanded.push({value:g,symbol:false}));}
+      else{expanded.push({value:chunk,symbol:false});}
+    }catch{expanded.push({value:chunk,symbol:false});}
+  }
+  return expanded;
+}
+
+function animatedMathScene(icon){
+  const raw=String(icon||"");
+  if(raw.includes("→")){
+    const [left,right]=raw.split("→");
+    return `<div class="share-scene"><div class="share-items">${escapeSceneText(left.trim())}</div><div class="share-arrow">➜</div><div class="share-kids">${escapeSceneText(right.trim())}</div></div>`;
+  }
+  const tokens=splitEmojiScene(raw);
+  return `<div class="math-scene">${tokens.map(token=>`<span class="${token.symbol?"math-symbol-token":"math-token"}">${escapeSceneText(token.value)}</span>`).join("")}</div>`;
+}
+
+function animatedWordBuildScene(title){
+  const match=String(title||"").match(/^\s*(.+?)\s*\+\s*(.+?)\s*=\s*(.+?)\s*$/);
+  if(!match)return "";
+  const [,first,second,result]=match;
+  return `<div class="word-build-scene"><div class="word-part">${escapeSceneText(first)}</div><div class="word-operator">+</div><div class="word-part part2">${escapeSceneText(second)}</div><div class="word-operator">=</div><div class="word-result">${escapeSceneText(result)}</div></div>`;
+}
+
+function animatedPantigScene(q){
+  const title=String(q.title||"");
+  if(/^[A-ZÑ]+(?:-[A-ZÑ]+){2,}$/i.test(title)){
+    return `<div class="pantig-scene">${title.split("-").map(s=>`<div class="syllable-chip">${escapeSceneText(s)}</div>`).join("")}</div>`;
+  }
+  const single=title.match(/^(?:Patinig|Pantig)\s+(.+)$/i);
+  if(single){return `<div class="letter-scene"><div class="learning-letter">${escapeSceneText(single[1])}</div></div>`;}
+  return "";
+}
+
+function getQuestionVisual(q){
+  const title=String(q.title||"");
+  const prompt=String(q.prompt||"");
+  const lowerTitle=title.toLowerCase();
+  if(lowerTitle.includes("shape")||prompt.toLowerCase().includes("what shape")){
+    let shape=`<div class="demo-shape triangle"></div>`;
+    const icon=String(q.icon||"");
+    if(icon.includes("⭕")||lowerTitle.includes("circle"))shape=`<div class="demo-shape circle"></div>`;
+    else if(icon.includes("⬜")||lowerTitle.includes("square"))shape=`<div class="demo-shape square"></div>`;
+    else if(icon.includes("❤️")||lowerTitle.includes("heart"))shape=`<div class="demo-shape heart">❤️</div>`;
+    return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">⭐</span><span class="scene-sparkle s3">✨</span><span class="scene-sparkle s4">⭐</span><div class="visual-card"><div class="shape-stage">${shape}</div></div></div>`;
+  }
+  const wordBuild=animatedWordBuildScene(title);
+  if(currentMode==="filipino"&&wordBuild){return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">🌟</span><span class="scene-sparkle s3">✨</span><span class="scene-sparkle s4">🌈</span><div class="visual-card">${wordBuild}</div></div>`;}
+  if(currentMode==="filipino"){
+    const pantig=animatedPantigScene(q);
+    if(pantig){return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">⭐</span><span class="scene-sparkle s3">🌟</span><span class="scene-sparkle s4">✨</span><div class="visual-card">${pantig}</div></div>`;}
+  }
+  if(currentMode==="math"){return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">⭐</span><span class="scene-sparkle s3">✨</span><span class="scene-sparkle s4">⭐</span><div class="visual-card">${animatedMathScene(q.icon)}</div></div>`;}
+  if(currentMode==="story"){return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">📖</span><span class="scene-sparkle s3">⭐</span><span class="scene-sparkle s4">✨</span><div class="visual-card"><div class="story-scene">${escapeSceneText(q.icon)}</div></div></div>`;}
+  if(currentMode==="thinking"){return `<div class="learning-visual"><div class="visual-card"><div class="thinking-scene">${escapeSceneText(q.icon)}</div></div></div>`;}
+  return `<div class="learning-visual"><span class="scene-sparkle s1">✨</span><span class="scene-sparkle s2">⭐</span><span class="scene-sparkle s3">✨</span><span class="scene-sparkle s4">⭐</span><div class="visual-card"><div class="animated-icon">${escapeSceneText(q.icon)}</div></div></div>`;
+}
+
 function renderQuestion(){
   $("#lessonStars").textContent = `⭐ ${lessonScore}`;
   if(qIndex >= questions.length){ finishLesson(); return; }
+
   const q = questions[qIndex];
-  $("#lessonStage").innerHTML = `
+  const stage = $("#lessonStage");
+  const soundKind = inferQuestionSound(q);
+
+  stage.classList.remove("question-enter");
+  void stage.offsetWidth;
+  stage.classList.add("question-enter");
+
+  stage.innerHTML = `
     <div class="pill">${labelSkill(currentMode)}</div>
-    <div class="big-symbol">${q.icon}</div>
+    ${getQuestionVisual(q)}
     <h2>${q.title}</h2>
     <p class="prompt">${q.prompt}</p>
-    <button class="listen-btn" id="listenNow">🔊 Listen</button>
+    ${soundKind ? `
+      <button class="sound-effect-btn" id="soundNow">
+        <span class="sound-icon">🔊</span>${soundLabel(soundKind)}
+      </button>
+      <div class="sound-note">Tap to hear it again</div>
+    ` : ""}
     <div class="answer-grid">
       ${q.choices.map((c,i)=>`<button class="answer" data-i="${i}">${c}</button>`).join("")}
     </div>
     <div class="feedback" id="feedback"></div>
   `;
-  $("#listenNow").onclick=()=>speak(q.say + " " + q.prompt);
+
+  if(soundKind){
+    $("#soundNow").onclick=()=>playSoundKind(soundKind);
+
+    // Web Audio is unlocked by the user's lesson/Next tap.
+    // A short delay lets the visual appear first.
+    setTimeout(()=>playSoundKind(soundKind),420);
+  }
+
   $$(".answer").forEach(b=>b.onclick=()=>checkAnswer(Number(b.dataset.i)));
-  setTimeout(()=>speak(q.say + " " + q.prompt),350);
 }
 
 function checkAnswer(i){
   const q=questions[qIndex];
-  $$(".answer").forEach(b=>b.disabled=true);
+  const answerButtons = $$(".answer");
+  answerButtons.forEach(b=>b.disabled=true);
+  const selected = answerButtons.find(b=>Number(b.dataset.i)===i);
+  const correct = answerButtons.find(b=>Number(b.dataset.i)===q.correct);
   if(i===q.correct){
+    selected?.classList.add("correct-answer");
     lessonScore++; state.totalStars++; state.todayStars++;
     state.skills[currentMode] = Math.min(100,(state.skills[currentMode]||0)+4);
-
     if(currentMode === "filipino"){
       $("#feedback").innerHTML="🎉 Magaling! Tama ang sagot mo!";
-      speak("Magaling! Tama ang sagot mo!", "filipino");
     }else{
       $("#feedback").innerHTML="🎉 Well done! That is correct!";
-      speak("Well done. That is correct.", "english");
     }
+    soundSuccess();
     celebrate();
   } else {
+    selected?.classList.add("wrong-answer");
+    correct?.classList.add("reveal-answer");
     if(currentMode === "filipino"){
       $("#feedback").innerHTML=`🌟 Magandang subok! Ang tamang sagot ay <b>${q.choices[q.correct]}</b>.`;
-      speak("Magandang subok! Subukan nating tandaan ang tamang sagot.", "filipino");
     }else{
-      $("#feedback").innerHTML=`🌟 Good try! The answer is <b>${q.choices[q.correct]}</b>.`;
-      speak("Good try. Let us look carefully at the correct answer.", "english");
+      $("#feedback").innerHTML=`🌟 Good try! The correct answer is <b>${q.choices[q.correct]}</b>.`;
     }
+    soundTryAgain();
   }
   save();
   const btn=document.createElement("button");
   btn.className="primary next-btn"; btn.textContent="Next ➜";
-  btn.onclick=()=>{qIndex++;renderQuestion()};
+  btn.onclick=()=>{getAudioContext();qIndex++;renderQuestion()};
   $("#feedback").appendChild(document.createElement("br")); $("#feedback").appendChild(btn);
 }
 
@@ -1140,7 +1327,7 @@ function finishLesson(){
   save();
   const max=questions.length;
   $("#lessonStage").innerHTML=`
-    <div class="big-symbol">🏆</div>
+    <div class="finish-trophy">🏆</div>
     <h2>Adventure Complete!</h2>
     <p class="prompt">You earned <b>${lessonScore} out of ${max} stars</b>! ⭐</p>
     <p>${lessonScore===max ? "Amazing work! 🌈" : "Wonderful effort! Practice makes us stronger. 💪"}</p>
@@ -1148,11 +1335,7 @@ function finishLesson(){
     <button id="homeAfterBtn" class="secondary" style="margin-top:10px">Go Home</button>
   `;
   celebrate();
-  if(currentMode === "filipino"){
-    speak(`Tapos na ang ating gawain. Nakakuha ka ng ${lessonScore} na bituin. Magaling!`, "filipino");
-  }else{
-    speak(`The lesson is complete. You earned ${lessonScore} stars. Well done.`, "english");
-  }
+  soundComplete();
   $("#againBtn").onclick=()=>startLesson(currentMode);
   $("#homeAfterBtn").onclick=()=>showView("#homeView");
 }
@@ -1166,50 +1349,21 @@ function startDaily(){
 $("#startDailyBtn").onclick=startDaily;
 $$(".lesson-card").forEach(b=>b.onclick=()=>startLesson(b.dataset.mode));
 $("#backBtn").onclick=()=>showView("#homeView");
-$("#parentBtn").onclick=()=>{updateHome();populateVoiceControls();showView("#parentView")};
+$("#parentBtn").onclick=()=>{updateHome();showView("#parentView")};
 $("#parentBackBtn").onclick=()=>showView("#homeView");
 $("#saveProfile").onclick=()=>{
   state.name=$("#learnerName").value.trim()||"Super Learner";
   state.dailyGoal=Number($("#dailyGoal").value);
   save(); alert("Profile saved! ⭐");
 };
-$("#voiceToggle").onchange=e=>{state.voice=e.target.checked;save()};
-
-$("#filipinoVoiceSelect").onchange=e=>{
-  state.filipinoVoiceURI = e.target.value;
+$("#soundEffectsToggle").onchange=e=>{
+  state.soundEffects=e.target.checked;
   save();
-  updateVoiceInfo();
-  previewFilipinoVoice();
+  if(state.soundEffects){
+    getAudioContext();
+    soundSuccess();
+  }
 };
-
-$("#englishVoiceSelect").onchange=e=>{
-  state.englishVoiceURI = e.target.value;
-  save();
-  updateVoiceInfo();
-  previewEnglishVoice();
-};
-
-$("#previewFilipinoVoice").onclick=previewFilipinoVoice;
-$("#previewEnglishVoice").onclick=previewEnglishVoice;
-
-$("#filipinoRate").oninput=e=>{
-  state.filipinoSpeechRate = Number(e.target.value);
-  $("#filipinoRateValue").textContent = `${Math.round(state.filipinoSpeechRate * 100)}%`;
-};
-$("#filipinoRate").onchange=()=>{
-  save();
-  previewFilipinoVoice();
-};
-
-$("#englishRate").oninput=e=>{
-  state.englishSpeechRate = Number(e.target.value);
-  $("#englishRateValue").textContent = `${Math.round(state.englishSpeechRate * 100)}%`;
-};
-$("#englishRate").onchange=()=>{
-  save();
-  previewEnglishVoice();
-};
-
 $("#celebrateToggle").onchange=e=>{state.celebrate=e.target.checked;save()};
 $("#resetProgress").onclick=()=>{
   if(confirm("Reset all learning progress on this iPad and the connected cloud profile?")){
