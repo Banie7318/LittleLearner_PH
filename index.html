@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fff6d9" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Little Learner PH" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Little Learner PH</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">🌈 KINDERGARTEN LEARNING BUDDY</div>
+        <h1>Little Learner PH</h1>
+      </div>
+      <div class="top-actions">
+        <span id="cloudStatus" class="cloud-status local" title="Progress storage status">☁️ Local</span>
+        <button id="parentBtn" class="icon-btn" aria-label="Parent dashboard">👨‍👩‍👧</button>
+      </div>
+    </header>
+
+    <main id="app">
+      <section id="homeView" class="view active">
+        <div class="hero card">
+          <div class="hero-copy">
+            <span class="pill">⭐ Learn • Play • Grow</span>
+            <h2 id="heroGreeting">Hello, Super Learner! 👋</h2>
+            <p>Choose a fun adventure for today.</p>
+            <button id="startDailyBtn" class="primary big">Start Today’s Adventure 🚀</button>
+          </div>
+          <div class="mascot" aria-hidden="true">🦄</div>
+        </div>
+
+        <div class="progress-card card">
+          <div>
+            <strong>Today’s Stars</strong>
+            <div id="starText">0 stars earned</div>
+          </div>
+          <div class="stars" id="starDisplay">☆ ☆ ☆ ☆ ☆</div>
+        </div>
+
+        <h3 class="section-title">Pick a Learning Game</h3>
+        <div class="lesson-grid">
+          <button class="lesson-card english" data-mode="english">
+            <span class="emoji">🔤</span><strong>English Reading</strong><small>Letters, sounds & words</small>
+          </button>
+          <button class="lesson-card filipino" data-mode="filipino">
+            <span class="emoji">🇵🇭</span><strong>Filipino Reading</strong><small>Patinig, pantig at pagbasa</small>
+          </button>
+          <button class="lesson-card math" data-mode="math">
+            <span class="emoji">🔢</span><strong>Math Adventure</strong><small>Add, subtract, share & compare</small>
+          </button>
+          <button class="lesson-card story" data-mode="story">
+            <span class="emoji">📖</span><strong>Story Time</strong><small>Read and understand</small>
+          </button>
+          <button class="lesson-card thinking" data-mode="thinking">
+            <span class="emoji">🧩</span><strong>Thinking Game</strong><small>Patterns & logic</small>
+          </button>
+          <button class="lesson-card review" data-mode="review">
+            <span class="emoji">🏆</span><strong>Quick Review</strong><small>Practice what we learned</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="lessonView" class="view">
+        <div class="lesson-top">
+          <button id="backBtn" class="secondary">← Home</button>
+          <div class="lesson-score"><span id="lessonStars">⭐ 0</span></div>
+        </div>
+        <div id="lessonStage" class="card lesson-stage"></div>
+      </section>
+
+      <section id="parentView" class="view">
+        <div class="lesson-top">
+          <button id="parentBackBtn" class="secondary">← Home</button>
+          <h2>Parent Dashboard</h2>
+        </div>
+        <div class="card parent-panel">
+          <h3>👧 Learner Profile</h3>
+          <label>Name <input id="learnerName" placeholder="Child's name"></label>
+          <label>Daily Goal
+            <select id="dailyGoal">
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="20">20 minutes</option>
+              <option value="30">30 minutes</option>
+            </select>
+          </label>
+          <button id="saveProfile" class="primary">Save Profile</button>
+        </div>
+
+        <div class="card parent-panel">
+          <h3>📊 Progress</h3>
+          <div class="stats">
+            <div><b id="totalStars">0</b><span>Total Stars</span></div>
+            <div><b id="sessionsDone">0</b><span>Activities Done</span></div>
+            <div><b id="streak">0</b><span>Day Streak</span></div>
+          </div>
+          <div id="skillProgress" class="skill-progress"></div>
+        </div>
+
+
+        <div class="card parent-panel">
+          <h3>☁️ Cloud Backup</h3>
+          <p class="muted">Lessons are always saved on this iPad first. Firebase adds a cloud copy when internet is available.</p>
+          <div class="cloud-box">
+            <div>
+              <b id="cloudStateText">Starting…</b>
+              <small id="cloudDetail">Checking Firebase connection.</small>
+            </div>
+            <button id="syncNowBtn" class="secondary">Sync Now</button>
+          </div>
+        </div>
+
+        <div class="card parent-panel">
+          <h3>⚙️ Learning Settings</h3>
+          <label><input type="checkbox" id="voiceToggle" checked> Read instructions aloud using Filipino/English voice automatically</label>
+          <label><input type="checkbox" id="celebrateToggle" checked> Celebration sounds & animation</label>
+          <button id="resetProgress" class="danger">Reset Progress</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="celebration" class="celebration" aria-hidden="true">🎉 ⭐ 🌈 🥳 ⭐ 🎉</div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

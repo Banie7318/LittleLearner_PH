@@ -1,0 +1,97 @@
+
+:root{
+  --ink:#243047; --cream:#fffaf0; --yellow:#ffd85a; --pink:#ff8fb3; --blue:#77c8ff;
+  --green:#8fe0b0; --purple:#b8a2ff; --orange:#ffad66; --white:#fff;
+  --shadow:0 14px 30px rgba(44,55,84,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:ui-rounded, "SF Pro Rounded", "Trebuchet MS", system-ui, sans-serif;background:linear-gradient(180deg,#fff8d9,#f6fbff);color:var(--ink)}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button,input,select{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app-shell{max-width:980px;margin:auto;padding:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.eyebrow{font-size:.78rem;font-weight:900;letter-spacing:.08em;color:#6d6f86}
+h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
+.icon-btn{border:none;background:#fff;border-radius:18px;padding:12px 14px;font-size:1.5rem;box-shadow:var(--shadow)}
+.view{display:none}.view.active{display:block}
+.card{background:rgba(255,255,255,.94);border-radius:28px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,.9)}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;align-items:center;padding:28px;overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#fff1a8;right:-60px;top:-80px;z-index:0}
+.hero-copy,.mascot{position:relative;z-index:1}
+.hero h2{font-size:clamp(1.8rem,5vw,3.4rem);margin:12px 0 8px}
+.hero p{font-size:1.15rem;color:#667085}
+.mascot{font-size:clamp(5rem,17vw,10rem);text-align:center;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(3deg)}}
+.pill{display:inline-block;background:#fff2ad;padding:8px 12px;border-radius:999px;font-weight:900}
+.primary,.secondary,.danger{border:none;border-radius:18px;padding:13px 18px;font-weight:900}
+.primary{background:linear-gradient(135deg,#ffc943,#ff8e72);color:#382900;box-shadow:0 8px 18px rgba(255,169,79,.25)}
+.primary.big{font-size:1.12rem;padding:16px 22px}
+.secondary{background:#eef4ff;color:#314a75}
+.danger{background:#ffe3e3;color:#9c2323}
+.progress-card{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;margin-top:16px}
+.stars{font-size:1.7rem;letter-spacing:3px;color:#f3b700}
+.section-title{margin:26px 4px 12px}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.lesson-card{border:0;text-align:left;border-radius:24px;padding:18px;min-height:138px;box-shadow:var(--shadow);transition:.18s transform}
+.lesson-card:active{transform:scale(.97)}
+.lesson-card .emoji{font-size:2.3rem;display:block;margin-bottom:8px}
+.lesson-card strong{font-size:1.08rem;display:block}.lesson-card small{display:block;margin-top:5px;color:#495468}
+.english{background:#dff2ff}.filipino{background:#ffe0ea}.math{background:#e7f8d9}.story{background:#fff0c9}.thinking{background:#eee7ff}.review{background:#dff8ef}
+.lesson-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.lesson-stage{padding:24px;min-height:590px;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center}
+.lesson-stage h2{font-size:clamp(1.7rem,5vw,3rem);margin:8px}
+.lesson-stage .big-symbol{font-size:clamp(5rem,18vw,9rem);margin:10px}
+.prompt{font-size:1.25rem;line-height:1.45;max-width:680px}
+.answer-grid{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;width:min(650px,100%);margin-top:20px}
+.answer{border:3px solid #edf0f7;background:#fff;border-radius:20px;padding:18px;font-weight:900;font-size:1.1rem;min-height:72px}
+.answer:active{transform:scale(.98)}
+.feedback{min-height:45px;font-size:1.15rem;font-weight:900;margin-top:14px}
+.listen-btn{border:0;background:#e9f7ff;border-radius:18px;padding:12px 16px;font-weight:900;margin-top:8px}
+.next-btn{margin-top:12px}
+.parent-panel{padding:20px;margin:12px 0}
+.parent-panel label{display:block;margin:14px 0;font-weight:800}
+.parent-panel input:not([type=checkbox]),.parent-panel select{width:100%;margin-top:6px;padding:12px;border:2px solid #e4e8f1;border-radius:14px;background:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stats div{background:#f7f9ff;border-radius:18px;padding:16px;text-align:center}
+.stats b{font-size:1.7rem;display:block}.stats span{font-size:.8rem;color:#667085}
+.skill-row{margin:14px 0}.skill-row .bar{height:12px;background:#edf0f6;border-radius:999px;overflow:hidden}.skill-row .fill{height:100%;background:linear-gradient(90deg,#ffd64d,#8bd9ff);border-radius:999px}
+.celebration{position:fixed;inset:0;display:none;place-items:center;text-align:center;font-size:clamp(2.5rem,10vw,6rem);background:rgba(255,255,255,.7);z-index:99;pointer-events:none}
+.celebration.show{display:grid;animation:pop .8s ease}
+@keyframes pop{0%{opacity:0;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1)}}
+@media (max-width:650px){
+  .app-shell{padding:12px}
+  .hero{grid-template-columns:1fr;padding:22px}.mascot{position:absolute;right:8px;bottom:8px;font-size:5rem;opacity:.85}
+  .hero-copy{padding-right:60px}
+  .lesson-grid{grid-template-columns:1fr 1fr}
+  .lesson-card{min-height:128px;padding:15px}
+  .lesson-stage{min-height:70vh;padding:18px}
+}
+@media (max-width:430px){.lesson-grid{grid-template-columns:1fr}.hero-copy{padding-right:0}.mascot{display:none}}
+
+
+/* =========================================================
+   CLOUD / FIREBASE UI
+   ========================================================= */
+.top-actions{display:flex;align-items:center;gap:10px}
+.cloud-status{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;
+  font-size:.78rem;font-weight:900;white-space:nowrap
+}
+.cloud-status.local{background:#f0f2f6;color:#667085}
+.cloud-status.connecting{background:#fff1c7;color:#7a5b00}
+.cloud-status.online{background:#dff8e8;color:#17633a}
+.cloud-status.offline{background:#ffe8d7;color:#8a491d}
+.cloud-status.error{background:#ffe1e1;color:#952b2b}
+.muted{color:#667085;line-height:1.5}
+.cloud-box{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:#f7f9ff;border-radius:18px;padding:15px
+}
+.cloud-box b,.cloud-box small{display:block}
+.cloud-box small{margin-top:4px;color:#667085}
+@media (max-width:560px){
+  .cloud-status{font-size:0;width:40px;height:40px;justify-content:center;padding:0}
+  .cloud-status::before{content:"☁️";font-size:1rem}
+  .cloud-box{align-items:flex-start;flex-direction:column}
+}
