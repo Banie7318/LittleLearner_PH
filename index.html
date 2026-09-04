@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
 =========================================================
@@ -40,7 +41,7 @@ so full offline PWA caching requires the multi-file edition.
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Little Learner PH" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <title>Little Learner PH</title>
+  <title>Little Learner PH 2.1 — Adaptive Learning</title>
 <style>
 
 :root{
@@ -501,6 +502,138 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
   }
 }
 
+
+
+/* =========================================================
+   LITTLE LEARNER PH 2.0 — MAGICAL PURPLE + PINK EXPERIENCE
+   Phase 1: Tala, Star Jar, Adventure Path & Reward Collection
+   ========================================================= */
+:root{
+  --ink:#3f3155;
+  --cream:#fff8ff;
+  --yellow:#ffe277;
+  --pink:#ff8fc8;
+  --blue:#9edcff;
+  --green:#9be7c3;
+  --purple:#a887ff;
+  --orange:#ffc089;
+  --magic-purple:#8d6af6;
+  --magic-purple-dark:#6545c8;
+  --magic-pink:#ff78b7;
+  --magic-pink-soft:#ffd7ec;
+  --magic-lilac:#eee5ff;
+  --magic-cream:#fff9ff;
+  --shadow:0 16px 34px rgba(102,69,200,.13);
+}
+html,body{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.95) 0 3%,transparent 3.5%),
+    radial-gradient(circle at 88% 16%,rgba(255,255,255,.8) 0 2.5%,transparent 3%),
+    linear-gradient(180deg,#f8ecff 0%,#fff1f8 48%,#fffaf0 100%);
+}
+.topbar{padding:4px 2px}
+.eyebrow{color:#865dc7}
+.icon-btn{box-shadow:0 10px 24px rgba(112,76,186,.14)}
+.primary{background:linear-gradient(135deg,var(--magic-purple),var(--magic-pink));color:white;box-shadow:0 9px 20px rgba(172,91,208,.24)}
+.secondary{background:#f3edff;color:#5b4697}
+.pill{background:#fff1fb;color:#7c4e9f;border:1px solid #f3d6ff}
+
+.magic-hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);
+  gap:18px;
+  align-items:center;
+  min-height:390px;
+  padding:30px;
+  background:
+    radial-gradient(circle at 80% 18%,rgba(255,255,255,.9),transparent 22%),
+    linear-gradient(145deg,#f0e5ff 0%,#ffe1f0 54%,#fff5d7 100%);
+  border:2px solid rgba(255,255,255,.92);
+}
+.magic-hero::before,.magic-hero::after{
+  content:"";position:absolute;border-radius:999px;background:rgba(255,255,255,.57);filter:blur(.2px);pointer-events:none
+}
+.magic-hero::before{width:210px;height:70px;left:-34px;bottom:34px;box-shadow:72px -18px 0 8px rgba(255,255,255,.45)}
+.magic-hero::after{width:170px;height:55px;right:-28px;top:40px;box-shadow:-54px 18px 0 4px rgba(255,255,255,.46)}
+.magic-copy,.tala-stage{position:relative;z-index:2;min-width:0}
+.magic-copy h2{font-size:clamp(2rem,5vw,3.5rem);margin:12px 0 8px;color:#4a356d;line-height:1.04}
+.magic-copy p{font-size:1.12rem;color:#6c5b7b;line-height:1.55;max-width:560px}
+.magic-start{font-size:1.12rem!important;padding:17px 23px!important;min-height:58px}
+.home-quick-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.collection-btn{border:2px solid rgba(137,100,218,.14);background:rgba(255,255,255,.82);color:#674d90;border-radius:18px;padding:11px 14px;font-weight:950;min-height:48px;box-shadow:0 8px 18px rgba(81,55,132,.08)}
+.collection-btn:active{transform:scale(.97)}
+
+.tala-stage{display:grid;place-items:center;align-self:stretch;min-height:300px}
+.tala-glow{position:relative;width:230px;height:230px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff 0 38%,#f5ddff 62%,rgba(255,255,255,.15) 70%);box-shadow:0 22px 44px rgba(112,67,177,.13);animation:talaFloat 3s ease-in-out infinite}
+.tala-face{font-size:9.2rem;filter:drop-shadow(0 13px 13px rgba(76,45,112,.13));transform:rotate(-2deg)}
+.tala-accessory{position:absolute;z-index:4;right:34px;top:18px;font-size:3.2rem;transform:rotate(13deg);filter:drop-shadow(0 6px 5px rgba(90,58,126,.15))}
+.tala-spark{position:absolute;font-size:1.65rem;animation:magicTwinkle 1.9s ease-in-out infinite}.tala-spark.s1{left:10px;top:36px}.tala-spark.s2{right:3px;bottom:54px;animation-delay:.45s}.tala-spark.s3{left:30px;bottom:23px;animation-delay:.9s}
+.tala-speech{position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:min(270px,95%);background:#fff;border:2px solid #f0d9ff;border-radius:22px;padding:11px 14px;text-align:center;font-weight:900;color:#654c83;box-shadow:0 10px 24px rgba(82,55,128,.1)}
+@keyframes talaFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+@keyframes magicTwinkle{0%,100%{transform:scale(.75) rotate(0);opacity:.5}50%{transform:scale(1.18) rotate(15deg);opacity:1}}
+
+.adventure-and-reward{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(230px,.55fr);gap:14px;margin-top:16px}
+.adventure-card,.star-jar-card{padding:20px;overflow:hidden}
+.adventure-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}.adventure-head h3{margin:0;color:#523b75}.adventure-head small{display:block;color:#7a6b87;margin-top:4px;line-height:1.4}
+.adventure-badge{background:#f2e9ff;color:#7655bb;padding:8px 10px;border-radius:999px;font-weight:950;font-size:.78rem;white-space:nowrap}
+.adventure-path{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;position:relative;align-items:start}
+.adventure-path::before{content:"";position:absolute;left:7%;right:7%;top:27px;height:7px;border-radius:999px;background:linear-gradient(90deg,#d9c8ff,#ffd0e7,#ffe397);z-index:0}
+.adventure-stop{position:relative;z-index:1;text-align:center;min-width:0}
+.adventure-orb{width:54px;height:54px;border-radius:50%;margin:auto;display:grid;place-items:center;background:#fff;border:4px solid #eadfff;box-shadow:0 8px 17px rgba(85,58,128,.09);font-size:1.45rem;transition:.25s ease}
+.adventure-stop small{display:block;margin-top:7px;font-size:.69rem;font-weight:900;color:#786a87;line-height:1.15}
+.adventure-stop.complete .adventure-orb{background:linear-gradient(145deg,#a887ff,#ff91c7);border-color:white;transform:scale(1.02);color:white}
+.adventure-stop.active .adventure-orb{animation:adventurePulse 1.5s ease-in-out infinite;border-color:#d19cff}
+@keyframes adventurePulse{0%,100%{box-shadow:0 0 0 0 rgba(168,135,255,.15)}50%{box-shadow:0 0 0 9px rgba(168,135,255,.12)}}
+
+.star-jar-card{text-align:center;background:linear-gradient(145deg,#fff,#fff5fc)}
+.star-jar-card h3{margin:0 0 4px;color:#5e4382}.star-jar-card p{margin:3px 0 12px;color:#7a6c85;font-size:.9rem;line-height:1.35}
+.star-jar{position:relative;width:126px;height:148px;margin:10px auto 12px;border:6px solid #cbb3ef;border-top-width:11px;border-radius:20px 20px 34px 34px;background:rgba(255,255,255,.72);overflow:hidden;box-shadow:inset 0 0 22px rgba(150,113,221,.08),0 12px 24px rgba(90,57,143,.1)}
+.star-jar::before{content:"";position:absolute;left:19px;right:19px;top:-16px;height:20px;border-radius:9px;background:#a98be6;border:4px solid #9271d4;z-index:4}
+.jar-fill{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,rgba(255,209,239,.55),rgba(164,126,245,.28));transition:height .55s cubic-bezier(.2,.8,.2,1)}
+.jar-stars{position:absolute;inset:16px 8px 8px;display:flex;align-content:flex-end;justify-content:center;align-items:flex-end;flex-wrap:wrap;gap:2px;font-size:1.25rem;z-index:2;line-height:1}
+.jar-count{font-size:1.18rem;font-weight:1000;color:#624889}.reward-hint{display:inline-block;margin-top:5px;background:#fff0bb;color:#705700;border-radius:999px;padding:7px 10px;font-weight:900;font-size:.78rem}
+
+.magic-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 4px 11px}.magic-section-title h3{margin:0}.magic-section-title span{font-size:.78rem;color:#786c82}
+.lesson-card{border:2px solid rgba(255,255,255,.92)}
+.english{background:linear-gradient(145deg,#e9e0ff,#daf3ff)}.filipino{background:linear-gradient(145deg,#ffdced,#ffe8f3)}.math{background:linear-gradient(145deg,#e9ddff,#e2f8df)}.story{background:linear-gradient(145deg,#fff0cb,#ffe5f1)}.thinking{background:linear-gradient(145deg,#e8dcff,#f4eaff)}.review{background:linear-gradient(145deg,#dff8ef,#eadfff)}
+
+.collection-view .lesson-top h2{color:#5d4381}
+.collection-hero{padding:21px;margin-bottom:14px;background:linear-gradient(145deg,#eee3ff,#ffe3f1)}.collection-hero p{margin:5px 0;color:#735f80}
+.collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.collectible{position:relative;min-height:132px;padding:16px 10px;border-radius:22px;background:#fff;border:2px solid #eee5f8;text-align:center;box-shadow:0 10px 23px rgba(77,53,117,.08);overflow:hidden}
+.collectible .collect-icon{display:block;font-size:3rem;margin-bottom:7px}.collectible strong{display:block;color:#59416f}.collectible small{display:block;color:#8a7b92;margin-top:4px}.collectible.locked{filter:saturate(.25);opacity:.62;background:#f7f4f9}.collectible.selected{border-color:#a984f2;box-shadow:0 0 0 4px rgba(169,132,242,.14)}
+button.collectible{cursor:pointer;font:inherit}button.collectible:not(:disabled):active{transform:scale(.97)}button.collectible:disabled{cursor:not-allowed}
+.closet-tala{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}.closet-tala-figure{position:relative;font-size:7rem;line-height:1}.closet-tala-accessory{position:absolute;right:-2px;top:-15px;font-size:2.8rem;transform:rotate(12deg)}
+
+.reward-reveal{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(63,43,83,.28);backdrop-filter:blur(5px);z-index:180}.reward-reveal.show{display:grid}.reward-box{width:min(390px,94vw);padding:25px;text-align:center;border-radius:32px;background:linear-gradient(145deg,#fff,#fff0fb);box-shadow:0 24px 70px rgba(67,45,101,.25);border:3px solid white;animation:rewardBoxIn .55s cubic-bezier(.2,.9,.2,1)}.reward-icon{font-size:6rem;animation:rewardBounce 1.15s ease-in-out infinite}.reward-box h2{margin:8px 0 5px;color:#5c3e82}.reward-box p{color:#75627f;line-height:1.45}.reward-box button{margin-top:8px}
+@keyframes rewardBoxIn{from{opacity:0;transform:scale(.72) translateY(18px)}to{opacity:1;transform:scale(1) translateY(0)}}@keyframes rewardBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+
+.flying-star{position:fixed;z-index:170;pointer-events:none;font-size:2.1rem;filter:drop-shadow(0 6px 6px rgba(89,53,118,.2))}.sparkle-pop{position:fixed;z-index:169;pointer-events:none;font-size:1rem;animation:sparkPop .75s ease-out forwards}@keyframes sparkPop{0%{opacity:0;transform:translate(0,0) scale(.4)}35%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.25) rotate(30deg)}}
+.tala-happy{animation:talaHappy .75s cubic-bezier(.2,.9,.2,1)!important}@keyframes talaHappy{0%,100%{transform:translateY(0) rotate(0)}32%{transform:translateY(-18px) rotate(-6deg) scale(1.06)}62%{transform:translateY(-8px) rotate(6deg) scale(1.04)}}
+
+@media(max-width:760px){
+  .magic-hero{grid-template-columns:1fr;min-height:0;padding:22px}.tala-stage{min-height:270px}.tala-glow{width:205px;height:205px}.tala-face{font-size:8rem}
+  .adventure-and-reward{grid-template-columns:1fr}.adventure-card{overflow-x:auto}.adventure-path{min-width:520px}.collection-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:430px){
+  .magic-hero{padding:18px}.magic-copy h2{font-size:2rem}.home-quick-row{display:grid;grid-template-columns:1fr 1fr}.collection-btn{padding:10px 8px}.tala-stage{min-height:245px}.tala-glow{width:185px;height:185px}.tala-face{font-size:7.1rem}.tala-accessory{right:23px;top:12px;font-size:2.7rem}.tala-speech{font-size:.86rem}.collection-grid{grid-template-columns:1fr 1fr}.collectible{min-height:118px}.collectible .collect-icon{font-size:2.6rem}
+}
+@media(prefers-reduced-motion:reduce){.tala-glow,.tala-spark,.adventure-stop.active .adventure-orb,.reward-icon{animation:none!important}.flying-star,.sparkle-pop{display:none!important}}
+
+
+/* =========================================================
+   TALA ADAPTIVE LEARNING — inspired by best-practice adaptive loops
+   ========================================================= */
+.adaptive-card{margin-top:16px;padding:18px 20px;display:grid;grid-template-columns:1.3fr .8fr;gap:16px;align-items:center;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(249,238,255,.95));border:2px solid rgba(184,122,255,.16)}
+.adaptive-kicker{font-size:.75rem;font-weight:1000;letter-spacing:.06em;color:#8b5ca8;text-transform:uppercase}.adaptive-card h3{margin:5px 0 6px;font-size:1.2rem}.adaptive-card p{margin:0;color:#6f6577;line-height:1.45}.adaptive-actions{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}.adaptive-mini{border:0;border-radius:17px;padding:11px 14px;font-weight:950;background:#f5e9ff;color:#6a3f86;min-height:46px}.adaptive-mini.primary-smart{background:linear-gradient(135deg,#db9dff,#ff9fca);color:#3e214d;box-shadow:0 8px 18px rgba(177,93,221,.16)}
+.adaptive-status{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:7px 10px;border-radius:999px;background:#fff;color:#6a5475;font-size:.78rem;font-weight:900;border:1px solid #ecdff3}.adaptive-status.ready{background:#e8faee;color:#267548;border-color:#cdeed9}
+.tala-help-card{width:min(650px,100%);margin:12px auto 0;padding:14px 16px;border-radius:20px;background:linear-gradient(145deg,#fff5fc,#f3eaff);border:2px solid #ead6f7;text-align:left;color:#55445f;line-height:1.45}.tala-help-card strong{display:block;margin-bottom:5px;color:#6b3e84}.help-btn{border:0;background:#f5e9ff;color:#6a3f86;border-radius:16px;padding:10px 14px;font-weight:950;margin-top:8px;min-height:44px}.help-btn.used{background:#eee8f2;color:#786d7d}
+.adaptive-progress{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.adaptive-chip{padding:10px;border-radius:16px;background:#faf7fc;text-align:center}.adaptive-chip b{display:block;font-size:1.05rem}.adaptive-chip small{color:#786e7e;font-size:.73rem}.adaptive-insight{margin-top:12px;padding:12px 14px;border-radius:17px;background:#fff8df;color:#6a5820;line-height:1.4}.adaptive-insight b{color:#4f4115}
+.placement-banner{width:min(680px,100%);margin:0 auto 14px;padding:12px 14px;border-radius:18px;background:linear-gradient(145deg,#f4e9ff,#ffe9f4);font-weight:900;color:#684479;border:2px solid #ead7f5}
+@media(max-width:680px){.adaptive-card{grid-template-columns:1fr}.adaptive-actions{justify-content:flex-start}.adaptive-progress{grid-template-columns:1fr}.adaptive-mini{flex:1 1 150px}}
+
 </style>
 </head>
 <body>
@@ -508,7 +641,7 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
     <header class="topbar">
       <div>
         <div class="eyebrow">🌈 KINDERGARTEN LEARNING BUDDY</div>
-        <h1>Little Learner PH</h1>
+        <h1>Little Learner PH <small style="font-size:.44em;color:#8a6b97;vertical-align:middle">2.1</small></h1>
       </div>
       <div class="top-actions">
         <span id="cloudStatus" class="cloud-status local" title="Progress storage status">☁️ Local</span>
@@ -518,25 +651,80 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
 
     <main id="app">
       <section id="homeView" class="view active">
-        <div class="hero card">
-          <div class="hero-copy">
-            <span class="pill">⭐ Learn • Play • Grow</span>
-            <h2 id="heroGreeting">Hello, Super Learner! 👋</h2>
-            <p>Choose a fun adventure for today.</p>
-            <button id="startDailyBtn" class="primary big">Start Today’s Adventure 🚀</button>
+        <div class="magic-hero card">
+          <div class="magic-copy">
+            <span class="pill">💜 Learn • Play • Shine ✨</span>
+            <h2 id="heroGreeting">Hi, Super Learner! ✨</h2>
+            <p>Come with Tala on a magical learning adventure filled with stories, games, stars, and surprises.</p>
+            <button id="startDailyBtn" class="primary big magic-start">🌈 Start Today’s Adventure</button>
+            <div class="home-quick-row">
+              <button id="stickerBookBtn" class="collection-btn" type="button">📕 My Sticker Book</button>
+              <button id="closetBtn" class="collection-btn" type="button">🎀 Tala’s Closet</button>
+            </div>
           </div>
-          <div class="mascot" aria-hidden="true">🦄</div>
+
+          <div class="tala-stage" aria-label="Tala the unicorn learning buddy">
+            <div class="tala-glow" id="homeTala">
+              <span class="tala-spark s1">✨</span>
+              <span class="tala-spark s2">⭐</span>
+              <span class="tala-spark s3">💖</span>
+              <span id="talaAccessory" class="tala-accessory">🎀</span>
+              <div class="tala-face" aria-hidden="true">🦄</div>
+            </div>
+            <div class="tala-speech" id="talaSpeech">Ready to learn and play? 🌟</div>
+          </div>
         </div>
 
-        <div class="progress-card card">
+        <div class="adventure-and-reward">
+          <div class="adventure-card card">
+            <div class="adventure-head">
+              <div>
+                <h3>🌈 Today’s Rainbow Adventure</h3>
+                <small>A little reading, math, story, thinking, and review—all in one playful journey.</small>
+              </div>
+              <span class="adventure-badge" id="adventureBadge">0 / 6</span>
+            </div>
+            <div class="adventure-path" id="adventurePath" aria-label="Today's learning adventure progress">
+              <div class="adventure-stop" data-step="0"><div class="adventure-orb">🔤</div><small>English</small></div>
+              <div class="adventure-stop" data-step="1"><div class="adventure-orb">🇵🇭</div><small>Filipino</small></div>
+              <div class="adventure-stop" data-step="2"><div class="adventure-orb">🔢</div><small>Math</small></div>
+              <div class="adventure-stop" data-step="3"><div class="adventure-orb">📖</div><small>Story</small></div>
+              <div class="adventure-stop" data-step="4"><div class="adventure-orb">🧩</div><small>Thinking</small></div>
+              <div class="adventure-stop" data-step="5"><div class="adventure-orb">🏆</div><small>Review</small></div>
+            </div>
+          </div>
+
+          <div class="star-jar-card card">
+            <h3>⭐ Magical Star Jar</h3>
+            <p>Fill the jar to unlock a surprise!</p>
+            <div class="star-jar" aria-hidden="true">
+              <div id="jarFill" class="jar-fill"></div>
+              <div id="jarStars" class="jar-stars"></div>
+            </div>
+            <div id="starJarCount" class="jar-count">0 / 10 stars</div>
+            <span id="rewardHint" class="reward-hint">10 more to a surprise 🎁</span>
+            <div id="starText" style="margin-top:9px;font-size:.82rem;color:#887791">0 stars earned today</div>
+            <div id="starDisplay" class="stars" style="font-size:1.05rem;margin-top:4px">☆ ☆ ☆ ☆ ☆</div>
+          </div>
+        </div>
+
+        <div class="adaptive-card card" id="adaptiveHomeCard">
           <div>
-            <strong>Today’s Stars</strong>
-            <div id="starText">0 stars earned</div>
+            <div class="adaptive-kicker">🧠 TALA LEARNS WITH YOU</div>
+            <h3 id="adaptiveHomeTitle">A learning path that grows with every answer</h3>
+            <p id="adaptiveHomeText">Tala remembers what feels easy, what needs more practice, and what you are ready to try next.</p>
+            <span id="adaptiveHomeStatus" class="adaptive-status">✨ Getting to know your learning</span>
           </div>
-          <div class="stars" id="starDisplay">☆ ☆ ☆ ☆ ☆</div>
+          <div class="adaptive-actions">
+            <button id="placementBtn" type="button" class="adaptive-mini">🌟 Tala’s Quick Check</button>
+            <button id="smartPracticeBtn" type="button" class="adaptive-mini primary-smart">🎯 Smart Practice</button>
+          </div>
         </div>
 
-        <h3 class="section-title">Pick a Learning Game</h3>
+        <div class="magic-section-title">
+          <h3>🎮 More Learning Games</h3>
+          <span>Pick anything you want to practice</span>
+        </div>
         <div class="lesson-grid">
           <button class="lesson-card english" data-mode="english">
             <span class="emoji">🔤</span><strong>English Reading</strong><small>Letters, sounds & words</small>
@@ -545,18 +733,45 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
             <span class="emoji">🇵🇭</span><strong>Filipino Reading</strong><small>Patinig, pantig at pagbasa</small>
           </button>
           <button class="lesson-card math" data-mode="math">
-            <span class="emoji">🔢</span><strong>Math Adventure</strong><small>Add, subtract, share & compare</small>
+            <span class="emoji">🔢</span><strong>Math Adventure</strong><small>Count, add, subtract & compare</small>
           </button>
           <button class="lesson-card story" data-mode="story">
-            <span class="emoji">📖</span><strong>Story Time</strong><small>Read and understand</small>
+            <span class="emoji">📖</span><strong>Story Time</strong><small>Listen, read & understand</small>
           </button>
           <button class="lesson-card thinking" data-mode="thinking">
-            <span class="emoji">🧩</span><strong>Thinking Game</strong><small>Patterns & logic</small>
+            <span class="emoji">🧩</span><strong>Thinking Game</strong><small>Patterns, logic & discovery</small>
           </button>
           <button class="lesson-card review" data-mode="review">
             <span class="emoji">🏆</span><strong>Quick Review</strong><small>Practice what we learned</small>
           </button>
         </div>
+      </section>
+
+      <section id="stickerView" class="view collection-view">
+        <div class="lesson-top">
+          <button id="stickerBackBtn" class="secondary">← Home</button>
+          <h2>📕 My Sticker Book</h2>
+        </div>
+        <div class="collection-hero card">
+          <h3 style="margin:0">✨ Little treasures from learning</h3>
+          <p>Earn stars and Tala will discover new stickers with you.</p>
+        </div>
+        <div id="stickerGrid" class="collection-grid"></div>
+      </section>
+
+      <section id="closetView" class="view collection-view">
+        <div class="lesson-top">
+          <button id="closetBackBtn" class="secondary">← Home</button>
+          <h2>🎀 Tala’s Closet</h2>
+        </div>
+        <div class="collection-hero card closet-tala">
+          <div class="closet-tala-figure" aria-hidden="true">🦄<span id="closetTalaAccessory" class="closet-tala-accessory">🎀</span></div>
+          <div>
+            <h3 style="margin:0">Dress up Tala!</h3>
+            <p>Unlock cute accessories by filling your Magical Star Jar.</p>
+          </div>
+        </div>
+        <div id="accessoryGrid" class="collection-grid"></div>
       </section>
 
       <section id="lessonView" class="view">
@@ -598,6 +813,18 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
 
 
         <div class="card parent-panel">
+          <h3>🧠 Tala’s Adaptive Learning Map</h3>
+          <p class="muted">Tala uses recent answers to choose easier support, right-level practice, or a gentle challenge. Old skills are mixed back in so learning stays strong.</p>
+          <div class="adaptive-progress">
+            <div class="adaptive-chip"><b id="adaptiveMastered">0</b><small>Strong skills</small></div>
+            <div class="adaptive-chip"><b id="adaptivePracticing">0</b><small>Practicing</small></div>
+            <div class="adaptive-chip"><b id="adaptiveNeedsHelp">0</b><small>Needs support</small></div>
+          </div>
+          <div id="adaptiveInsight" class="adaptive-insight"><b>Next:</b> Tala is still learning the child’s strengths.</div>
+          <button id="parentPlacementBtn" type="button" class="secondary" style="margin-top:12px">🌟 Run Tala’s Quick Learning Check</button>
+        </div>
+
+        <div class="card parent-panel">
           <h3>☁️ Cloud Backup</h3>
           <p class="muted">Lessons are always saved on this iPad first. Firebase adds a cloud copy when internet is available.</p>
           <div class="cloud-box">
@@ -612,12 +839,12 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
         <div class="card parent-panel">
           <h3>⚙️ Learning Settings</h3>
           <label><input type="checkbox" id="soundEffectsToggle" checked> Play animal & object sounds</label>
-          <label><input type="checkbox" id="backgroundMusicToggle" checked> Play gentle background music</label>
+          <label><input type="checkbox" id="backgroundMusicToggle" checked> Play cheerful magical background music</label>
           <label>Background music volume
             <input id="backgroundMusicVolume" type="range" min="0.03" max="0.28" step="0.01" value="0.14">
             <span id="backgroundMusicVolumeValue">14%</span>
           </label>
-          <label><input type="checkbox" id="celebrateToggle" checked> Celebration animation</label>
+          <label><input type="checkbox" id="celebrateToggle" checked> Stars, claps & celebration effects</label>
           <button id="resetProgress" class="danger">Reset Progress</button>
         </div>
 
@@ -635,6 +862,14 @@ h1{margin:4px 0 0;font-size:clamp(1.5rem,4vw,2.3rem)}
   </div>
 
   <div id="celebration" class="celebration" aria-hidden="true">🎉 ⭐ 🌈 🥳 ⭐ 🎉</div>
+  <div id="rewardReveal" class="reward-reveal" aria-hidden="true">
+    <div class="reward-box" role="dialog" aria-modal="true" aria-labelledby="rewardRevealTitle">
+      <div id="rewardRevealIcon" class="reward-icon">🎁</div>
+      <h2 id="rewardRevealTitle">Surprise Unlocked!</h2>
+      <p id="rewardRevealText">Tala found something magical for your collection.</p>
+      <button id="rewardRevealClose" class="primary big" type="button">Yay! ✨</button>
+    </div>
+  </div>
 <script type="module">
 /* =========================================================
    LITTLE LEARNER PH — MAIN APP FILE
@@ -682,6 +917,16 @@ const APP_CONFIG = {
     backgroundMusic: true,
     backgroundMusicVolume: 0.14,
     celebrate: true,
+    rewardMilestone: null,
+    todayAdventureSteps: 0,
+    unlockedStickers: ["rainbow"],
+    unlockedAccessories: ["pinkBow"],
+    equippedAccessory: "pinkBow",
+    adaptiveEnabled: true,
+    placementComplete: false,
+    placementRuns: 0,
+    questionMastery: {},
+    adaptiveHistory: [],
     updatedAt: 0,
     skills: {
       english: 0,
@@ -705,6 +950,28 @@ state.skills = {
   ...defaults.skills,
   ...(state.skills || {})
 };
+
+
+function ensureRewardState(){
+  if(!Array.isArray(state.unlockedStickers)) state.unlockedStickers = [...defaults.unlockedStickers];
+  if(!Array.isArray(state.unlockedAccessories)) state.unlockedAccessories = [...defaults.unlockedAccessories];
+  state.unlockedStickers = [...new Set(state.unlockedStickers)];
+  state.unlockedAccessories = [...new Set(state.unlockedAccessories)];
+  state.todayAdventureSteps = Math.max(0,Math.min(6,Number(state.todayAdventureSteps || 0)));
+  if(!state.equippedAccessory) state.equippedAccessory = "pinkBow";
+  if(typeof state.adaptiveEnabled !== "boolean") state.adaptiveEnabled = true;
+  if(typeof state.placementComplete !== "boolean") state.placementComplete = false;
+  state.placementRuns = Math.max(0,Number(state.placementRuns || 0));
+  if(!state.questionMastery || typeof state.questionMastery !== "object" || Array.isArray(state.questionMastery)) state.questionMastery = {};
+  if(!Array.isArray(state.adaptiveHistory)) state.adaptiveHistory = [];
+  if(state.rewardMilestone === null || state.rewardMilestone === undefined || !Number.isFinite(Number(state.rewardMilestone))){
+    // Existing learners keep their previous stars without retroactive reward popups.
+    state.rewardMilestone = Math.floor(Number(state.totalStars || 0) / 10);
+  }else{
+    state.rewardMilestone = Math.max(0,Number(state.rewardMilestone || 0));
+  }
+}
+ensureRewardState();
 
 /* =========================================================
    2) FIREBASE CLOUD SYNC
@@ -1054,14 +1321,43 @@ function updateStreak(){
   state.streak = state.lastDay === yesterday ? state.streak + 1 : 1;
   state.lastDay = t;
   state.todayStars = 0;
+  state.todayAdventureSteps = 0;
 }
 
 function updateHome(){
+  ensureRewardState();
   updateStreak();
-  $("#heroGreeting").textContent = `Hello, ${state.name || "Super Learner"}! 👋`;
-  $("#starText").textContent = `${state.todayStars} stars earned`;
+
+  const learner = state.name || "Super Learner";
+  $("#heroGreeting").textContent = `Hi, ${learner}! ✨`;
+  $("#talaSpeech").textContent = state.todayAdventureSteps >= 6
+    ? "You finished today’s rainbow adventure! I’m so proud of you! 🌈"
+    : state.todayAdventureSteps > 0
+      ? "Our rainbow adventure is waiting. Let’s keep going! ⭐"
+      : "Ready to learn, play, and collect stars? 💖";
+
+  $("#starText").textContent = `${state.todayStars} star${state.todayStars===1?"":"s"} earned today`;
   const filled = Math.min(5, state.todayStars);
   $("#starDisplay").textContent = "★ ".repeat(filled) + "☆ ".repeat(5-filled);
+
+  const jarCount = Number(state.totalStars || 0) % 10;
+  $("#starJarCount").textContent = `${jarCount} / 10 stars`;
+  $("#jarFill").style.height = `${Math.max(0,jarCount*10)}%`;
+  $("#jarStars").textContent = "⭐".repeat(jarCount);
+  const untilReward = jarCount === 0 ? 10 : 10 - jarCount;
+  $("#rewardHint").textContent = `${untilReward} more to a surprise 🎁`;
+
+  const steps = Math.max(0,Math.min(6,Number(state.todayAdventureSteps || 0)));
+  $("#adventureBadge").textContent = `${steps} / 6`;
+  $$(".adventure-stop").forEach((el,index)=>{
+    el.classList.toggle("complete",index < steps);
+    el.classList.toggle("active",index === steps && steps < 6);
+  });
+
+  const accessory = ACCESSORY_CATALOG.find(x=>x.id===state.equippedAccessory) || ACCESSORY_CATALOG[0];
+  $("#talaAccessory").textContent = accessory.icon;
+  $("#closetTalaAccessory").textContent = accessory.icon;
+
   $("#totalStars").textContent = state.totalStars;
   $("#sessionsDone").textContent = state.sessions;
   $("#streak").textContent = state.streak;
@@ -1077,8 +1373,391 @@ function updateHome(){
       <div style="display:flex;justify-content:space-between"><b>${labelSkill(k)}</b><span>${Math.min(v,100)}%</span></div>
       <div class="bar"><div class="fill" style="width:${Math.min(v,100)}%"></div></div>
     </div>`).join("");
+
+  renderRewardCollections();
+  updateAdaptiveUI();
 }
 function labelSkill(k){ return ({english:"English Reading",filipino:"Filipino Reading",math:"Math",story:"Comprehension",thinking:"Thinking Skills",review:"Review"})[k]||k; }
+
+
+/* =========================================================
+   TALA ADAPTIVE LEARNING ENGINE
+   A child-friendly loop: observe → help → practice → review → challenge.
+   ========================================================= */
+let placementActive = false;
+let currentQuestionAttempts = 0;
+let currentHelpUsed = false;
+
+function questionId(mode,q){
+  const bank = lessonBanks[mode] || [];
+  let index = bank.indexOf(q);
+  if(index < 0){
+    index = bank.findIndex(item=>String(item?.title||"")===String(q?.title||"") && String(item?.prompt||"")===String(q?.prompt||""));
+  }
+  if(index >= 0) return `${mode}:${index}`;
+  const title = String(q?.title || "question").toLowerCase().replace(/[^a-z0-9ñ]+/g,"-").replace(/^-|-$/g,"").slice(0,45);
+  return `${mode}:${title || "custom"}`;
+}
+
+function questionDifficulty(mode,q){
+  const title=String(q?.title||"").toLowerCase();
+  const prompt=String(q?.prompt||"").toLowerCase();
+  if(mode==="filipino"){
+    if(title.includes("patinig") || title.startsWith("pantig ")) return 1;
+    if(title.includes("+") || title.includes("salitang")) return 2;
+    if(title.includes("pangungusap") || title.includes("pagbasa")) return 3;
+  }
+  if(mode==="math"){
+    if(title.includes("count") || prompt.includes("how many")) return 1;
+    if(prompt.includes("+") || title.includes("addition") || title.includes("shape")) return 2;
+    if(prompt.includes("-") || prompt.includes("÷") || prompt.includes("greater") || prompt.includes("less") || prompt.includes("sign")) return 3;
+  }
+  if(mode==="english"){
+    if(title.includes("letter")) return 1;
+    if(title.includes("sight") || title.includes("c-a-t")) return 2;
+    if(title.includes("sentence")) return 3;
+  }
+  if(mode==="story") return 2;
+  if(mode==="thinking") return title.includes("everyday") ? 1 : 2;
+  return 2;
+}
+
+function getQuestionRecord(mode,q){
+  ensureRewardState();
+  const id=questionId(mode,q);
+  if(!state.questionMastery[id]){
+    state.questionMastery[id]={attempts:0,correct:0,misses:0,streak:0,mastery:0,lastSeen:0,difficulty:questionDifficulty(mode,q)};
+  }
+  return state.questionMastery[id];
+}
+
+function recordQuestionResult(mode,q,isCorrect,{helpUsed=false}={}){
+  const r=getQuestionRecord(mode,q);
+  r.attempts++;
+  r.lastSeen=Date.now();
+  r.difficulty=questionDifficulty(mode,q);
+  if(isCorrect){
+    r.correct++;
+    r.streak=Math.min(6,(r.streak||0)+1);
+    const gain = helpUsed ? 8 : Math.max(9,16 - (r.mastery||0)*0.04);
+    r.mastery=Math.min(100,Math.round((r.mastery||0)+gain));
+  }else{
+    r.misses++;
+    r.streak=0;
+    r.mastery=Math.max(0,Math.round((r.mastery||0)-3));
+  }
+  state.adaptiveHistory.push({id:questionId(mode,q),mode,correct:Boolean(isCorrect),helpUsed:Boolean(helpUsed),at:Date.now()});
+  if(state.adaptiveHistory.length>120) state.adaptiveHistory=state.adaptiveHistory.slice(-120);
+  recalculateModeMastery(mode);
+  return r;
+}
+
+function recalculateModeMastery(mode){
+  const bank=lessonBanks[mode]||[];
+  const records=bank.map(q=>state.questionMastery[questionId(mode,q)]).filter(Boolean);
+  if(!records.length) return;
+  const avg=records.reduce((sum,r)=>sum+Number(r.mastery||0),0)/records.length;
+  state.skills[mode]=Math.max(0,Math.min(100,Math.round(avg)));
+}
+
+function desiredDifficulty(mode){
+  const skill=Number(state.skills[mode]||0);
+  if(skill<28) return 1;
+  if(skill<68) return 2;
+  return 3;
+}
+
+function adaptiveQuestionScore(mode,q,purpose="practice"){
+  const r=getQuestionRecord(mode,q);
+  const desired=desiredDifficulty(mode);
+  const difficulty=questionDifficulty(mode,q);
+  const unseen=r.attempts===0 ? 32 : 0;
+  const weak=(100-Number(r.mastery||0))*1.45;
+  const old=r.lastSeen ? Math.min(35,(Date.now()-r.lastSeen)/86400000*8) : 18;
+  const levelPenalty=Math.abs(difficulty-desired)*24;
+  const repeatedPenalty=r.lastSeen && Date.now()-r.lastSeen < 90000 ? 45 : 0;
+  const reviewBoost=purpose==="review" && r.attempts>0 ? 28 : 0;
+  const challengeBoost=purpose==="challenge" && difficulty===Math.min(3,desired+1) ? 22 : 0;
+  return weak+unseen+old+reviewBoost+challengeBoost-levelPenalty-repeatedPenalty+Math.random()*10;
+}
+
+function chooseAdaptiveQuestion(mode,purpose="practice",excludeIds=new Set()){
+  const bank=lessonBanks[mode]||[];
+  const candidates=bank.filter(q=>!excludeIds.has(questionId(mode,q)));
+  const pool=candidates.length?candidates:bank;
+  if(!pool.length) return null;
+  return [...pool].sort((a,b)=>adaptiveQuestionScore(mode,b,purpose)-adaptiveQuestionScore(mode,a,purpose))[0];
+}
+
+function buildAdaptiveSession(mode,count=6){
+  const picked=[];
+  const ids=new Set();
+  for(let i=0;i<count;i++){
+    const purpose=i===count-1?"review":(i===Math.floor(count/2)?"challenge":"practice");
+    const q=chooseAdaptiveQuestion(mode,purpose,ids);
+    if(!q) break;
+    ids.add(questionId(mode,q));
+    picked.push(q);
+  }
+  return picked;
+}
+
+function weakestMode(){
+  const modes=["english","filipino","math","story","thinking"];
+  return [...modes].sort((a,b)=>Number(state.skills[a]||0)-Number(state.skills[b]||0))[0] || "english";
+}
+
+function adaptiveSummary(){
+  const records=Object.values(state.questionMastery||{}).filter(r=>Number(r.attempts||0)>0);
+  const mastered=records.filter(r=>Number(r.mastery||0)>=60).length;
+  const practicing=records.filter(r=>Number(r.mastery||0)>=15 && Number(r.mastery||0)<60).length;
+  const needsHelp=records.filter(r=>Number(r.mastery||0)<15 && Number(r.misses||0)>0).length;
+  return {records,mastered,practicing,needsHelp};
+}
+
+function updateAdaptiveUI(){
+  const summary=adaptiveSummary();
+  const weak=weakestMode();
+  const weakLabel=labelSkill(weak);
+  const status=$("#adaptiveHomeStatus");
+  if(status){
+    status.classList.toggle("ready",state.placementComplete || summary.records.length>=5);
+    status.textContent=state.placementComplete
+      ? `✨ Personalized path ready • ${summary.records.length} skills observed`
+      : summary.records.length
+        ? `🌱 Tala is learning from ${summary.records.length} practiced skills`
+        : "✨ Getting to know your learning";
+  }
+  const title=$("#adaptiveHomeTitle");
+  const body=$("#adaptiveHomeText");
+  if(title && body){
+    if(summary.records.length){
+      title.textContent=`Tala recommends a little more ${weakLabel}`;
+      body.textContent=`Your next adventure will quietly mix practice, review, and a gentle challenge based on recent answers.`;
+    }else{
+      title.textContent="A learning path that grows with every answer";
+      body.textContent="Tala remembers what feels easy, what needs more practice, and what you are ready to try next.";
+    }
+  }
+  const placementBtn=$("#placementBtn");
+  if(placementBtn) placementBtn.textContent=state.placementComplete?"🌟 Redo Quick Check":"🌟 Tala’s Quick Check";
+  if($("#adaptiveMastered")) $("#adaptiveMastered").textContent=String(summary.mastered);
+  if($("#adaptivePracticing")) $("#adaptivePracticing").textContent=String(summary.practicing);
+  if($("#adaptiveNeedsHelp")) $("#adaptiveNeedsHelp").textContent=String(summary.needsHelp);
+  if($("#adaptiveInsight")){
+    $("#adaptiveInsight").innerHTML=summary.records.length
+      ? `<b>Recommended next:</b> ${weakLabel}. Tala will start at the child’s current level, revisit a weak item, then add one gentle challenge.`
+      : `<b>Recommended next:</b> Run Tala’s Quick Learning Check or simply start an adventure. Tala learns automatically from play.`;
+  }
+}
+
+function startSmartPractice(){
+  placementActive=false;
+  dailyAdventureActive=false;
+  getAudioContext();startBackgroundMusic();
+  const mode=weakestMode();
+  currentMode=mode;lessonScore=0;qIndex=0;
+  questions=buildAdaptiveSession(mode,5);
+  showView("#lessonView");
+  renderQuestion();
+}
+
+function startPlacementCheck(){
+  placementActive=true;
+  dailyAdventureActive=false;
+  getAudioContext();startBackgroundMusic();
+  lessonScore=0;qIndex=0;
+  const modes=["english","filipino","math","story","thinking"];
+  questions=modes.map(mode=>{
+    const bank=lessonBanks[mode]||[];
+    const desiredIndex=Math.max(0,Math.min(bank.length-1,Math.floor(bank.length*.35)));
+    const source=bank[desiredIndex]||bank[0];
+    return source?{...source,__mode:mode,__placement:true}:null;
+  }).filter(Boolean);
+  currentMode=questions[0]?.__mode||"english";
+  showView("#lessonView");
+  renderQuestion();
+}
+
+function talaHelpHTML(q,afterMistake=false){
+  const prefix=currentMode==="filipino"?"Tala tumutulong":"Tala helps";
+  return `<div class="tala-help-card"><strong>💡 ${prefix}</strong>${escapeSceneText(String(q?.say||"Let’s look carefully and try one small step at a time."))}${afterMistake?"<br><b>Try once more—you can do it!</b>":""}</div>`;
+}
+
+
+const STICKER_CATALOG = [
+  {id:"rainbow",icon:"🌈",name:"Rainbow",note:"Starter sticker"},
+  {id:"puppy",icon:"🐶",name:"Happy Puppy",note:"Learning friend"},
+  {id:"unicorn",icon:"🦄",name:"Magic Unicorn",note:"Tala’s friend"},
+  {id:"flower",icon:"🌸",name:"Pink Flower",note:"Pretty blossom"},
+  {id:"star",icon:"🌟",name:"Super Star",note:"You shine!"},
+  {id:"butterfly",icon:"🦋",name:"Butterfly",note:"Colorful wings"},
+  {id:"mango",icon:"🥭",name:"Mango",note:"Proudly Filipino"},
+  {id:"carabao",icon:"🐃",name:"Carabao",note:"Philippine farm friend"},
+  {id:"eagle",icon:"🦅",name:"Philippine Eagle",note:"Brave and strong"},
+  {id:"rocket",icon:"🚀",name:"Rocket",note:"Reach for the stars"},
+  {id:"heart",icon:"💖",name:"Sparkle Heart",note:"Kind and caring"},
+  {id:"crownSticker",icon:"👑",name:"Little Champion",note:"Adventure reward"}
+];
+
+const ACCESSORY_CATALOG = [
+  {id:"pinkBow",icon:"🎀",name:"Pink Bow",note:"Tala’s starter look"},
+  {id:"crown",icon:"👑",name:"Purple Crown",note:"Royal learner"},
+  {id:"flower",icon:"🌸",name:"Flower Clip",note:"Blooming bright"},
+  {id:"star",icon:"⭐",name:"Star Clip",note:"A little sparkle"},
+  {id:"butterfly",icon:"🦋",name:"Butterfly Clip",note:"Magical wings"},
+  {id:"heart",icon:"💖",name:"Heart Charm",note:"Kindness power"},
+  {id:"rainbow",icon:"🌈",name:"Rainbow Charm",note:"Colorful adventure"},
+  {id:"magic",icon:"🪄",name:"Magic Wand",note:"Tala’s magic"}
+];
+
+const REWARD_CYCLE = [
+  {type:"sticker",id:"puppy"},
+  {type:"accessory",id:"crown"},
+  {type:"sticker",id:"unicorn"},
+  {type:"accessory",id:"flower"},
+  {type:"sticker",id:"star"},
+  {type:"accessory",id:"star"},
+  {type:"sticker",id:"butterfly"},
+  {type:"accessory",id:"butterfly"},
+  {type:"sticker",id:"mango"},
+  {type:"accessory",id:"heart"},
+  {type:"sticker",id:"carabao"},
+  {type:"accessory",id:"rainbow"},
+  {type:"sticker",id:"eagle"},
+  {type:"accessory",id:"magic"},
+  {type:"sticker",id:"rocket"},
+  {type:"sticker",id:"heart"},
+  {type:"sticker",id:"crownSticker"}
+];
+
+function renderRewardCollections(){
+  const stickerGrid = $("#stickerGrid");
+  if(stickerGrid){
+    stickerGrid.innerHTML = STICKER_CATALOG.map(item=>{
+      const unlocked = state.unlockedStickers.includes(item.id);
+      return `<div class="collectible ${unlocked?"":"locked"}">
+        <span class="collect-icon">${unlocked?item.icon:"🔒"}</span>
+        <strong>${unlocked?item.name:"Mystery Sticker"}</strong>
+        <small>${unlocked?item.note:"Keep earning stars!"}</small>
+      </div>`;
+    }).join("");
+  }
+
+  const accessoryGrid = $("#accessoryGrid");
+  if(accessoryGrid){
+    accessoryGrid.innerHTML = ACCESSORY_CATALOG.map(item=>{
+      const unlocked = state.unlockedAccessories.includes(item.id);
+      const selected = state.equippedAccessory === item.id;
+      return `<button type="button" class="collectible ${unlocked?"":"locked"} ${selected?"selected":""}" data-accessory="${item.id}" ${unlocked?"":"disabled"}>
+        <span class="collect-icon">${unlocked?item.icon:"🔒"}</span>
+        <strong>${unlocked?item.name:"Mystery Accessory"}</strong>
+        <small>${selected?"✨ Wearing now":unlocked?"Tap to wear":"Keep earning stars!"}</small>
+      </button>`;
+    }).join("");
+    $$("[data-accessory]").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const id = btn.dataset.accessory;
+        if(!state.unlockedAccessories.includes(id)) return;
+        state.equippedAccessory = id;
+        save();
+        makeTalaHappy();
+      });
+    });
+  }
+}
+
+function rewardItemDetails(reward){
+  const catalog = reward.type === "accessory" ? ACCESSORY_CATALOG : STICKER_CATALOG;
+  return catalog.find(item=>item.id===reward.id) || null;
+}
+
+function unlockMilestoneReward(){
+  ensureRewardState();
+  const milestone = Math.floor(Number(state.totalStars || 0) / 10);
+  if(milestone <= Number(state.rewardMilestone || 0)) return null;
+  state.rewardMilestone = milestone;
+
+  for(let offset=0; offset<REWARD_CYCLE.length; offset++){
+    const reward = REWARD_CYCLE[(milestone - 1 + offset) % REWARD_CYCLE.length];
+    if(reward.type === "sticker" && !state.unlockedStickers.includes(reward.id)){
+      state.unlockedStickers.push(reward.id);
+      return reward;
+    }
+    if(reward.type === "accessory" && !state.unlockedAccessories.includes(reward.id)){
+      state.unlockedAccessories.push(reward.id);
+      return reward;
+    }
+  }
+  return null;
+}
+
+function showRewardReveal(reward){
+  if(!reward) return;
+  const details = rewardItemDetails(reward);
+  if(!details) return;
+  $("#rewardRevealIcon").textContent = details.icon;
+  $("#rewardRevealTitle").textContent = reward.type === "accessory" ? "New Tala Accessory!" : "New Sticker Unlocked!";
+  $("#rewardRevealText").textContent = `${details.name} is now yours. Great learning!`;
+  $("#rewardReveal").classList.add("show");
+  $("#rewardReveal").setAttribute("aria-hidden","false");
+  soundComplete();
+}
+
+function hideRewardReveal(){
+  $("#rewardReveal").classList.remove("show");
+  $("#rewardReveal").setAttribute("aria-hidden","true");
+}
+
+function makeTalaHappy(){
+  const tala = $("#homeTala");
+  if(!tala) return;
+  tala.classList.remove("tala-happy");
+  void tala.offsetWidth;
+  tala.classList.add("tala-happy");
+  setTimeout(()=>tala.classList.remove("tala-happy"),800);
+}
+
+function animateEarnedStar(origin){
+  if(!origin || window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
+  const target = $("#lessonStars");
+  if(!target) return;
+  const a = origin.getBoundingClientRect();
+  const b = target.getBoundingClientRect();
+  if(!a.width || !b.width) return;
+
+  const star = document.createElement("div");
+  star.className = "flying-star";
+  star.textContent = "⭐";
+  star.style.left = `${a.left + a.width/2 - 16}px`;
+  star.style.top = `${a.top + a.height/2 - 16}px`;
+  document.body.appendChild(star);
+
+  const dx = b.left + b.width/2 - (a.left + a.width/2);
+  const dy = b.top + b.height/2 - (a.top + a.height/2);
+  if(star.animate){
+    const animation = star.animate([
+      {transform:"translate(0,0) scale(.5) rotate(0deg)",opacity:0},
+      {transform:"translate(0,-18px) scale(1.25) rotate(20deg)",opacity:1,offset:.25},
+      {transform:`translate(${dx}px,${dy}px) scale(.55) rotate(280deg)`,opacity:.15}
+    ],{duration:760,easing:"cubic-bezier(.2,.8,.2,1)"});
+    animation.onfinish=()=>star.remove();
+  }else{
+    setTimeout(()=>star.remove(),760);
+  }
+
+  [0,1,2,3,4,5].forEach(i=>{
+    const sparkle=document.createElement("div");
+    sparkle.className="sparkle-pop";
+    sparkle.textContent=i%2?"✨":"💖";
+    sparkle.style.left=`${a.left+a.width/2}px`;
+    sparkle.style.top=`${a.top+a.height/2}px`;
+    sparkle.style.setProperty("--dx",`${Math.cos(i*Math.PI/3)*55}px`);
+    sparkle.style.setProperty("--dy",`${Math.sin(i*Math.PI/3)*55}px`);
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),820);
+  });
+}
 
 /* =========================================================
    CHILD-FRIENDLY SOUND EFFECT ENGINE
@@ -1447,8 +2126,13 @@ function soundSuccess(){
   if(!state.soundEffects) return;
   const ctx=getAudioContext();
   if(!ctx) return;
+  // Bright star melody.
   [523,659,784].forEach((freq,i)=>{
-    tone(ctx,{start:i*.09,duration:.19,from:freq,to:freq,type:"sine",gain:.07});
+    tone(ctx,{start:i*.09,duration:.19,from:freq,to:freq,type:"sine",gain:.065});
+  });
+  // Three short filtered noise bursts create a gentle clap-like cheer.
+  [0.03,.15,.28].forEach((start,i)=>{
+    noiseBurst(ctx,{start,duration:.07,gain:.055-i*.006,lowpass:2500,highpass:650});
   });
 }
 
@@ -1547,23 +2231,19 @@ function celebrate(){
   setTimeout(()=>el.classList.remove("show"),800);
 }
 
+let dailyAdventureActive = false;
+
 function startLesson(mode){
+  placementActive = false;
+  dailyAdventureActive = false;
   // Lesson selection is a user gesture, so audio can start safely on iPad.
   getAudioContext();
   startBackgroundMusic();
   currentMode = mode; lessonScore=0; qIndex=0;
-  questions = [...lessonBanks[mode]].sort(()=>Math.random()-.5);
 
-  // Keep kindergarten math sessions short while varying the skills practiced.
-  if(mode === "math"){
-    questions = questions.slice(0, 6);
-  }
-
-  // Filipino has a larger progressive bank: patinig → pantig → salita.
-  // Keep each session short and child-friendly.
-  if(mode === "filipino"){
-    questions = questions.slice(0, 7);
-  }
+  // Adaptive session: choose the child's best next questions instead of random shuffling.
+  const sessionCount = mode === "filipino" ? 7 : (mode === "math" ? 6 : 5);
+  questions = state.adaptiveEnabled ? buildAdaptiveSession(mode,sessionCount) : [...lessonBanks[mode]].sort(()=>Math.random()-.5).slice(0,sessionCount);
 
   showView("#lessonView");
   renderQuestion();
@@ -1991,6 +2671,9 @@ function renderQuestion(){
   if(qIndex >= questions.length){ finishLesson(); return; }
 
   const q = questions[qIndex];
+  currentQuestionAttempts = 0;
+  currentHelpUsed = false;
+  if((dailyAdventureActive || placementActive) && q.__mode) currentMode = q.__mode;
   const stage = $("#lessonStage");
   const isStory = currentMode === "story";
   const isSubtraction = Boolean(getSubtractionData(q));
@@ -2001,6 +2684,7 @@ function renderQuestion(){
   stage.classList.add("question-enter");
 
   stage.innerHTML = `
+    ${placementActive ? `<div class="placement-banner">🌟 Tala’s Quick Learning Check • ${qIndex+1} of ${questions.length}<br><small>No pressure—just play so Tala can choose the best starting level.</small></div>` : ""}
     <div class="pill">${labelSkill(currentMode)}</div>
     ${getQuestionVisual(q)}
     <h2>${q.title}</h2>
@@ -2008,6 +2692,7 @@ function renderQuestion(){
     ${isStory ? storyListeningPanel(q) : ""}
 
     <p class="prompt">${q.prompt}</p>
+    ${!isStory ? `<button type="button" class="help-btn" id="talaHelpBtn">💡 Ask Tala for Help</button><div id="talaHelpArea"></div>` : ""}
 
     ${soundKind ? `
       <button class="sound-effect-btn" id="soundNow">
@@ -2036,6 +2721,17 @@ function renderQuestion(){
 
   $$(".answer").forEach(b=>b.onclick=()=>checkAnswer(Number(b.dataset.i)));
 
+  const helpBtn=$("#talaHelpBtn");
+  if(helpBtn){
+    helpBtn.addEventListener("click",()=>{
+      currentHelpUsed=true;
+      helpBtn.classList.add("used");
+      helpBtn.textContent="💜 Tala is helping";
+      $("#talaHelpArea").innerHTML=talaHelpHTML(q,false);
+      soundTryAgain();
+    });
+  }
+
   if(isSubtraction){
     setupSubtractionInteraction(q);
   }
@@ -2047,69 +2743,160 @@ function renderQuestion(){
 
 function checkAnswer(i){
   const q=questions[qIndex];
+  currentQuestionAttempts++;
   const answerButtons = $$(".answer");
   answerButtons.forEach(b=>b.disabled=true);
   const selected = answerButtons.find(b=>Number(b.dataset.i)===i);
   const correct = answerButtons.find(b=>Number(b.dataset.i)===q.correct);
+  let milestoneReward = null;
+
   if(i===q.correct){
     selected?.classList.add("correct-answer");
     lessonScore++; state.totalStars++; state.todayStars++;
-    state.skills[currentMode] = Math.min(100,(state.skills[currentMode]||0)+4);
-    if(currentMode === "filipino"){
-      $("#feedback").innerHTML="🎉 Magaling! Tama ang sagot mo!";
-    }else{
-      $("#feedback").innerHTML="🎉 Well done! That is correct!";
+    const adaptiveRecord=recordQuestionResult(currentMode,q,true,{helpUsed:currentHelpUsed || currentQuestionAttempts>1});
+    if(placementActive){
+      adaptiveRecord.mastery=Math.max(Number(adaptiveRecord.mastery||0), currentQuestionAttempts===1 ? 55 : 38);
+      recalculateModeMastery(currentMode);
     }
+
+    const filipinoCheers = [
+      "👏 Ang galing! Tama ang sagot mo! ⭐",
+      "🌟 Magaling! You found it!",
+      "💖 Yehey! Napakahusay!"
+    ];
+    const englishCheers = [
+      "👏 Amazing! You got it! ⭐",
+      "🌟 Great job, Super Learner!",
+      "💖 Yay! That was wonderful!"
+    ];
+    const cheers = currentMode === "filipino" ? filipinoCheers : englishCheers;
+    $("#feedback").innerHTML = cheers[Math.floor(Math.random()*cheers.length)];
+
+    milestoneReward = unlockMilestoneReward();
     soundSuccess();
     celebrate();
+    animateEarnedStar(selected);
   } else {
     selected?.classList.add("wrong-answer");
+    recordQuestionResult(currentMode,q,false,{helpUsed:currentHelpUsed});
+    currentHelpUsed=true;
+    soundTryAgain();
+
+    // First miss = targeted teaching, not immediate answer reveal.
+    if(currentQuestionAttempts===1){
+      $("#feedback").innerHTML = currentMode === "filipino"
+        ? `🌱 Magandang subok! Tulungan ka muna ni Tala.${talaHelpHTML(q,true)}`
+        : `🌱 Nice try! Tala will show you one helpful clue.${talaHelpHTML(q,true)}`;
+      setTimeout(()=>{
+        answerButtons.forEach(btn=>{
+          if(btn!==selected){btn.disabled=false;btn.classList.remove("interaction-locked");}
+        });
+      },380);
+      save();
+      return;
+    }
+
+    // Second miss = reveal gently and move on, so the child never gets stuck.
+    if(placementActive){
+      const placementRecord=getQuestionRecord(currentMode,q);
+      placementRecord.mastery=Math.min(Number(placementRecord.mastery||0),12);
+      recalculateModeMastery(currentMode);
+    }
     correct?.classList.add("reveal-answer");
     if(currentMode === "filipino"){
-      $("#feedback").innerHTML=`🌟 Magandang subok! Ang tamang sagot ay <b>${q.choices[q.correct]}</b>.`;
+      $("#feedback").innerHTML=`💜 Ayos lang! Ang sagot ay <b>${q.choices[q.correct]}</b>. Susubukan natin ulit ang ganitong skill sa ibang pagkakataon.`;
     }else{
-      $("#feedback").innerHTML=`🌟 Good try! The correct answer is <b>${q.choices[q.correct]}</b>.`;
+      $("#feedback").innerHTML=`💜 That was a tricky one. The answer is <b>${q.choices[q.correct]}</b>. Tala will bring this skill back for gentle practice later.`;
     }
-    soundTryAgain();
   }
+
+  if(dailyAdventureActive){
+    state.todayAdventureSteps = Math.min(6,Number(state.todayAdventureSteps || 0)+1);
+  }
+
   save();
+  if(milestoneReward){
+    setTimeout(()=>showRewardReveal(milestoneReward),850);
+  }
+
   const btn=document.createElement("button");
-  btn.className="primary next-btn"; btn.textContent="Next ➜";
+  btn.className="primary next-btn";
+  btn.textContent=placementActive ? "Next Fun Check 🌟" : (dailyAdventureActive ? "Continue Adventure 🌈" : "Next ➜");
   btn.onclick=()=>{getAudioContext();startBackgroundMusic();qIndex++;renderQuestion()};
-  $("#feedback").appendChild(document.createElement("br")); $("#feedback").appendChild(btn);
+  $("#feedback").appendChild(document.createElement("br"));
+  $("#feedback").appendChild(btn);
 }
 
 function finishLesson(){
   stopStoryNarration();
+  const wasDailyAdventure = dailyAdventureActive;
+  const wasPlacement = placementActive;
+  const replayMode = currentMode;
+  dailyAdventureActive = false;
+  placementActive = false;
+
   state.sessions++;
-  state.skills[currentMode]=Math.min(100,(state.skills[currentMode]||0)+3);
+  if(wasPlacement){
+    state.placementComplete=true;
+    state.placementRuns=Number(state.placementRuns||0)+1;
+  }
   save();
+
   const max=questions.length;
+  const title=wasPlacement?"Tala Found Your Starting Path!":(wasDailyAdventure?"Rainbow Adventure Complete!":"Adventure Complete!");
+  const trophy=wasPlacement?"🦄✨":(wasDailyAdventure?"🌈":"🏆");
+  const message=wasPlacement
+    ? "Tala will now choose practice that matches what feels easy, what needs help, and what you’re ready to try next."
+    : (lessonScore===max ? "👏 Amazing work! Tala is doing a happy dance! 🦄✨" : "💖 Wonderful effort! Every try makes your learning power stronger.");
   $("#lessonStage").innerHTML=`
-    <div class="finish-trophy">🏆</div>
-    <h2>Adventure Complete!</h2>
+    <div class="finish-trophy">${trophy}</div>
+    <h2>${title}</h2>
     <p class="prompt">You earned <b>${lessonScore} out of ${max} stars</b>! ⭐</p>
-    <p>${lessonScore===max ? "Amazing work! 🌈" : "Wonderful effort! Practice makes us stronger. 💪"}</p>
-    <button id="againBtn" class="primary big">Play Again 🎮</button>
-    <button id="homeAfterBtn" class="secondary" style="margin-top:10px">Go Home</button>
+    <p>${message}</p>
+    <button id="againBtn" class="primary big">${wasPlacement?"Start My Smart Adventure 🎯":wasDailyAdventure?"Play Rainbow Adventure Again 🌈":"Play Again 🎮"}</button>
+    <button id="homeAfterBtn" class="secondary" style="margin-top:10px">Go Home to Tala 🦄</button>
   `;
   celebrate();
   soundComplete();
-  $("#againBtn").onclick=()=>startLesson(currentMode);
-  $("#homeAfterBtn").onclick=()=>showView("#homeView");
+  $("#againBtn").onclick=()=>wasPlacement ? startSmartPractice() : (wasDailyAdventure ? startDaily() : startLesson(replayMode));
+  $("#homeAfterBtn").onclick=()=>{showView("#homeView");makeTalaHappy();};
 }
 
 function startDaily(){
-  const sequence=["english","filipino","math","story","thinking"];
-  const pick=sequence[Math.floor(Math.random()*sequence.length)];
-  startLesson(pick);
+  // Balanced rainbow journey + adaptive question choice inside each stop.
+  getAudioContext();
+  startBackgroundMusic();
+  placementActive = false;
+  dailyAdventureActive = true;
+  lessonScore = 0;
+  qIndex = 0;
+
+  const sequence=["english","filipino","math","story","thinking","review"];
+  questions = sequence.map((mode,index)=>{
+    const purpose=index===5?"review":(mode===weakestMode()?"practice":"challenge");
+    const source=state.adaptiveEnabled ? chooseAdaptiveQuestion(mode,purpose) : (lessonBanks[mode]||[])[Math.floor(Math.random()*(lessonBanks[mode]||[]).length)];
+    return source?{...source,__mode:mode}:null;
+  }).filter(Boolean);
+
+  currentMode = questions[0]?.__mode || "english";
+  showView("#lessonView");
+  renderQuestion();
 }
 
 $("#startDailyBtn").onclick=startDaily;
+$("#placementBtn").onclick=startPlacementCheck;
+$("#smartPracticeBtn").onclick=startSmartPractice;
+$("#parentPlacementBtn").onclick=startPlacementCheck;
 $$(".lesson-card").forEach(b=>b.onclick=()=>startLesson(b.dataset.mode));
-$("#backBtn").onclick=()=>{stopStoryNarration();showView("#homeView")};
+$("#backBtn").onclick=()=>{stopStoryNarration();placementActive=false;dailyAdventureActive=false;showView("#homeView")};
 $("#parentBtn").onclick=()=>{stopStoryNarration();updateHome();showView("#parentView")};
 $("#parentBackBtn").onclick=()=>showView("#homeView");
+$("#stickerBookBtn").onclick=()=>{updateHome();showView("#stickerView")};
+$("#closetBtn").onclick=()=>{updateHome();showView("#closetView")};
+$("#stickerBackBtn").onclick=()=>showView("#homeView");
+$("#closetBackBtn").onclick=()=>showView("#homeView");
+$("#rewardRevealClose").onclick=hideRewardReveal;
+$("#rewardReveal").addEventListener("click",e=>{if(e.target===$("#rewardReveal")) hideRewardReveal();});
 $("#saveProfile").onclick=()=>{
   state.name=$("#learnerName").value.trim()||"Super Learner";
   state.dailyGoal=Number($("#dailyGoal").value);
@@ -2148,7 +2935,9 @@ $("#backgroundMusicVolume").onchange=e=>{
 $("#celebrateToggle").onchange=e=>{state.celebrate=e.target.checked;save()};
 $("#resetProgress").onclick=()=>{
   if(confirm("Reset all learning progress on this iPad and the connected cloud profile?")){
-    state={...defaults,skills:{...defaults.skills},updatedAt:Date.now()};
+    state=JSON.parse(JSON.stringify(defaults));
+    state.updatedAt=Date.now();
+    ensureRewardState();
     save();
     updateHome();
   }
