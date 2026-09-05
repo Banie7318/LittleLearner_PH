@@ -634,6 +634,48 @@ button.collectible{cursor:pointer;font:inherit}button.collectible:not(:disabled)
 .placement-banner{width:min(680px,100%);margin:0 auto 14px;padding:12px 14px;border-radius:18px;background:linear-gradient(145deg,#f4e9ff,#ffe9f4);font-weight:900;color:#684479;border:2px solid #ead7f5}
 @media(max-width:680px){.adaptive-card{grid-template-columns:1fr}.adaptive-actions{justify-content:flex-start}.adaptive-progress{grid-template-columns:1fr}.adaptive-mini{flex:1 1 150px}}
 
+
+
+/* =========================================================
+   LITTLE LEARNER PH 2.2 — GAME-FIRST LEARNING ENGINES
+   Pop • Catch • Drag • Match • Build • Count • Trace • Sort
+   ========================================================= */
+.game-shell{width:min(700px,100%);margin:14px auto 2px;padding:16px;border-radius:28px;background:linear-gradient(145deg,#fff9ff,#f6eeff);border:2px solid #ead7f5;box-shadow:0 14px 30px rgba(102,62,132,.08)}
+.game-kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:#f0e1ff;color:#704489;font-size:.76rem;font-weight:1000;letter-spacing:.04em;margin-bottom:9px}
+.game-instruction{margin:0 auto 14px;max-width:600px;color:#5f5168;font-weight:850;line-height:1.42}
+.game-status{min-height:28px;margin-top:10px;font-weight:950;color:#765487}.game-status.ready{color:#287a49}
+.game-choices{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;width:100%}.game-choices.one-row{grid-template-columns:repeat(4,minmax(90px,1fr))}
+.game-choice{position:relative;border:3px solid #eee4f5;background:#fff;border-radius:22px;padding:15px 12px;min-height:70px;font-weight:1000;font-size:1.05rem;color:#3f3347;box-shadow:0 9px 18px rgba(81,51,99,.08);touch-action:manipulation;transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.game-choice:active{transform:scale(.96)}.game-choice[disabled]{cursor:not-allowed}.game-choice.correct-answer{border-color:#77d699!important;background:#e8faee!important;animation:correctPop .62s cubic-bezier(.2,.9,.25,1)!important}.game-choice.wrong-answer{border-color:#ff9bba!important;background:#fff0f7!important;animation:wrongWiggle .42s ease!important}.game-choice.reveal-answer{border-color:#77d699!important;background:#e8faee!important;animation:correctGlow .85s ease!important}
+
+/* Balloon pop */
+.balloon-field{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:18px;padding:8px}.balloon{min-height:112px;border:0;border-radius:52% 48% 49% 51% / 57% 57% 43% 43%;background:linear-gradient(145deg,#f7b6e6,#cc9aff);color:#43284f;box-shadow:inset 0 0 0 4px rgba(255,255,255,.45),0 12px 22px rgba(142,82,175,.17);font-size:1.05rem;font-weight:1000;padding:18px;position:relative;animation:balloonFloat 2.5s ease-in-out infinite}
+.balloon:nth-child(2){animation-delay:.25s}.balloon:nth-child(3){animation-delay:.5s}.balloon:nth-child(4){animation-delay:.75s}.balloon::after{content:"";position:absolute;left:50%;bottom:-15px;width:2px;height:18px;background:#aa8ab9}.balloon.correct-answer{animation:balloonPop .45s forwards!important}.balloon.wrong-answer{animation:wrongWiggle .42s ease!important;opacity:.68}
+@keyframes balloonFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}@keyframes balloonPop{0%{transform:scale(1)}65%{transform:scale(1.18)}100%{transform:scale(.12);opacity:0}}
+
+/* Catch game */
+.catch-arena{position:relative;min-height:230px;border-radius:24px;background:linear-gradient(180deg,#eee9ff,#fff4fb);overflow:hidden;border:2px dashed #d8bde9;padding:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:center}.catch-choice{min-height:76px;background:#fff;border:3px solid #eadff0;border-radius:25px;box-shadow:0 10px 20px rgba(88,56,110,.1);font-weight:1000;font-size:1.15rem;animation:catchBob 2.2s ease-in-out infinite}.catch-choice:nth-child(2){animation-delay:.28s}.catch-choice:nth-child(3){animation-delay:.56s}.catch-choice:nth-child(4){animation-delay:.84s}@keyframes catchBob{0%,100%{transform:translate(0,0) rotate(-1deg)}50%{transform:translate(5px,-8px) rotate(1deg)}}
+
+/* Drag / feed / match / sort */
+.drag-zone{display:grid;grid-template-columns:.78fr 1.22fr;gap:15px;align-items:stretch}.drop-target{min-height:190px;border-radius:26px;border:3px dashed #d5aceb;background:linear-gradient(145deg,#f6eaff,#fff4fb);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;font-weight:950;color:#654274;transition:.18s ease}.drop-target.drag-over{transform:scale(1.025);border-color:#b67bd8;background:#f1dcff}.drop-target .drop-icon{font-size:4.7rem;line-height:1;margin-bottom:8px}.drop-target .target-picture{font-size:4rem;line-height:1.1;margin-bottom:8px}.drag-cards{display:grid;grid-template-columns:repeat(2,minmax(105px,1fr));gap:10px}.draggable-card{cursor:grab;user-select:none}.draggable-card:active{cursor:grabbing}.draggable-card.dragging{opacity:.45;transform:scale(.96)}
+.sort-bin{background:linear-gradient(145deg,#ffe9f6,#efe5ff)}.sort-bin .drop-icon{font-size:4rem}
+
+/* Word builder */
+.word-builder{display:grid;gap:14px}.build-slots{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}.build-slot{min-height:78px;border:3px dashed #d7b9e8;border-radius:20px;background:#fff;display:grid;place-items:center;font-size:1.6rem;font-weight:1000;color:#5a3c68;padding:8px}.build-plus{font-size:2rem;font-weight:1000;color:#9d70b6}.syllable-bank{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.syllable-game-chip{border:0;border-radius:20px;background:linear-gradient(145deg,#dfc3ff,#ffbee0);min-width:100px;min-height:66px;padding:12px 18px;font-size:1.45rem;font-weight:1000;color:#4d2e5c;box-shadow:0 9px 18px rgba(141,81,170,.13);cursor:grab}.syllable-game-chip.used{opacity:.38}.build-action{justify-self:center}
+
+/* Tap-to-count */
+.count-playground{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;padding:14px;border-radius:24px;background:#fff;border:2px dashed #ead8f4;min-height:130px}.count-token{width:76px;height:76px;border:0;border-radius:22px;background:#fff7fd;box-shadow:0 9px 18px rgba(91,56,110,.1);font-size:2.7rem;transition:.18s ease}.count-token.counted{background:#e8faee;transform:scale(.9);box-shadow:inset 0 0 0 4px #bde8ca}.count-readout{display:inline-flex;align-items:center;gap:7px;margin:12px auto;padding:9px 14px;border-radius:999px;background:#f0e4ff;color:#624173;font-weight:1000;font-size:1.08rem}.game-hidden{display:none!important}
+
+/* Trace */
+.trace-board{position:relative;width:min(480px,100%);aspect-ratio:2/1;margin:8px auto 12px;border-radius:28px;background:#fff;border:3px dashed #d8b9e8;overflow:hidden;touch-action:none}.trace-guide{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(6rem,22vw,10rem);font-weight:1000;color:#eadcf2;line-height:1;pointer-events:none}.trace-board canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.trace-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.trace-btn{border:0;border-radius:17px;padding:11px 15px;min-height:46px;font-weight:950;background:#f1e5fb;color:#654175}.trace-btn.done{background:linear-gradient(135deg,#d9a6ff,#ffaad4);color:#472653}
+
+/* Small game mode badge */
+.game-mode-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #eadff0;color:#72577d;font-size:.72rem;font-weight:950;margin-bottom:4px}
+.game-interactive.locked{pointer-events:none;opacity:.68}
+@media(max-width:620px){.game-choices,.balloon-field,.catch-arena,.drag-cards{grid-template-columns:1fr 1fr}.drag-zone{grid-template-columns:1fr}.drop-target{min-height:150px}.balloon{min-height:100px}.game-shell{padding:13px}.build-slot{min-height:68px}.count-token{width:66px;height:66px;font-size:2.35rem}}
+@media(max-width:390px){.game-choices,.balloon-field,.catch-arena,.drag-cards{grid-template-columns:1fr}.build-slots{grid-template-columns:1fr}.build-plus{display:none}.count-token{width:61px;height:61px;font-size:2.15rem}}
+@media(prefers-reduced-motion:reduce){.balloon,.catch-choice{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -641,7 +683,7 @@ button.collectible{cursor:pointer;font:inherit}button.collectible:not(:disabled)
     <header class="topbar">
       <div>
         <div class="eyebrow">🌈 KINDERGARTEN LEARNING BUDDY</div>
-        <h1>Little Learner PH <small style="font-size:.44em;color:#8a6b97;vertical-align:middle">2.1</small></h1>
+        <h1>Little Learner PH <small style="font-size:.44em;color:#8a6b97;vertical-align:middle">2.2</small></h1>
       </div>
       <div class="top-actions">
         <span id="cloudStatus" class="cloud-status local" title="Progress storage status">☁️ Local</span>
@@ -872,7 +914,7 @@ button.collectible{cursor:pointer;font:inherit}button.collectible:not(:disabled)
   </div>
 <script type="module">
 /* =========================================================
-   LITTLE LEARNER PH — MAIN APP FILE
+   LITTLE LEARNER PH 2.2 — GAME-FIRST ADAPTIVE APP
    =========================================================
 
    ⭐ EDIT HERE FIRST ⭐
@@ -964,6 +1006,7 @@ function ensureRewardState(){
   state.placementRuns = Math.max(0,Number(state.placementRuns || 0));
   if(!state.questionMastery || typeof state.questionMastery !== "object" || Array.isArray(state.questionMastery)) state.questionMastery = {};
   if(!Array.isArray(state.adaptiveHistory)) state.adaptiveHistory = [];
+  if(!Array.isArray(state.gameHistory)) state.gameHistory = [];
   if(state.rewardMilestone === null || state.rewardMilestone === undefined || !Number.isFinite(Number(state.rewardMilestone))){
     // Existing learners keep their previous stars without retroactive reward popups.
     state.rewardMilestone = Math.floor(Number(state.totalStars || 0) / 10);
@@ -1446,7 +1489,7 @@ function recordQuestionResult(mode,q,isCorrect,{helpUsed=false}={}){
     r.streak=0;
     r.mastery=Math.max(0,Math.round((r.mastery||0)-3));
   }
-  state.adaptiveHistory.push({id:questionId(mode,q),mode,correct:Boolean(isCorrect),helpUsed:Boolean(helpUsed),at:Date.now()});
+  state.adaptiveHistory.push({id:questionId(mode,q),mode,gameType:currentGameType,correct:Boolean(isCorrect),helpUsed:Boolean(helpUsed),at:Date.now()});
   if(state.adaptiveHistory.length>120) state.adaptiveHistory=state.adaptiveHistory.slice(-120);
   recalculateModeMastery(mode);
   return r;
@@ -2382,7 +2425,7 @@ function setupSubtractionInteraction(q){
 
   let removed = 0;
   const buttons = $$(".subtract-object");
-  const answerButtons = $$(".answer");
+  const answerButtons = $$(`[data-answer-index]`);
 
   answerButtons.forEach(btn=>{
     btn.disabled=true;
@@ -2536,7 +2579,7 @@ function storyListeningPanel(q){
 }
 
 function unlockStoryAnswers(message="Now choose your answer."){
-  const answerButtons = $$(".answer");
+  const answerButtons = $$(`[data-answer-index]`);
   answerButtons.forEach((btn,i)=>{
     btn.disabled=false;
     btn.classList.remove("interaction-locked");
@@ -2554,7 +2597,7 @@ function unlockStoryAnswers(message="Now choose your answer."){
 function setupStoryNarration(q){
   if(currentMode !== "story") return false;
 
-  const answerButtons = $$(".answer");
+  const answerButtons = $$(`[data-answer-index]`);
   answerButtons.forEach(btn=>{
     btn.disabled=true;
     btn.classList.add("interaction-locked");
@@ -2634,6 +2677,339 @@ function setupStoryNarration(q){
   return true;
 }
 
+
+/* =========================================================
+   7) GAME-FIRST LEARNING ENGINE
+   ---------------------------------------------------------
+   The adaptive engine still chooses WHAT skill to practice.
+   This layer chooses HOW the child practices it.
+   ========================================================= */
+let currentGameType = "classic";
+let questionResolved = false;
+
+function traceCharacter(q){
+  const text=`${q?.title||""} ${q?.prompt||""}`;
+  const match=text.match(/(?:letter|patinig)\s+([A-ZÑ])/i);
+  return match ? match[1].toUpperCase() : "";
+}
+
+function wordBuildParts(q){
+  const match=String(q?.title||"").match(/^\s*(.+?)\s*\+\s*(.+?)\s*=\s*(.+?)\s*$/);
+  return match ? {first:match[1].trim(),second:match[2].trim(),result:match[3].trim()} : null;
+}
+
+function countableTokens(q){
+  return splitEmojiScene(String(q?.icon||"")).filter(token=>!token.symbol && /\p{Extended_Pictographic}/u.test(token.value));
+}
+
+function rememberGameType(type,q){
+  ensureRewardState();
+  state.gameHistory.push({type,mode:currentMode,id:questionId(currentMode,q),at:Date.now()});
+  if(state.gameHistory.length>60) state.gameHistory=state.gameHistory.slice(-60);
+}
+
+function chooseGameType(q){
+  if(currentMode==="story" || getSubtractionData(q)) return "classic";
+  const title=String(q?.title||"").toLowerCase();
+  const prompt=String(q?.prompt||"").toLowerCase();
+  const build=wordBuildParts(q);
+  const trace=traceCharacter(q);
+  const tokens=countableTokens(q);
+  const record=getQuestionRecord(currentMode,q);
+  const mastery=Number(record.mastery||0);
+
+  // Skill-specific interactions get priority.
+  if(build) return "build";
+  if(currentMode==="math" && tokens.length>=2 && (title.includes("count") || prompt.includes("how many"))) return "tap-count";
+  if(trace && mastery<55) return "trace";
+  if(currentMode==="thinking" && (title.includes("odd") || title.includes("sort") || prompt.includes("does not belong"))) return "sort";
+
+  let candidates=[];
+  if(currentMode==="english") candidates=mastery<30?["catch","pop","match"]:["match","catch","feed","pop"];
+  else if(currentMode==="filipino") candidates=mastery<35?["catch","pop","match"]:["match","feed","catch","pop"];
+  else if(currentMode==="math") candidates=mastery<35?["pop","match"]:["feed","match","pop","sort"];
+  else if(currentMode==="thinking") candidates=["sort","match","pop","feed"];
+  else candidates=["pop","match","feed"];
+
+  // Avoid repeating the exact same play style too often.
+  const recent=(state.gameHistory||[]).slice(-2).map(x=>x.type);
+  const fresh=candidates.filter(type=>!recent.includes(type));
+  const pool=fresh.length?fresh:candidates;
+  const difficulty=questionDifficulty(currentMode,q);
+  const index=(questionId(currentMode,q).length + Math.round(mastery) + difficulty + qIndex) % pool.length;
+  return pool[index] || "pop";
+}
+
+function gameModeLabel(type){
+  return ({
+    "pop":"🎈 Pop the Answer",
+    "catch":"✨ Catch It",
+    "feed":"🦄 Feed Tala",
+    "match":"🧩 Match It",
+    "build":"🔤 Build the Word",
+    "tap-count":"👆 Tap & Count",
+    "trace":"🖍️ Trace & Choose",
+    "sort":"🧺 Sort It",
+    "classic":"🌟 Learning Challenge"
+  })[type] || "🎮 Learning Game";
+}
+
+function answerChoiceHTML(q,className="game-choice"){
+  return q.choices.map((choice,index)=>`<button type="button" class="${className} game-interactive" data-answer-index="${index}">${escapeSceneText(choice)}</button>`).join("");
+}
+
+function classicAnswerHTML(q,locked=false){
+  return `<div class="answer-grid">${q.choices.map((c,i)=>`
+    <button type="button" class="answer game-interactive ${locked?"interaction-locked":""}" data-i="${i}" data-answer-index="${i}" ${locked?"disabled":""}>${escapeSceneText(c)}</button>
+  `).join("")}</div>`;
+}
+
+function renderLearningGame(q,type,{locked=false}={}){
+  if(type==="classic") return classicAnswerHTML(q,locked);
+
+  if(type==="pop"){
+    return `<div class="game-shell" data-game="pop">
+      <div class="game-kicker">🎈 POP GAME</div>
+      <p class="game-instruction">Pop the bubble with the best answer!</p>
+      <div class="balloon-field">${answerChoiceHTML(q,"balloon game-choice")}</div>
+      <div class="game-status" id="gameStatus">✨ Pick a balloon.</div>
+    </div>`;
+  }
+
+  if(type==="catch"){
+    return `<div class="game-shell" data-game="catch">
+      <div class="game-kicker">✨ CATCH GAME</div>
+      <p class="game-instruction">Catch the correct answer before it floats away!</p>
+      <div class="catch-arena">${answerChoiceHTML(q,"catch-choice game-choice")}</div>
+      <div class="game-status" id="gameStatus">👆 Tap the answer you want to catch.</div>
+    </div>`;
+  }
+
+  if(type==="feed"){
+    const friends=["🐶","🐰","🐱","🦄"];
+    const friend=friends[(questionId(currentMode,q).length+qIndex)%friends.length];
+    return `<div class="game-shell" data-game="feed">
+      <div class="game-kicker">🍓 FEED A FRIEND</div>
+      <p class="game-instruction">Drag the correct answer to our hungry friend—or tap it to feed them.</p>
+      <div class="drag-zone">
+        <div class="drop-target" id="gameDropTarget"><div class="drop-icon">${friend}</div><b>Yum! Which answer should our friend eat?</b><small>Drop it here</small></div>
+        <div class="drag-cards">${answerChoiceHTML(q,"draggable-card game-choice")}</div>
+      </div>
+      <div class="game-status" id="gameStatus">💜 Choose carefully.</div>
+    </div>`;
+  }
+
+  if(type==="match"){
+    return `<div class="game-shell" data-game="match">
+      <div class="game-kicker">🧩 MATCH GAME</div>
+      <p class="game-instruction">Match the right card to Tala’s picture. Drag it over—or tap it.</p>
+      <div class="drag-zone">
+        <div class="drop-target" id="gameDropTarget"><div class="target-picture">${escapeSceneText(q.icon||"✨")}</div><b>Match me!</b><small>Drop the answer here</small></div>
+        <div class="drag-cards">${answerChoiceHTML(q,"draggable-card game-choice")}</div>
+      </div>
+      <div class="game-status" id="gameStatus">🧩 Find the best match.</div>
+    </div>`;
+  }
+
+  if(type==="sort"){
+    return `<div class="game-shell" data-game="sort">
+      <div class="game-kicker">🧺 SORT GAME</div>
+      <p class="game-instruction">Put the correct item in Tala’s magic basket. Drag it—or tap it.</p>
+      <div class="drag-zone">
+        <div class="drop-target sort-bin" id="gameDropTarget"><div class="drop-icon">🧺</div><b>Magic Basket</b><small>Drop the answer here</small></div>
+        <div class="drag-cards">${answerChoiceHTML(q,"draggable-card game-choice")}</div>
+      </div>
+      <div class="game-status" id="gameStatus">🌟 Which one belongs in the basket?</div>
+    </div>`;
+  }
+
+  if(type==="build"){
+    const parts=wordBuildParts(q);
+    const scrambled=[parts.second,parts.first];
+    return `<div class="game-shell" data-game="build">
+      <div class="game-kicker">🔤 WORD BUILDER</div>
+      <p class="game-instruction">Help Tala put the syllables in the right order to make <b>${escapeSceneText(parts.result)}</b>.</p>
+      <div class="word-builder">
+        <div class="build-slots"><div class="build-slot" data-build-slot="0">?</div><div class="build-plus">+</div><div class="build-slot" data-build-slot="1">?</div></div>
+        <div class="syllable-bank">${scrambled.map((part,i)=>`<button type="button" class="syllable-game-chip game-interactive" draggable="true" data-build-part="${escapeSceneText(part)}" data-build-id="${i}">${escapeSceneText(part)}</button>`).join("")}</div>
+        <button type="button" class="primary build-action game-interactive" id="buildWordBtn">✨ Build the Word</button>
+      </div>
+      <div class="game-status" id="gameStatus">👆 Tap the syllables, or drag them into the boxes.</div>
+    </div>`;
+  }
+
+  if(type==="tap-count"){
+    const tokens=countableTokens(q);
+    return `<div class="game-shell" data-game="tap-count">
+      <div class="game-kicker">👆 TAP & COUNT</div>
+      <p class="game-instruction">Tap every object one at a time. Tala will count with you!</p>
+      <div class="count-playground">${tokens.map((token,i)=>`<button type="button" class="count-token game-interactive" data-count-token="${i}" aria-label="Count object ${i+1}">${escapeSceneText(token.value)}</button>`).join("")}</div>
+      <div class="count-readout">🔢 Counted: <b id="countReadout">0</b></div>
+      <div class="game-choices game-hidden" id="countAnswerChoices">${answerChoiceHTML(q)}</div>
+      <div class="game-status" id="gameStatus">Start tapping the objects.</div>
+    </div>`;
+  }
+
+  if(type==="trace"){
+    const char=traceCharacter(q) || "A";
+    return `<div class="game-shell" data-game="trace">
+      <div class="game-kicker">🖍️ TRACE GAME</div>
+      <p class="game-instruction">Trace the big <b>${escapeSceneText(char)}</b> with your finger, then answer Tala’s question.</p>
+      <div class="trace-board" id="traceBoard"><span class="trace-guide">${escapeSceneText(char)}</span><canvas id="traceCanvas" width="720" height="360" aria-label="Tracing area"></canvas></div>
+      <div class="trace-actions"><button type="button" class="trace-btn game-interactive" id="clearTraceBtn">↺ Clear</button><button type="button" class="trace-btn done game-interactive" id="traceDoneBtn">✨ I traced it!</button></div>
+      <div class="game-choices game-hidden" id="traceAnswerChoices">${answerChoiceHTML(q)}</div>
+      <div class="game-status" id="gameStatus">💜 Use your finger or mouse to trace.</div>
+    </div>`;
+  }
+
+  return classicAnswerHTML(q,locked);
+}
+
+function setGameStatus(text,ready=false){
+  const status=$("#gameStatus");
+  if(!status) return;
+  status.textContent=text;
+  status.classList.toggle("ready",ready);
+}
+
+function lockGameInteractions(){
+  $$(".game-interactive").forEach(el=>{
+    el.classList.add("locked");
+    if("disabled" in el) el.disabled=true;
+    if(el.hasAttribute("draggable")) el.setAttribute("draggable","false");
+  });
+}
+
+function setupChoiceClickHandlers(){
+  $$("[data-answer-index]").forEach(btn=>{
+    if(btn.dataset.gameBound==="1") return;
+    btn.dataset.gameBound="1";
+    btn.addEventListener("click",()=>{
+      if(btn.disabled || questionResolved) return;
+      checkAnswer(Number(btn.dataset.answerIndex));
+    });
+  });
+}
+
+function setupDragToTarget(q){
+  const target=$("#gameDropTarget");
+  if(!target) return;
+  let draggedIndex=null;
+  $$(".draggable-card[data-answer-index]").forEach(card=>{
+    card.setAttribute("draggable","true");
+    card.addEventListener("dragstart",event=>{
+      draggedIndex=Number(card.dataset.answerIndex);
+      card.classList.add("dragging");
+      try{event.dataTransfer.setData("text/plain",String(draggedIndex));event.dataTransfer.effectAllowed="move";}catch{}
+    });
+    card.addEventListener("dragend",()=>card.classList.remove("dragging"));
+  });
+  target.addEventListener("dragover",event=>{event.preventDefault();target.classList.add("drag-over")});
+  target.addEventListener("dragleave",()=>target.classList.remove("drag-over"));
+  target.addEventListener("drop",event=>{
+    event.preventDefault();target.classList.remove("drag-over");
+    let index=draggedIndex;
+    try{const raw=event.dataTransfer.getData("text/plain");if(raw!=="") index=Number(raw);}catch{}
+    if(Number.isInteger(index) && !questionResolved){
+      setGameStatus("✨ Tala caught your answer!");
+      checkAnswer(index);
+    }
+  });
+}
+
+function setupWordBuilder(q){
+  const parts=wordBuildParts(q);
+  if(!parts) return;
+  const slots=$$("[data-build-slot]");
+  const chips=$$("[data-build-part]");
+  let placed=[null,null];
+
+  const refresh=()=>{
+    slots.forEach((slot,index)=>{slot.textContent=placed[index]||"?";slot.classList.toggle("filled",Boolean(placed[index]))});
+    chips.forEach(chip=>chip.classList.toggle("used",placed.includes(chip.dataset.buildPart)));
+  };
+  const placePart=part=>{
+    const existing=placed.indexOf(part);
+    if(existing>=0){placed[existing]=null;refresh();return;}
+    const open=placed.findIndex(x=>!x);
+    if(open>=0){placed[open]=part;refresh();soundSuccess();}
+  };
+  chips.forEach(chip=>{
+    chip.addEventListener("click",()=>{if(!questionResolved) placePart(chip.dataset.buildPart)});
+    chip.addEventListener("dragstart",event=>{try{event.dataTransfer.setData("text/plain",chip.dataset.buildPart)}catch{}});
+  });
+  slots.forEach((slot,index)=>{
+    slot.addEventListener("click",()=>{if(placed[index] && !questionResolved){placed[index]=null;refresh()}});
+    slot.addEventListener("dragover",event=>event.preventDefault());
+    slot.addEventListener("drop",event=>{
+      event.preventDefault();if(questionResolved)return;
+      let part="";try{part=event.dataTransfer.getData("text/plain")}catch{}
+      if(!part)return;
+      const other=placed.indexOf(part);if(other>=0)placed[other]=null;
+      placed[index]=part;refresh();soundSuccess();
+    });
+  });
+  $("#buildWordBtn")?.addEventListener("click",()=>{
+    if(questionResolved)return;
+    if(placed.some(x=>!x)){setGameStatus("💜 Put both syllables in the boxes first.");return;}
+    const isCorrect=placed[0]===parts.first && placed[1]===parts.second;
+    if(isCorrect){setGameStatus(`🌟 ${parts.first} + ${parts.second} = ${parts.result}!`,true);checkAnswer(q.correct);}
+    else{
+      setGameStatus("🌱 Almost! Try swapping the syllables.");
+      const wrong=q.choices.findIndex((_,i)=>i!==q.correct);
+      checkAnswer(wrong<0?999:wrong);
+      if(!questionResolved){placed=[null,null];refresh();}
+    }
+  });
+  refresh();
+}
+
+function setupTapCount(q){
+  const tokens=$$("[data-count-token]");
+  const answerBox=$("#countAnswerChoices");
+  let count=0;
+  tokens.forEach(token=>token.addEventListener("click",()=>{
+    if(questionResolved || token.classList.contains("counted")) return;
+    token.classList.add("counted");token.disabled=true;count++;
+    if($("#countReadout")) $("#countReadout").textContent=String(count);
+    setGameStatus(`${count}! ${count===tokens.length?"Great counting! Now choose the number.":"Keep going…"}`,count===tokens.length);
+    soundSuccess();
+    if(count===tokens.length){answerBox?.classList.remove("game-hidden");setupChoiceClickHandlers();}
+  }));
+}
+
+function setupTraceGame(){
+  const canvas=$("#traceCanvas");
+  if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  let drawing=false,hasDrawn=false;
+  ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=24;ctx.strokeStyle="#a55acb";
+  const point=event=>{
+    const rect=canvas.getBoundingClientRect();
+    return {x:(event.clientX-rect.left)*(canvas.width/rect.width),y:(event.clientY-rect.top)*(canvas.height/rect.height)};
+  };
+  canvas.addEventListener("pointerdown",event=>{if(questionResolved)return;drawing=true;hasDrawn=true;canvas.setPointerCapture?.(event.pointerId);const p=point(event);ctx.beginPath();ctx.moveTo(p.x,p.y);event.preventDefault()});
+  canvas.addEventListener("pointermove",event=>{if(!drawing)return;const p=point(event);ctx.lineTo(p.x,p.y);ctx.stroke();event.preventDefault()});
+  const end=()=>{drawing=false};canvas.addEventListener("pointerup",end);canvas.addEventListener("pointercancel",end);
+  $("#clearTraceBtn")?.addEventListener("click",()=>{ctx.clearRect(0,0,canvas.width,canvas.height);hasDrawn=false;setGameStatus("💜 Try tracing again.")});
+  $("#traceDoneBtn")?.addEventListener("click",()=>{
+    if(!hasDrawn){setGameStatus("🖍️ Make a little trace first, then tap Done.");return;}
+    $("#traceAnswerChoices")?.classList.remove("game-hidden");
+    setGameStatus("✨ Beautiful tracing! Now choose your answer.",true);
+    setupChoiceClickHandlers();
+  });
+}
+
+function setupLearningGame(q,type){
+  if(type==="classic"){setupChoiceClickHandlers();return;}
+  if(["pop","catch"].includes(type)){setupChoiceClickHandlers();return;}
+  if(["feed","match","sort"].includes(type)){setupChoiceClickHandlers();setupDragToTarget(q);return;}
+  if(type==="build"){setupWordBuilder(q);return;}
+  if(type==="tap-count"){setupTapCount(q);return;}
+  if(type==="trace"){setupTraceGame();return;}
+  setupChoiceClickHandlers();
+}
+
 function getQuestionVisual(q){
   const title=String(q.title||"");
   const prompt=String(q.prompt||"");
@@ -2673,11 +3049,14 @@ function renderQuestion(){
   const q = questions[qIndex];
   currentQuestionAttempts = 0;
   currentHelpUsed = false;
+  questionResolved = false;
   if((dailyAdventureActive || placementActive) && q.__mode) currentMode = q.__mode;
   const stage = $("#lessonStage");
   const isStory = currentMode === "story";
   const isSubtraction = Boolean(getSubtractionData(q));
   const soundKind = isStory ? null : inferQuestionSound(q);
+  currentGameType = chooseGameType(q);
+  rememberGameType(currentGameType,q);
 
   stage.classList.remove("question-enter");
   void stage.offsetWidth;
@@ -2686,12 +3065,13 @@ function renderQuestion(){
   stage.innerHTML = `
     ${placementActive ? `<div class="placement-banner">🌟 Tala’s Quick Learning Check • ${qIndex+1} of ${questions.length}<br><small>No pressure—just play so Tala can choose the best starting level.</small></div>` : ""}
     <div class="pill">${labelSkill(currentMode)}</div>
+    <div class="game-mode-badge">${gameModeLabel(currentGameType)}</div>
     ${getQuestionVisual(q)}
-    <h2>${q.title}</h2>
+    <h2>${escapeSceneText(q.title)}</h2>
 
     ${isStory ? storyListeningPanel(q) : ""}
 
-    <p class="prompt">${q.prompt}</p>
+    <p class="prompt">${escapeSceneText(q.prompt)}</p>
     ${!isStory ? `<button type="button" class="help-btn" id="talaHelpBtn">💡 Ask Tala for Help</button><div id="talaHelpArea"></div>` : ""}
 
     ${soundKind ? `
@@ -2701,15 +3081,7 @@ function renderQuestion(){
       <div class="sound-note">Tap to hear it again</div>
     ` : ""}
 
-    <div class="answer-grid">
-      ${q.choices.map((c,i)=>`
-        <button
-          class="answer ${(isStory || isSubtraction) ? "interaction-locked" : ""}"
-          data-i="${i}"
-          ${(isStory || isSubtraction) ? "disabled" : ""}
-        >${c}</button>
-      `).join("")}
-    </div>
+    ${renderLearningGame(q,currentGameType,{locked:isStory || isSubtraction})}
 
     <div class="feedback" id="feedback"></div>
   `;
@@ -2719,7 +3091,7 @@ function renderQuestion(){
     playSoundKind(soundKind);
   }
 
-  $$(".answer").forEach(b=>b.onclick=()=>checkAnswer(Number(b.dataset.i)));
+  setupLearningGame(q,currentGameType);
 
   const helpBtn=$("#talaHelpBtn");
   if(helpBtn){
@@ -2742,15 +3114,17 @@ function renderQuestion(){
 }
 
 function checkAnswer(i){
+  if(questionResolved) return;
   const q=questions[qIndex];
   currentQuestionAttempts++;
-  const answerButtons = $$(".answer");
+  const answerButtons = $$('[data-answer-index]');
   answerButtons.forEach(b=>b.disabled=true);
-  const selected = answerButtons.find(b=>Number(b.dataset.i)===i);
-  const correct = answerButtons.find(b=>Number(b.dataset.i)===q.correct);
+  const selected = answerButtons.find(b=>Number(b.dataset.answerIndex)===i);
+  const correct = answerButtons.find(b=>Number(b.dataset.answerIndex)===q.correct);
   let milestoneReward = null;
 
   if(i===q.correct){
+    questionResolved=true;
     selected?.classList.add("correct-answer");
     lessonScore++; state.totalStars++; state.todayStars++;
     const adaptiveRecord=recordQuestionResult(currentMode,q,true,{helpUsed:currentHelpUsed || currentQuestionAttempts>1});
@@ -2775,7 +3149,8 @@ function checkAnswer(i){
     milestoneReward = unlockMilestoneReward();
     soundSuccess();
     celebrate();
-    animateEarnedStar(selected);
+    animateEarnedStar(selected || $(".game-shell") || $("#lessonStage"));
+    lockGameInteractions();
   } else {
     selected?.classList.add("wrong-answer");
     recordQuestionResult(currentMode,q,false,{helpUsed:currentHelpUsed});
@@ -2791,22 +3166,26 @@ function checkAnswer(i){
         answerButtons.forEach(btn=>{
           if(btn!==selected){btn.disabled=false;btn.classList.remove("interaction-locked");}
         });
+        // Builder/trace controls do not always carry answer indexes.
+        $$(".game-interactive").forEach(el=>{if(el!==selected && "disabled" in el) el.disabled=false});
       },380);
       save();
       return;
     }
 
     // Second miss = reveal gently and move on, so the child never gets stuck.
+    questionResolved=true;
     if(placementActive){
       const placementRecord=getQuestionRecord(currentMode,q);
       placementRecord.mastery=Math.min(Number(placementRecord.mastery||0),12);
       recalculateModeMastery(currentMode);
     }
     correct?.classList.add("reveal-answer");
+    lockGameInteractions();
     if(currentMode === "filipino"){
-      $("#feedback").innerHTML=`💜 Ayos lang! Ang sagot ay <b>${q.choices[q.correct]}</b>. Susubukan natin ulit ang ganitong skill sa ibang pagkakataon.`;
+      $("#feedback").innerHTML=`💜 Ayos lang! Ang sagot ay <b>${escapeSceneText(q.choices[q.correct])}</b>. Susubukan natin ulit ang ganitong skill sa ibang pagkakataon.`;
     }else{
-      $("#feedback").innerHTML=`💜 That was a tricky one. The answer is <b>${q.choices[q.correct]}</b>. Tala will bring this skill back for gentle practice later.`;
+      $("#feedback").innerHTML=`💜 That was a tricky one. The answer is <b>${escapeSceneText(q.choices[q.correct])}</b>. Tala will bring this skill back for gentle practice later.`;
     }
   }
 
@@ -2821,7 +3200,7 @@ function checkAnswer(i){
 
   const btn=document.createElement("button");
   btn.className="primary next-btn";
-  btn.textContent=placementActive ? "Next Fun Check 🌟" : (dailyAdventureActive ? "Continue Adventure 🌈" : "Next ➜");
+  btn.textContent=placementActive ? "Next Fun Check 🌟" : (dailyAdventureActive ? "Continue Adventure 🌈" : "Next Game ➜");
   btn.onclick=()=>{getAudioContext();startBackgroundMusic();qIndex++;renderQuestion()};
   $("#feedback").appendChild(document.createElement("br"));
   $("#feedback").appendChild(btn);
